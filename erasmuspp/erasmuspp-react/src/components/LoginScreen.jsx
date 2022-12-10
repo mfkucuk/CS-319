@@ -6,6 +6,7 @@ export default function LoginScreen(){
 
   return (
     <div class="position-absolute top-50 start-50 translate-middle">
+    <h1>LOGIN</h1>
       <Card style={{ width: '18rem' }}>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
