@@ -7,7 +7,6 @@ export default function LoginScreen(){
     
     let navigate = useNavigate();
     function handleClick() {
-    
         navigate("/main");
     }
   return (
