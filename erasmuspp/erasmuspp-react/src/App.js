@@ -8,13 +8,12 @@ import { Route, Routes} from 'react-router-dom';
 function App() {
   return (
     <>
-
-          <Routes>
-            <Route path ="/" element = {<LoginScreen />}> </Route>
-            <Route path ="/login" element = {<LoginScreen />}> </Route>
-            <Route path ="/main" element = {<MainScreen />}> </Route>
-            <Route path ="/profile" element = {<ProfileScreen />}> </Route>
-          </Routes>
+      <Routes>
+        <Route path ="/" exact element = {<LoginScreen />}> </Route>
+        <Route path ="/login" element = {<LoginScreen />}> </Route>
+        <Route path ="/main" element = {<MainScreen />}> </Route>
+        <Route path ="/profile" element = {<ProfileScreen />}> </Route>
+      </Routes>
     
     
     </>
