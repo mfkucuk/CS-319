@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Announcement 
 {
+    // commit
     private final UUID id;
     private final String title;
     private final String content;
