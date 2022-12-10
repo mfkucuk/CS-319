@@ -1,14 +1,20 @@
-import logo from './logo.svg';
-import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import LoginScreen from './components/LoginScreen';
+import MainScreen from './components/MainScreen';
+import ProfileScreen from './components/ProfileScreen';
+import React from 'react';
+import { Route, Routes} from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <LoginScreen> 
-      </LoginScreen> 
-    
+
+          <Routes>
+            <Route path ="/" element = {<LoginScreen />}> </Route>
+            <Route path ="/login" element = {<LoginScreen />}> </Route>
+            <Route path ="/main" element = {<MainScreen />}> </Route>
+            <Route path ="/profile" element = {<ProfileScreen />}> </Route>
+          </Routes>
     
     
     </>
