@@ -9,10 +9,11 @@ import Col from 'react-bootstrap/Col';
 
 export default function MainScreen(){
 
-    return (
-      <Container>
+  return (
+    <Container>
       
         
-      </Container>
-    );
-  }
+    </Container>
+  );
+  
+}
