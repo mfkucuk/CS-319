@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
-import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncements';
+import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
 
 
 export default function MainScreen(){
@@ -14,7 +14,6 @@ export default function MainScreen(){
     <div>
       <TopNavBar/>
       <LeftSideBarAndAnnouncements/>
-      
       <DefaultFooter/>
       
     </div>
