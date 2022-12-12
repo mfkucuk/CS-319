@@ -6,15 +6,15 @@ import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
+import PostAnnouncementY from './PostAnnouncementY';
 
 
 export default function MainScreen(){
 
   return (
     <div>
-      <TopNavBar/>
-      <LeftSideBarAndAnnouncements/>
-      <DefaultFooter/>
+      <PostAnnouncementY/>
+      <LeftSideBarAndAnnouncements></LeftSideBarAndAnnouncements>
       
     </div>
   );
