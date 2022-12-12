@@ -8,8 +8,7 @@ import TopNavBar from './TopNavBar';
 import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncements';
 
 
-export default function MainScreen(){
-
+export default function MainMenuScreen(){
   return (
     <div>
       <TopNavBar/>
@@ -18,6 +17,6 @@ export default function MainScreen(){
       <DefaultFooter/>
       
     </div>
+    
   );
-  
 }
