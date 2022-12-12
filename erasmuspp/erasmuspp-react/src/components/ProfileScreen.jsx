@@ -14,9 +14,7 @@ import TopNavBar from './TopNavBar';
 export default function ProfileScreen(){
     return(
       <div style={{backgroundColor: "#2E2E2B"}}>
-       <TopNavBar>
-      
-       </TopNavBar>
+       <TopNavBar/>
        
        <div class="container-fluid" >
         
