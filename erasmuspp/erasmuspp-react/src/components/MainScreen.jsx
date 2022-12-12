@@ -1,19 +1,23 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react';
+import DefaultFooter from './DefaultFooter';
+import LargeBreak from './LargeBreak';
+import TopNavBar from './TopNavBar';
+import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncements';
 
 
 export default function MainScreen(){
 
   return (
-    <Container>
+    <div>
+      <TopNavBar/>
+      <LeftSideBarAndAnnouncements/>
       
-        
-    </Container>
+      <DefaultFooter/>
+      
+    </div>
   );
   
 }
