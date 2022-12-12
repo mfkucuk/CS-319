@@ -4,9 +4,15 @@ import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
+import { useNavigate } from "react-router-dom";
 
 
-export default function LeftSideBarAndAnnouncements(){
+export default function LeftSideBarAndAnnouncements() {
+    let navigate = useNavigate();
+    function navigateToMyApplications() {
+        navigate("/myApplications");
+    };
+
   return (
     <div class="container-fluid">
 	    <div class="row">
@@ -19,8 +25,8 @@ export default function LeftSideBarAndAnnouncements(){
           </p>	
           <Button variant="primary">Profile</Button>
           <br/>
-          <br/>
-          <Button variant="primary">My Applications</Button>
+                  <br />
+                  <Button variant="primary" onClick={navigateToMyApplications} >My Applications</Button>
           <LargeBreak></LargeBreak>
         </div>
         <div class="col-md-10">
@@ -29,5 +35,5 @@ export default function LeftSideBarAndAnnouncements(){
       </div>
     </div>
     
-  );
+    );
 }
