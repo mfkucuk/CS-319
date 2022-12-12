@@ -100,7 +100,7 @@ export default function PostAnnouncementY(){
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="success">Search</Button>
+            <Button style={{backgroundColor: "#3C7479"}}>Search</Button>
           </Form>
           </div>
         </div>
