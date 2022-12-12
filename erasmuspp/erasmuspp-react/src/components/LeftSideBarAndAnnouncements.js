@@ -4,9 +4,14 @@ import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
+import { useNavigate } from "react-router-dom";
 
 
 export default function LeftSideBarAndAnnouncements(){
+  let navigate = useNavigate();
+    function handleClick() {
+        navigate("/profile");
+    }
   return (
     <div class="container-fluid">
 	    <div class="row">
@@ -17,7 +22,7 @@ export default function LeftSideBarAndAnnouncements(){
           <p>
             h1. Lorem ipsum dolor sit amet.
           </p>	
-          <Button variant="primary">Profile</Button>
+          <Button variant="primary" onClick={handleClick}>Profile</Button>
           <br/>
           <br/>
           <Button variant="primary">My Applications</Button>
