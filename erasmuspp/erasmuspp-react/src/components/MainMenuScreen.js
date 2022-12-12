@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
-import LeftSideBar from './LeftSideBarAndAnnouncements';
+import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncements';
 
 
 export default function MainMenuScreen(){
   return (
     <div>
       <TopNavBar/>
-      <LeftSideBar/>
+      <LeftSideBarAndAnnouncements/>
       
       <DefaultFooter/>
       
