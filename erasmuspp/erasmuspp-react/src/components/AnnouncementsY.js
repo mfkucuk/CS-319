@@ -5,8 +5,15 @@ import AnnouncementCardBreakY from './AnnouncementCardBreakY';
 import AnnouncementsModalPopUpY from './AnnouncementsModalPopUpY';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-export default function AnnouncementsY() {  
+
+export default function AnnouncementsY() {
+
+  let navigate = useNavigate();
+  function handleClick() {
+      navigate("/addAnnouncement");
+  }
   return (
     <div style={{backgroundColor: "#1F908F"}}>
       <Card style={{backgroundColor: "#C7D6D2"}}>
@@ -14,7 +21,7 @@ export default function AnnouncementsY() {
           <Card.Title>
             <div style={{ display: "flex" }}>
             <h1>Announcements</h1>
-            <Button style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
+            <Button onClick={handleClick} style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
               Add New Announcement+
             </Button>
             </div>

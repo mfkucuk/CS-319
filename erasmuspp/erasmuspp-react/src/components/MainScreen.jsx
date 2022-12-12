@@ -7,15 +7,14 @@ import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
 import PostAnnouncementY from './PostAnnouncementY';
+import LoginScreen from './LoginScreen';
 
 
 export default function MainScreen(){
 
   return (
     <div>
-      <PostAnnouncementY/>
       <LeftSideBarAndAnnouncements></LeftSideBarAndAnnouncements>
-      
     </div>
   );
   
