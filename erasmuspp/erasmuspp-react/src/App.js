@@ -6,6 +6,8 @@ import React from 'react';
 import { Route, Routes} from 'react-router-dom';
 import PostAnnouncementY from './components/PostAnnouncementY';
 import MyApplicationsN from './components/MyApplicationsN';
+import RegisterCandidateY from './components/RegisterCandidateY';
+import StudentsTableY from './components/StudentsTableY';
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
         <Route path ="/profile" element = {<ProfileScreen />}> </Route>
         <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
         <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
-        <Route path ="/candidateRegistration" element = {<MyApplicationsN />}> </Route>
+        <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
+        <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
       </Routes>  
     </>
   );

@@ -15,13 +15,18 @@ export default function LeftSideBarAndAnnouncements(){
   }
 
   let navigateMyApplications = useNavigate();
-    function handleClickMyApplications() {
-        navigate("/myApplications");
-    }
+  function handleClickMyApplications() {
+      navigate("/myApplications");
+  }
 
   let navigateCandidateRegistration = useNavigate();
   function handleClickCandidateRegistration() {
       navigate("/candidateRegistration");
+  }
+
+  let navigateStudentsTable = useNavigate();
+  function handleClickStudentsTable() {
+      navigate("/studentsTable");
   }
 
   return (
@@ -54,6 +59,11 @@ export default function LeftSideBarAndAnnouncements(){
               <br/>
               <Button onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
                 Register Candidate
+              </Button>
+              <br/>
+              <br/>
+              <Button onClick={handleClickStudentsTable} style={{backgroundColor: "#3C7479"}} size="lg">
+                Students List
               </Button>
               <LargeBreak></LargeBreak>
             </div>
