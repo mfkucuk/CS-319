@@ -17,6 +17,7 @@ function App() {
         <Route path ="/profile" element = {<ProfileScreen />}> </Route>
         <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
         <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
+        <Route path ="/candidateRegistration" element = {<MyApplicationsN />}> </Route>
       </Routes>  
     </>
   );

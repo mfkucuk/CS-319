@@ -19,6 +19,11 @@ export default function LeftSideBarAndAnnouncements(){
         navigate("/myApplications");
     }
 
+  let navigateCandidateRegistration = useNavigate();
+  function handleClickCandidateRegistration() {
+      navigate("/candidateRegistration");
+  }
+
   return (
     <div>
       <TopNavBar/>
@@ -44,6 +49,11 @@ export default function LeftSideBarAndAnnouncements(){
               <br/>
               <Button onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
                 My Applications
+              </Button>
+              <br/>
+              <br/>
+              <Button onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
+                Register Candidate
               </Button>
               <LargeBreak></LargeBreak>
             </div>
