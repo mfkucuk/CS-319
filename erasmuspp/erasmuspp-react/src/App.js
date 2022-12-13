@@ -8,6 +8,7 @@ import PostAnnouncementY from './components/PostAnnouncementY';
 import MyApplicationsN from './components/MyApplicationsN';
 import RegisterCandidateY from './components/RegisterCandidateY';
 import StudentsTableY from './components/StudentsTableY';
+import MyApplicationY from './components/MyApplicationY';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
         <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
         <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
+        <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
       </Routes>  
     </>
   );

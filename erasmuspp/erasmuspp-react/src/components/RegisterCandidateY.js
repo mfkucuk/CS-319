@@ -1,10 +1,8 @@
 import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
-import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
-import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfo from './SaveCandidateInfoModalPopUpY';
+import SaveCandidateInfoModalPopUpY from './SaveCandidateInfoModalPopUpY';
 
 export default function PostAnnouncementY(){
   return(
@@ -106,7 +104,7 @@ export default function PostAnnouncementY(){
               <div class="row">
                 <div class="col-md-12 text-center" style={{backgroundColor: "#1F8F8E"}}>
                   <br/><br/>
-                  <SaveCandidateInfo/>
+                  <SaveCandidateInfoModalPopUpY/>
                   <br/><br/><br/><br/>
                 </div>
               </div>
