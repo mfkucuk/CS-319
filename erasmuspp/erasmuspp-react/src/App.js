@@ -4,8 +4,7 @@ import MainScreen from './components/MainScreen';
 import ProfileScreen from './components/ProfileScreen';
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
-import PostAnnouncementY from './components/PostAnnouncementY';
-import MyApplicationsN from './components/MyApplicationsN';
+import {useEffect} from 'react';
 
 function App() {
   return (
@@ -15,10 +14,9 @@ function App() {
         <Route path ="/login" element = {<LoginScreen />}> </Route>
         <Route path ="/main" element = {<MainScreen />}> </Route>
         <Route path ="/profile" element = {<ProfileScreen />}> </Route>
-        <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
-        <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
-        <Route path ="/candidateRegistration" element = {<MyApplicationsN />}> </Route>
-      </Routes>  
+      </Routes>
+    
+    
     </>
   );
 }
