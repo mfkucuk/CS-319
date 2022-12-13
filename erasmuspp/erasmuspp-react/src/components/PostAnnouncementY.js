@@ -28,7 +28,7 @@ export default function PostAnnouncementY(){
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type="email" placeholder="Announcement Title"/>
+                <Form.Control type='text' placeholder="Announcement Title"/>
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Announcement Description:</Form.Label>
