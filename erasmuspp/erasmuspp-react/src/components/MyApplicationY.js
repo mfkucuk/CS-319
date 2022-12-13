@@ -5,6 +5,14 @@ import DefaultFooter from './DefaultFooter';
 import UploadFileModalPopUpY from './UploadFileModalPopUp';
 
 export default function PostAnnouncementY(){
+  
+  const [buttonIndex, changeButtonIndex] = useState(0);
+  
+  let buttonName;
+  if (buttonIndex == 0){
+    buttonName = "Upload Statement of Purpose"
+  }
+  
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
       <TopNavBar/>
@@ -29,7 +37,7 @@ export default function PostAnnouncementY(){
           </Form.Group>
           </div>
           <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
-            <UploadFileModalPopUpY></UploadFileModalPopUpY>
+            <UploadFileModalPopUpY/>
           </div>
           <div class="col-md-2" style={{backgroundColor: "#1F8F8E"}}>
           </div>

@@ -4,20 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function UploadFileModalPopUpY() {
   const [show, setShow] = useState(false);
-  const [buttonIndex, changeButtonIndex] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  let buttonName;
-
-  if (buttonIndex == 0){
-    buttonName = "Upload Statement of Purpose"
-  }
   return (
     <>
       <Button style={{backgroundColor: "#3C7479"}} onClick={handleShow}>
-        {buttonName}
+        Upload
       </Button>
 
       <Modal show={show} onHide={handleClose}>
