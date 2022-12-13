@@ -17,8 +17,6 @@ export default function LeftSideBarAndAnnouncements(){
     axios.get("localhost:8081/user").then(res => setuserName(res.data[0].name));
   }, [userName]) 
 
-
-
   let navigate = useNavigate();
   function handleClick() {
       navigate("/profile");
