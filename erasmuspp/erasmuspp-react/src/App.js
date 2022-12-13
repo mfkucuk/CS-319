@@ -4,6 +4,11 @@ import MainScreen from './components/MainScreen';
 import ProfileScreen from './components/ProfileScreen';
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
+import PostAnnouncementY from './components/PostAnnouncementY';
+import MyApplicationsN from './components/MyApplicationsN';
+import RegisterCandidateY from './components/RegisterCandidateY';
+import StudentsTableY from './components/StudentsTableY';
+import MyApplicationY from './components/MyApplicationY';
 import {useEffect} from 'react';
 
 function App() {
@@ -14,9 +19,12 @@ function App() {
         <Route path ="/login" element = {<LoginScreen />}> </Route>
         <Route path ="/main" element = {<MainScreen />}> </Route>
         <Route path ="/profile" element = {<ProfileScreen />}> </Route>
-      </Routes>
-    
-    
+        <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
+        <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
+        <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
+        <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
+        <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
+      </Routes>  
     </>
   );
 }
