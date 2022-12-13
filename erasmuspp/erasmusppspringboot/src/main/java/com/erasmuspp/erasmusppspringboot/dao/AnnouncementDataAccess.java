@@ -24,7 +24,8 @@ public class AnnouncementDataAccess implements AnnouncementDao
    @Override
    public int insertAnnouncement(UUID id, Announcement announcement)
    {
-    return 0;
+    final String sql = "INSERT INTO announcement (id, title, content, postdate, expiredate)\n VALUES(?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] {id, announcement.getTitle(), announcement.getContent(), announcement.getPostDate(), announcement.getExpireDate()});
    }
 
    @Override
@@ -46,6 +47,7 @@ public class AnnouncementDataAccess implements AnnouncementDao
             );
         });
         return announcements; 
+
    }
 
 @Override
