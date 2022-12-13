@@ -10,9 +10,11 @@ export default function UploadFileModalPopUpY() {
 
   return (
     <>
-      <Button style={{backgroundColor: "#3C7479"}} onClick={handleShow}>
-        Upload
-      </Button>
+      <div className='pt-2'>
+        <Button style={{backgroundColor: "#3C7479"}} onClick={handleShow}>
+          Upload
+        </Button>
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

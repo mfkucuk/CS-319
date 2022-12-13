@@ -5,14 +5,7 @@ import DefaultFooter from './DefaultFooter';
 import UploadFileModalPopUpY from './UploadFileModalPopUp';
 
 export default function PostAnnouncementY(){
-  
-  const [buttonIndex, changeButtonIndex] = useState(0);
-  
-  let buttonName;
-  if (buttonIndex == 0){
-    buttonName = "Upload Statement of Purpose"
-  }
-  
+
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
       <TopNavBar/>
@@ -32,11 +25,28 @@ export default function PostAnnouncementY(){
           </div>
           <div class="col-md-3" style={{backgroundColor: "#1F8F8E"}}>
           <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label style={{color: '#f4eff2'}}>Large file input example</Form.Label>
+            <Form.Label style={{color: '#f4eff2'}}>Upload Statement of Purpose</Form.Label>
+            <Form.Control type="file" size="lg" />
+          </Form.Group>
+          <br/>
+          <Form.Group controlId="formFileLg" className="mb-3">
+            <Form.Label style={{color: '#f4eff2'}}>Upload CV</Form.Label>
+            <Form.Control type="file" size="lg" />
+          </Form.Group>
+          <br/>
+          <Form.Group controlId="formFileLg" className="mb-3">
+            <Form.Label style={{color: '#f4eff2'}}>Upload Application Form</Form.Label>
             <Form.Control type="file" size="lg" />
           </Form.Group>
           </div>
           <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
+            <br/>
+            <UploadFileModalPopUpY/>
+            <br/><br/><br/>
+            <UploadFileModalPopUpY/>
+            <br/><br/><br/>
+            {/* TODO: buraya yeni butonlar eklencek */}
+            <UploadFileModalPopUpY/> 
             <UploadFileModalPopUpY/>
           </div>
           <div class="col-md-2" style={{backgroundColor: "#1F8F8E"}}>
