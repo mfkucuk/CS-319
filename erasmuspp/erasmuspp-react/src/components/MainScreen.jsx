@@ -5,10 +5,9 @@ import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
-import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
 import PostAnnouncementY from './PostAnnouncementY';
 import LoginScreen from './LoginScreen';
-
+import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
 
 export default function MainScreen(){
 
