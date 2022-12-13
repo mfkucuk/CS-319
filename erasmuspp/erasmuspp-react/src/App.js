@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import LoginScreen from './components/LoginScreen';
+import MainScreen from './components/MainScreen';
+import ProfileScreen from './components/ProfileScreen';
+import React from 'react';
+import { Route, Routes} from 'react-router-dom';
+import PostAnnouncementY from './components/PostAnnouncementY';
+import MyApplicationsN from './components/MyApplicationsN';
+import RegisterCandidateY from './components/RegisterCandidateY';
+import StudentsTableY from './components/StudentsTableY';
+import MyApplicationY from './components/MyApplicationY';
+import {useEffect} from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path ="/" exact element = {<LoginScreen />}> </Route>
+        <Route path ="/login" element = {<LoginScreen />}> </Route>
+        <Route path ="/main" element = {<MainScreen />}> </Route>
+        <Route path ="/profile" element = {<ProfileScreen />}> </Route>
+        <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
+        <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
+        <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
+        <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
+        <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
+      </Routes>  
+    </>
   );
 }
 
