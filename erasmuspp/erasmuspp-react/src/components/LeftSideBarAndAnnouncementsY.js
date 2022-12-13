@@ -15,10 +15,9 @@ export default function LeftSideBarAndAnnouncements(){
   
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
-
-
   }, [userName]) 
-  
+
+
 
   let navigate = useNavigate();
   function handleClick() {
