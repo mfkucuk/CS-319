@@ -75,10 +75,7 @@ export default function PostAnnouncementY(){
                     <Form.Group className="mb-3 text-end" controlId="exampleForm.ControlTextarea1">
                       <Form.Label>Department/Class:</Form.Label>
                     </Form.Group>
-                    <Form.Group className="mb-3 text-end" controlId="exampleForm.ControlTextarea3">
-                      <Form.Label>Major:</Form.Label>
-                    </Form.Group>
-                    <Form.Group className="mb-3 text-end" controlId="exampleForm.ControlTextarea4">
+                    <Form.Group className="mb-3 text-end" controlId="exampleForm.ControlTextarea2">
                       <Form.Label>Cumulative GPA:</Form.Label>
                     </Form.Group>
                   </Form>
@@ -86,16 +83,13 @@ export default function PostAnnouncementY(){
                 <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
                   <br/>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
-                    <Form.Control type="text" placeholder="Yunus Eren"/>
+                    <Form.Control type="text" placeholder="22001842"/>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput6">
-                    <Form.Control type="text" placeholder="Türkeri"/>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
-                    <Form.Control type="text" placeholder="dd/mm/yyyy"/>
+                    <Form.Control type="text" placeholder="Computer Science"/>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput8">
-                    <Form.Control type="text" placeholder="Turkey"/>
+                    <Form.Control type="text" placeholder="3.21"/>
                   </Form.Group>
                 </div>
                 <div class="col-md-4 text-center" style={{backgroundColor: "#1F8F8E"}}>
