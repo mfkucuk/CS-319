@@ -13,7 +13,6 @@ export default function AnnouncementsModalPopUpY() {
       <Button style={{backgroundColor: "#2C4953"}} onClick={handleShow}>
         Expand Post
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>

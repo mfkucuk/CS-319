@@ -1,14 +1,24 @@
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import AnnouncementsY from './AnnouncementsY';
 import TopNavBar from './TopNavBar';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import {useEffect, useState} from 'react';
 
 export default function LeftSideBarAndAnnouncements(){
+
+  const [userName, setuserName]= useState("");
+  
+  useEffect(() => {
+    axios.get("localhost:8081/user").then(res => setuserName(res.data[0].name));
+  }, [userName]) 
+
+
+
   let navigate = useNavigate();
   function handleClick() {
       navigate("/profile");
@@ -41,7 +51,7 @@ export default function LeftSideBarAndAnnouncements(){
               <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
             </view>
             <p style={{textAlign: "center"}}>
-              Username
+              {userName}
               <br/>
               <br/>
               <br/>

@@ -9,6 +9,7 @@ import MyApplicationsN from './components/MyApplicationsN';
 import RegisterCandidateY from './components/RegisterCandidateY';
 import StudentsTableY from './components/StudentsTableY';
 import MyApplicationY from './components/MyApplicationY';
+import {useEffect} from 'react';
 
 function App() {
   return (
