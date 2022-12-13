@@ -6,8 +6,19 @@ import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import AnnouncementsY from './AnnouncementsY';
 import TopNavBar from './TopNavBar';
+import { useNavigate } from "react-router-dom";
 
 export default function LeftSideBarAndAnnouncements(){
+  let navigate = useNavigate();
+  function handleClick() {
+      navigate("/profile");
+  }
+
+  let navigateMyApplications = useNavigate();
+    function handleClickMyApplications() {
+        navigate("/myApplications");
+    }
+
   return (
     <div>
       <TopNavBar/>
@@ -26,12 +37,12 @@ export default function LeftSideBarAndAnnouncements(){
               <br/>
             </p>	
             <div className="d-grid gap-2">
-              <Button style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button onClick={handleClick} style={{backgroundColor: "#3C7479"}} size="lg">
                 Profile
               </Button>
               <br/>
               <br/>
-              <Button style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
                 My Applications
               </Button>
               <LargeBreak></LargeBreak>
