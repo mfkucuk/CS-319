@@ -14,7 +14,7 @@ export default function LeftSideBarAndAnnouncements(){
   const [userName, setuserName]= useState("");
   
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
+    axios.get("localhost:8081/user").then(res => setuserName(res.data[0].name));
   }, [userName]) 
 
 
