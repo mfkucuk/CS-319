@@ -10,7 +10,7 @@ function TopNavBar() {
   function handleClick() {
       navigate("/main");
   }
-
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container>
