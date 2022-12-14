@@ -4,21 +4,29 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import {createBrowserHistory} from 'history';
+import {unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
+
+
+
 export default function LoginScreen(){
   const [email, setEmail]= useState("");
   const [password, setPassword]= useState("");
 
     let navigate = useNavigate();
-    function handleClick() {
-      console.log("1");
-      axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
-        console.log("2");
-        if (res.data[0].id == "2") {
-          navigate("/main");
-        }
 
-      })
-
+    function navigateTo() {
+      navigate("/main");
+    }
+    function login() {
+      navigate("/main");
+      axios.interceptors.get("https://jsonplaceholder.typicode.com/posts").then( res => {
+        navigateTo();
+      }
+    
+        
+        
+      )
     }
   
   return (
@@ -41,7 +49,7 @@ export default function LoginScreen(){
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick = {handleClick}>
+          <Button variant="primary" type="submit" onClick = {login}>
             Submit
           </Button>
         </Form>
