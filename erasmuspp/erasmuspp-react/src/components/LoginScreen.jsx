@@ -4,9 +4,6 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import {createBrowserHistory} from 'history';
-import {unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
-
 
 
 export default function LoginScreen(){
