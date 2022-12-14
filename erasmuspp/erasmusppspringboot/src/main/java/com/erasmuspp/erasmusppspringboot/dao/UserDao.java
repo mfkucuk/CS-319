@@ -21,4 +21,6 @@ public interface UserDao {
     int deleteUserById(UUID id);
 
     int updateUserById(UUID id, User newUser);
+
+    int setUserRoleById(UUID id, String newRole);
 }
