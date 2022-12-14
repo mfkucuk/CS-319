@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.User;
 
-@Repository("postgres")
+@Repository("user")
 public class UserDataAccess implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -20,8 +20,8 @@ public class UserDataAccess implements UserDao {
     
     @Override
     public int insertUser(UUID id, User user) {
-
-        return 0;
+        final String sql = "INSERT INTO user (id, name)\nVALUES(?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, user.getName() });
     }
 
     @Override
