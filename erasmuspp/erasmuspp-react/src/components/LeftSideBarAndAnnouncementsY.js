@@ -82,6 +82,5 @@ export default function LeftSideBarAndAnnouncements(){
       </div>
       <DefaultFooter/>
     </div>
-    
   );
 }
