@@ -14,21 +14,20 @@ export default function LoginScreen(){
   const [password, setPassword]= useState("");
 
     let navigate = useNavigate();
-
-    function navigateTo() {
-      navigate("/main");
-    }
-    function login() {
-      navigate("/main");
-      axios.interceptors.get("https://jsonplaceholder.typicode.com/posts").then( res => {
-        navigateTo();
-      }
+    const login = (e) => {
+      e.preventDefault();
+      console.log(email);
+      console.log(password);
+      axios
+          .get("https://jsonplaceholder.typicode.com/posts")
+          .then((res) => {
+            if (res.data[0].id === 1) {
+              navigate("/main");
+            }
+          });
+    };
     
-        
-        
-      )
-    }
-  
+    
   return (
     <div class="position-absolute top-50 start-50 translate-middle">
     <h1>LOGIN</h1>
