@@ -41,14 +41,14 @@ export default function ProfileScreen(){
 
           <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="egeayan2001@gmail.com"/>
+    <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder="egeayan2001@gmail.com"/>
       
   </div>
   <br/>
 
   <div class="form-group">
     <label for="exampleInputPhone1">Phone Number</label>
-    <input type="email" class="form-control" id="exampleInputPhone1" aria-describedby="emailHelp" placeholder="0531313131"/>
+    <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder="0531313131"/>
   </div>
           <br/>
           
@@ -103,7 +103,7 @@ export default function ProfileScreen(){
 
           <div class="form-group">
           <label for="exampleFormControlTextarea1"></label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder='ABOUT ME HAKKINDA BOS ATILAN BILGI'></textarea>
+          <textarea class="form-control" id="profileScreenAboutMe" rows="4" placeholder='ABOUT ME HAKKINDA BOS ATILAN BILGI'></textarea>
           </div>
           <br/>
           <Button>Change About Me</Button>

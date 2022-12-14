@@ -18,24 +18,19 @@ export default function LeftSideBarAndAnnouncements(){
     axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
   }, [userName]) 
 
-
-
   let navigate = useNavigate();
   function handleClick() {
     navigate("/profile");
   }
 
-  let navigateMyApplications = useNavigate();
   function handleClickMyApplications() {
     navigate("/myApplications");
   }
 
-  let navigateCandidateRegistration = useNavigate();
   function handleClickCandidateRegistration() {
       navigate("/candidateRegistration");
   }
 
-  let navigateStudentsTable = useNavigate();
   function handleClickStudentsTable() {
       navigate("/studentsTable");
   }
@@ -88,6 +83,5 @@ export default function LeftSideBarAndAnnouncements(){
       </div>
       <DefaultFooter/>
     </div>
-    
   );
 }
