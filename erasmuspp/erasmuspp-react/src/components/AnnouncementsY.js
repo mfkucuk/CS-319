@@ -7,13 +7,13 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-
 export default function AnnouncementsY() {
 
   let navigate = useNavigate();
   function handleClick() {
       navigate("/addAnnouncement");
   }
+  
   return (
     <div style={{backgroundColor: "#1F908F"}}>
       <Card style={{backgroundColor: "#C7D6D2"}}>

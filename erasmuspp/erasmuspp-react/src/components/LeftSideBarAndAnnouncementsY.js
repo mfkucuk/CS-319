@@ -22,17 +22,14 @@ export default function LeftSideBarAndAnnouncements(){
       navigate("/profile");
   }
 
-  let navigateMyApplications = useNavigate();
   function handleClickMyApplications() {
       navigate("/myApplications");
   }
 
-  let navigateCandidateRegistration = useNavigate();
   function handleClickCandidateRegistration() {
       navigate("/candidateRegistration");
   }
 
-  let navigateStudentsTable = useNavigate();
   function handleClickStudentsTable() {
       navigate("/studentsTable");
   }
