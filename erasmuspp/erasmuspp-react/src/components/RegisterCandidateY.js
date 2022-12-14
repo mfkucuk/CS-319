@@ -39,7 +39,7 @@ export default function PostAnnouncementY(){
                   </Form.Group>
                 </Form>
               </div>
-              <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
+              <div class="col-md-4 text-center" style={{backgroundColor: "#1F8F8E"}}>
                 <br/>
                 <Form.Group className="mb-3" controlId="registerCandidateFirstNameForm">
                   <Form.Control type="text" placeholder="Yunus Eren"/>
@@ -54,7 +54,7 @@ export default function PostAnnouncementY(){
                   <Form.Control type="text" placeholder="Turkey"/>
                 </Form.Group>
               </div>
-              <div class="col-md-4 text-center" style={{backgroundColor: "#1F8F8E"}}>
+              <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
               </div>
             </div>
             <div class="row">
@@ -65,34 +65,40 @@ export default function PostAnnouncementY(){
             </div>
             <div class="row">
               <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
-                </div>
-                <div class="col-md-2 text-center" style={{backgroundColor: "#1F8F8E"}}>
-                  <br/>
-                  <Form>
-                    <Form.Group className="mb-3 text-end" controlId="registerCandidateStudentID">
-                      <Form.Label>Student ID No.:</Form.Label>
-                    </Form.Group>
-                    <Form.Group className="mb-3 text-end" controlId="registerCandidateDepartment">
-                      <Form.Label>Department/Class:</Form.Label>
-                    </Form.Group>
-                    <Form.Group className="mb-3 text-end" controlId="registerCandidateCumGPA">
-                      <Form.Label>Cumulative GPA:</Form.Label>
-                    </Form.Group>
-                  </Form>
-                </div>
-                <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
-                  <br/>
-                  <Form.Group className="mb-3" controlId="registerCandidateStudentIDForm">
-                    <Form.Control type="text" placeholder="22001842"/>
+              </div>
+              <div class="col-md-2 text-center" style={{backgroundColor: "#1F8F8E"}}>
+                <br/>
+                <Form>
+                  <Form.Group className="mb-3 text-end" controlId="registerCandidateStudentID">
+                    <Form.Label>Student ID No.:</Form.Label>
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="registerCandidateDepartmentForm">
-                    <Form.Control type="text" placeholder="Computer Science"/>
+                  <Form.Group className="mb-3 text-end" controlId="registerCandidateDepartment">
+                    <Form.Label>Department/Class:</Form.Label>
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="registerCandidateCumGPAForm">
-                    <Form.Control type="text" placeholder="3.21"/>
+                  <Form.Group className="mb-3 text-end" controlId="registerCandiateBilkentEmail">
+                    <Form.Label>Bilkent E-mail:</Form.Label>
                   </Form.Group>
-                </div>
-                <div class="col-md-4 text-center" style={{backgroundColor: "#1F8F8E"}}>
+                  <Form.Group className="mb-3 text-end" controlId="registerCandidateCumGPA">
+                    <Form.Label>Cumulative GPA:</Form.Label>
+                  </Form.Group>
+                </Form>
+              </div>
+              <div class="col-md-4 text-center" style={{backgroundColor: "#1F8F8E"}}>
+                <br/>
+                <Form.Group className="mb-3" controlId="registerCandidateStudentIDForm">
+                  <Form.Control type="text" placeholder="22001842"/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="registerCandidateDepartmentForm">
+                  <Form.Control type="text" placeholder="Computer Science"/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="registerCandidateBilkentEmailForm">
+                  <Form.Control type="text" placeholder="eren.turkeri@ug.bilkent.edu.tr"/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="registerCandidateCumGPAForm">
+                  <Form.Control type="text" placeholder="3.21"/>
+                </Form.Group>
+              </div>
+              <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
               </div>
             </div>
               <div class="row">
