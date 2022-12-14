@@ -7,12 +7,11 @@ import Col from 'react-bootstrap/Col';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
 
-
 export default function MyApplicationsN() {
-
+    
     return (
             <div>
-
+            <br></br>
             <TopNavBar>
 
             </TopNavBar>

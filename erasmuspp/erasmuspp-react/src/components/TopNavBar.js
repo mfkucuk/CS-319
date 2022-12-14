@@ -5,10 +5,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from "react-router-dom";
 
 function TopNavBar() {
+  
   let navigate = useNavigate();
-    function navigateToMyApplications() {
-        navigate("/topNavBar");
-    };
+  function handleClick() {
+      navigate("/main");
+  }
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -16,7 +18,7 @@ function TopNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home" onClick={navigateToMyApplications}>Home</Nav.Link>
+            <Nav.Link onClick={handleClick}>Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

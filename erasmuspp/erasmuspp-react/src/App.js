@@ -6,6 +6,13 @@ import MyApplicationsN from './components/MyApplicationsN';
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
 import TopNavBar from './components/TopNavBar';
+import PostAnnouncementY from './components/PostAnnouncementY';
+import MyApplicationsN from './components/MyApplicationsN';
+import RegisterCandidateY from './components/RegisterCandidateY';
+import StudentsTableY from './components/StudentsTableY';
+import MyApplicationY from './components/MyApplicationY';
+import ApplicationFormEditY from './components/ApplicationFormEditY';
+import ApplicationFormViewY from './components/ApplicationFormViewY';
 
 function App() {
   return (
@@ -15,11 +22,14 @@ function App() {
         <Route path ="/login" element = {<LoginScreen />}> </Route>
         <Route path ="/main" element = {<MainScreen />}> </Route>
         <Route path ="/profile" element = {<ProfileScreen />}> </Route>
+        <Route path ="/addAnnouncement" element = {<PostAnnouncementY />}> </Route>
         <Route path ="/myApplications" element = {<MyApplicationsN />}> </Route>
-        <Route path ="/topNavBar" element = {<MainScreen />}> </Route>
-      </Routes>
-    
-    
+        <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
+        <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
+        <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
+        <Route path ="/editApplicationForm" element = {<ApplicationFormEditY/>}> </Route>
+        <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
+      </Routes>  
     </>
   );
 }
