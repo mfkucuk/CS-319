@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.Announcement;
 
-
-
 @Repository("announcement")
 public class AnnouncementDataAccess implements AnnouncementDao
 {
@@ -24,14 +22,14 @@ public class AnnouncementDataAccess implements AnnouncementDao
    @Override
    public int insertAnnouncement(UUID id, Announcement announcement)
    {
-    final String sql = "INSERT INTO announcement (id, title, content, postdate, expiredate)\n VALUES(?, ?, ?, ?, ?);";
+        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate)\nVALUES(?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, new Object[] {id, announcement.getTitle(), announcement.getContent(), announcement.getPostDate(), announcement.getExpireDate()});
    }
 
    @Override
    public List<Announcement> selectAllAnnouncements()
    {
-    final String sql = "SELECT id, title, content, postDate, expireDate FROM announcement";
+        final String sql = "SELECT id, title, content, postDate, expireDate FROM \"announcement\"";
         List<Announcement> announcements = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID announcementId = UUID.fromString(resultSet.getString("id"));
             String title = resultSet.getString("title");
@@ -47,36 +45,36 @@ public class AnnouncementDataAccess implements AnnouncementDao
             );
         });
         return announcements; 
-
    }
 
-@Override
-public Optional<Announcement> selectAnnouncementById(UUID id) {
-    final String sql = "SELECT id, title, content, postDate, expireDate FROM announcement WHERE id = ?";
-        Announcement announcement = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
-            UUID announcementId = UUID.fromString(resultSet.getString("id"));
-            String title = resultSet.getString("title");
-            String content = resultSet.getString("content");
-            String postDate = resultSet.getString("postDate");
-            String expireDate = resultSet.getString("expireDate");
-            return new Announcement(
-                announcementId,
-                title,
-                content,
-                postDate,
-                expireDate
-            );
-        }, new Object[] {id});
-        return Optional.ofNullable(announcement); 
-}
+    @Override
+    public Optional<Announcement> selectAnnouncementById(UUID id) {
+            final String sql = "SELECT id, title, content, postDate, expireDate FROM \"announcement\" WHERE id = ?";
+            Announcement announcement = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+                UUID announcementId = UUID.fromString(resultSet.getString("id"));
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String postDate = resultSet.getString("postDate");
+                String expireDate = resultSet.getString("expireDate");
+                return new Announcement(
+                    announcementId,
+                    title,
+                    content,
+                    postDate,
+                    expireDate
+                );
+            }, new Object[] {id});
+            return Optional.ofNullable(announcement); 
+    }
 
-@Override
-public int deleteAnnouncementById(UUID id) {
-    return 0;
-}
+    @Override
+    public int deleteAnnouncementById(UUID id) {
+        final String sql = "DELETE FROM \"announcement\" WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
+    }
 
-@Override
-public int updateAnnouncementById(UUID id, Announcement announcement) {
-    return 0;
-}
+    @Override
+    public int updateAnnouncementById(UUID id, Announcement announcement) {
+        return 0;
+    }
 }
