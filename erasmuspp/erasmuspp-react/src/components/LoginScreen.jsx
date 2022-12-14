@@ -2,13 +2,25 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
-
+import {useEffect, useState} from 'react';
+import axios from 'axios';
 export default function LoginScreen(){
-    
+  const [email, setEmail]= useState("");
+  const [password, setPassword]= useState("");
+
     let navigate = useNavigate();
     function handleClick() {
-        navigate("/main");
+      console.log("1");
+      axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+        console.log("2");
+        if (res.data[0].id == "2") {
+          navigate("/main");
+        }
+
+      })
+
     }
+  
   return (
     <div class="position-absolute top-50 start-50 translate-middle">
     <h1>LOGIN</h1>
@@ -16,7 +28,7 @@ export default function LoginScreen(){
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" value ={email} onChange = {(e) => setEmail(e.target.value)} placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -24,7 +36,7 @@ export default function LoginScreen(){
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type="password" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />

@@ -12,21 +12,22 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName]= useState("");
+
   
   useEffect(() => {
-    axios.get("localhost:8081/user").then(res => setuserName(res.data[0].name));
+    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
   }, [userName]) 
 
 
 
   let navigate = useNavigate();
   function handleClick() {
-      navigate("/profile");
+    navigate("/profile");
   }
 
   let navigateMyApplications = useNavigate();
   function handleClickMyApplications() {
-      navigate("/myApplications");
+    navigate("/myApplications");
   }
 
   let navigateCandidateRegistration = useNavigate();
