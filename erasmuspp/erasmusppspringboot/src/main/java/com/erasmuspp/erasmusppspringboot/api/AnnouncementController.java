@@ -18,8 +18,8 @@ import com.erasmuspp.erasmusppspringboot.service.AnnouncementService;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.Valid;
 
+@RequestMapping("/api/v1/announcement")
 @RestController
-@RequestMapping("/api/v1")
 public class AnnouncementController
 {
     private final AnnouncementService announcementService;
@@ -30,7 +30,7 @@ public class AnnouncementController
     }
 
     @PostMapping
-    public void addAnnounement(@Nonnull @Valid @RequestBody Announcement announcement)
+    public void addAnnouncement(@Nonnull @Valid @RequestBody Announcement announcement)
     {
         announcementService.addAnnouncement(announcement);
     }

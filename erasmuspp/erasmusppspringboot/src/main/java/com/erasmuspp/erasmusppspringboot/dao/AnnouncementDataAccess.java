@@ -11,7 +11,7 @@ import com.erasmuspp.erasmusppspringboot.model.Announcement;
 
 
 
-@Repository("postgres")
+@Repository("announcement")
 public class AnnouncementDataAccess implements AnnouncementDao
 {
    private final JdbcTemplate jdbcTemplate;

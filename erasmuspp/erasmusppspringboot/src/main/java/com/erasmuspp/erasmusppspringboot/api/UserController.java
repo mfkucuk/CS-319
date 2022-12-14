@@ -11,8 +11,8 @@ import com.erasmuspp.erasmusppspringboot.service.UserService;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
+@RestController()
 public class UserController {
     private final UserService userService;
 
