@@ -4,7 +4,6 @@ import MainScreen from './components/MainScreen';
 import ProfileScreen from './components/ProfileScreen';
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
-import TopNavBar from './components/TopNavBar';
 import PostAnnouncementY from './components/PostAnnouncementY';
 import MyApplicationsN from './components/MyApplicationsN';
 import RegisterCandidateY from './components/RegisterCandidateY';
