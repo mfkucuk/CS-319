@@ -12,6 +12,7 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName]= useState("");
+  const [todoSwitch, setTodoSwitch] = useState(1);
 
   
   useEffect(() => {
@@ -33,6 +34,14 @@ export default function LeftSideBarAndAnnouncements(){
 
   function handleClickStudentsTable() {
       navigate("/studentsTable");
+  }
+
+  function handleClickToDoRoadmap() {
+    if (todoSwitch === 1) {
+      navigate("/toDoList");
+    } else {
+      navigate("/roadmap");
+    }
   }
 
   return (
@@ -63,7 +72,7 @@ export default function LeftSideBarAndAnnouncements(){
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button onClick={handleClickToDoRoadmap} style={{backgroundColor: "#3C7479"}} size="lg">
                 To Do / Roadmap
               </Button>
               <br/>
