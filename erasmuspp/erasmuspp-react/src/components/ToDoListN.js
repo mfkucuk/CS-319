@@ -53,8 +53,11 @@ export default function ToDoListN() {
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{alignContent: 'center', justifyContent: 'center',}}>
-                                        <Button style={{textAlign: 'center',}}>
-                                            Go to Application
+                                        <Button style={{textAlign: 'left', margin: '5px'}}>
+                                            View
+                                        </Button>
+                                        <Button style={{textAlign: 'right', margin: '5px'}}>
+                                            Approve
                                         </Button>
                                     </Card.Footer>
                                 </Card>
