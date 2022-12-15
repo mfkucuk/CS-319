@@ -63,6 +63,11 @@ export default function LeftSideBarAndAnnouncements(){
               </Button>
               <br/>
               <br/>
+              <Button onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
+                To Do / Roadmap
+              </Button>
+              <br/>
+              <br/>
               <Button onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
                 Register Candidate
               </Button>
@@ -77,6 +82,7 @@ export default function LeftSideBarAndAnnouncements(){
           <div class="col-md-10">
             <div id="scrollable">
               <AnnouncementsY/>
+              <br/>
             </div>
           </div>
         </div>
