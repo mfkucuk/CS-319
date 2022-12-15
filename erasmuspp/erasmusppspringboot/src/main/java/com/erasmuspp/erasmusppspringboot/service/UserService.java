@@ -34,6 +34,11 @@ public class UserService {
         return userDao.selectUserById(id);
     }
 
+    public Optional<User> getUserByEmail(String email)
+    {
+        return userDao.selectUserByEmail(email);
+    }
+
     public int deleteUserById(UUID id)
     {
         return userDao.deleteUserById(id);
