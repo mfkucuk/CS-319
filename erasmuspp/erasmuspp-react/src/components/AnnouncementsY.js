@@ -4,10 +4,23 @@ import Row from 'react-bootstrap/Row';
 import AnnouncementCardBreakY from './AnnouncementCardBreakY';
 import AnnouncementsModalPopUpY from './AnnouncementsModalPopUpY';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 export default function AnnouncementsY() {
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => {
+        setAnnouncements(res.data);
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+
+  }, [])
+
 
   let navigate = useNavigate();
   function handleClick() {
@@ -31,23 +44,20 @@ export default function AnnouncementsY() {
 
       <Row xs={2} md={1} className="g-4">
         <AnnouncementCardBreakY/>
-        {Array.from({ length: 10 }).map((_, idx) => (
+        {announcements.map(announcement => (
           <Col md={{ span: 10, offset: 1 }}>
             <Card style={{backgroundColor: "#F4EFF2"}}>
               <Card.Body>
-                <Card.Title >Card title</Card.Title>
+                <Card.Title >{announcement.title}</Card.Title>
                 <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  {announcement.body}
                 </Card.Text>
               </Card.Body>
-              <AnnouncementsModalPopUpY/>
+              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.body} />
             </Card>
           </Col>
         ))}
       </Row>
-      <AnnouncementCardBreakY/>
     </div>
   );
 }

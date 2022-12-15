@@ -12,18 +12,20 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName]= useState("");
+  const [todoSwitch, setTodoSwitch] = useState(1);
+
   
   useEffect(() => {
-    axios.get("localhost:8081/user").then(res => setuserName(res.data[0].name));
+    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
   }, [userName]) 
 
   let navigate = useNavigate();
   function handleClick() {
-      navigate("/profile");
+    navigate("/profile");
   }
 
   function handleClickMyApplications() {
-      navigate("/myApplications");
+    navigate("/myApplications");
   }
 
   function handleClickCandidateRegistration() {
@@ -32,6 +34,14 @@ export default function LeftSideBarAndAnnouncements(){
 
   function handleClickStudentsTable() {
       navigate("/studentsTable");
+  }
+
+  function handleClickToDoRoadmap() {
+    if (todoSwitch === 1) {
+      navigate("/toDoList");
+    } else {
+      navigate("/roadmap");
+    }
   }
 
   return (
@@ -62,6 +72,11 @@ export default function LeftSideBarAndAnnouncements(){
               </Button>
               <br/>
               <br/>
+              <Button onClick={handleClickToDoRoadmap} style={{backgroundColor: "#3C7479"}} size="lg">
+                To Do / Roadmap
+              </Button>
+              <br/>
+              <br/>
               <Button onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
                 Register Candidate
               </Button>
@@ -76,6 +91,7 @@ export default function LeftSideBarAndAnnouncements(){
           <div class="col-md-10">
             <div id="scrollable">
               <AnnouncementsY/>
+              <br/>
             </div>
           </div>
         </div>

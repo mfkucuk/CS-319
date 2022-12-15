@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function UploadFileModalPopUpY() {
+export default function UploadFileModalPopUpY(props) {
   const [show, setShow] = useState(false);
-
+  const fileName = props.fileName;
+  const sopB64x = props.sopB64;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const submitFile = () => {
+    console.log(sopB64x);
+  } 
+  
   return (
     <>
       <div className='pt-2'>
@@ -20,12 +26,12 @@ export default function UploadFileModalPopUpY() {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body> Are you sure to upload this file: <br/> {fileName}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={handleClose}>
+          <Button onClick={submitFile}>
             Additional button
           </Button>
         </Modal.Footer>
