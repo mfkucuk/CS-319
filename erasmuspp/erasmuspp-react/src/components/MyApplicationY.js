@@ -20,6 +20,10 @@ export default function MyApplicationY(){
     navigate("/viewApplicationForm");
   }
 
+  function handleCLickRoadmap() {
+    navigate("/roadmap");
+  }
+
   const uploadStatemenetOfPurpose = async (e) => {
     const statementOfPurpose = e.target.files[0];
     
@@ -124,7 +128,7 @@ export default function MyApplicationY(){
           </div>
           <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
             <br/><br/><br/><br/><br/>
-            <Button style={{backgroundColor: "#3C7479"}}>
+            <Button onClick={handleCLickRoadmap} style={{backgroundColor: "#3C7479"}}>
               Go to Roadmap
             </Button>
             <br/><br/><br/><br/>

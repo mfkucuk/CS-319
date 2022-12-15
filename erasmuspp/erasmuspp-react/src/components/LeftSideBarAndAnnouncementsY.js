@@ -12,8 +12,6 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName]= useState("");
-  const [todoSwitch, setTodoSwitch] = useState(1);
-
   
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
@@ -36,12 +34,8 @@ export default function LeftSideBarAndAnnouncements(){
       navigate("/studentsTable");
   }
 
-  function handleClickToDoRoadmap() {
-    if (todoSwitch === 1) {
-      navigate("/toDoList");
-    } else {
-      navigate("/roadmap");
-    }
+  function handleClickToDo() {
+    navigate("/toDoList");
   }
 
   return (
@@ -72,8 +66,8 @@ export default function LeftSideBarAndAnnouncements(){
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickToDoRoadmap} style={{backgroundColor: "#3C7479"}} size="lg">
-                To Do / Roadmap
+              <Button onClick={handleClickToDo} style={{backgroundColor: "#3C7479"}} size="lg">
+                To Do List
               </Button>
               <br/>
               <br/>
