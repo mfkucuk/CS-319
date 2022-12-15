@@ -11,6 +11,8 @@ import StudentsTableY from './components/StudentsTableY';
 import MyApplicationY from './components/MyApplicationY';
 import ApplicationFormEditY from './components/ApplicationFormEditY';
 import ApplicationFormViewY from './components/ApplicationFormViewY';
+import ToDoListN from './components/ToDoListN';
+import RoadmapY from './components/RoadmapY';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
         <Route path ="/editApplicationForm" element = {<ApplicationFormEditY/>}> </Route>
         <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
+        <Route path ="/toDoList" element = {<ToDoListN/>}> </Route>
+        <Route path ="/roadmap" element = {<RoadmapY/>}> </Route>
       </Routes>  
     </>
   );

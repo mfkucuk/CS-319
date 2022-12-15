@@ -30,6 +30,13 @@ code {
 }
 #scrollable {
   position: absolute;
+  height: 122%;
+  /* width: 100%; */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#scrollableMyApps{
   height: 100%;
   /* width: 100%; */
   overflow-y: auto;

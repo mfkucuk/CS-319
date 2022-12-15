@@ -6,12 +6,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
+import { useNavigate } from "react-router-dom";
 
 export default function MyApplicationsN() {
-    
+    let navigate = useNavigate();
+    function handleClickMyApplication() {
+        navigate("/myApplication");
+    }
+
     return (
             <div>
-            <br></br>
             <TopNavBar>
 
             </TopNavBar>
@@ -19,6 +23,7 @@ export default function MyApplicationsN() {
                 display: 'grid',
                 alignItems: 'center',
                 justifyContent: 'center',
+                alignContent: 'center',
                 height: '100vh',
                 background: "#A7DFD7",
                 paddingBottom: '50px'
@@ -30,9 +35,7 @@ export default function MyApplicationsN() {
                     padding: '50px',
                 }}><b>My Applications</b></header>
 
-                <br></br><br></br><br></br>
-
-                <Form id="scrollable" class="col-md-10" style={{ 
+                <Form id="scrollableMyApps" style={{ 
                 width: 'auto',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -69,7 +72,7 @@ export default function MyApplicationsN() {
                                 alignContent: 'center',
                                 justifyContent: 'center',
                             }}>
-                                <Button style={{
+                                <Button onClick={handleClickMyApplication} style={{
                                     textAlign: 'center',
                                 }}>
                                     Go to Application
