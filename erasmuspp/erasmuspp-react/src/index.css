@@ -35,5 +35,12 @@ code {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+#scrollableMyApps{
+  height: 100%;
+  /* width: 100%; */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 /* https://stackoverflow.com/questions/43608927/overflow-div-inside-fixed-div */
 
