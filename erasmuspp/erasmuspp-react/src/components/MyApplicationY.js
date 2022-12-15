@@ -43,6 +43,11 @@ export default function MyApplicationY(){
 
   const uploadSOPFinal = ()=> { 
     console.log(sopB64);
+    const linkSource = sopB64
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = "SA";
+    downloadLink.click();
   }
 
   return(
