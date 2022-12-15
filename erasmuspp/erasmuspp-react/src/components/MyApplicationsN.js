@@ -11,7 +11,6 @@ export default function MyApplicationsN() {
     
     return (
             <div>
-            <br></br>
             <TopNavBar>
 
             </TopNavBar>
@@ -19,6 +18,7 @@ export default function MyApplicationsN() {
                 display: 'grid',
                 alignItems: 'center',
                 justifyContent: 'center',
+                alignContent: 'center',
                 height: '100vh',
                 background: "#A7DFD7",
                 paddingBottom: '50px'
@@ -30,9 +30,7 @@ export default function MyApplicationsN() {
                     padding: '50px',
                 }}><b>My Applications</b></header>
 
-                <br></br><br></br><br></br>
-
-                <Form id="scrollable" class="col-md-10" style={{ 
+                <Form id="scrollableMyApps" style={{ 
                 width: 'auto',
                 alignItems: 'center',
                 justifyContent: 'center',
