@@ -14,6 +14,7 @@ import MyApplicationY from './components/MyApplicationY';
 import ApplicationFormEditY from './components/ApplicationFormEditY';
 import ApplicationFormViewY from './components/ApplicationFormViewY';
 import ToDoListN from './components/ToDoListN';
+import ForgotPasswordN from './components/ForgotPasswordN';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path ="/editApplicationForm" element = {<ApplicationFormEditY/>}> </Route>
         <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
         <Route path ="/toDoList" element = {<ToDoListN/>}> </Route>
+        <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
       </Routes>  
     </>
   );
