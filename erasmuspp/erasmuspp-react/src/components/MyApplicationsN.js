@@ -6,9 +6,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
+import { useNavigate } from "react-router-dom";
 
 export default function MyApplicationsN() {
-    
+    let navigate = useNavigate();
+    function handleClickMyApplication() {
+        navigate("/myApplication");
+    }
+
     return (
             <div>
             <TopNavBar>
@@ -67,7 +72,7 @@ export default function MyApplicationsN() {
                                 alignContent: 'center',
                                 justifyContent: 'center',
                             }}>
-                                <Button style={{
+                                <Button onClick={handleClickMyApplication} style={{
                                     textAlign: 'center',
                                 }}>
                                     Go to Application
