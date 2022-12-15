@@ -21,6 +21,7 @@ export default function LoginScreen(){
             if (res.data[0].id === 1) {
               navigate("/main");
             }
+            
           });
     };
     
