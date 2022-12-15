@@ -5,7 +5,8 @@ import TopNavBar from './TopNavBar';
 import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
 
-export default function PostAnnouncementY(){
+export default function ApplicationFormViewY(){
+
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
       <TopNavBar/>
@@ -16,7 +17,7 @@ export default function PostAnnouncementY(){
           </div>
           <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
             <br/><br/>
-            <h1 style={{ color: '#f4eff2' }}>Post Announcement</h1>
+            <h1 style={{ color: '#f4eff2' }}>Application Form (View Mode) </h1>
           </div>
         </div>
         <div class="row">
@@ -26,11 +27,11 @@ export default function PostAnnouncementY(){
           <div class="col-md-4" style={{backgroundColor: "#1F8F8E"}}>
             <br/>
             <Form>
-              <Form.Group className="mb-3" controlId="postAnnouncementTitle">
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title:</Form.Label>
                 <Form.Control type='text' placeholder="Announcement Title"/>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="postAnnouncementDescription">
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Announcement Description:</Form.Label>
                 <Form.Control as="textarea" rows={3}  placeholder="Type announcement details here"/>
               </Form.Group>
@@ -42,23 +43,23 @@ export default function PostAnnouncementY(){
           <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
             <br/><br/>
             <Form>
-              <Form.Group className="mb-3" controlId="postAnnouncementDepartment"  style={{textAlign: 'left'}}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"  style={{textAlign: 'left'}}>
                 <Form.Label>Department:</Form.Label>
               </Form.Group>
               <br/>
-              <Form.Group className="mb-3" controlId="postAnnouncementCountry"  style={{textAlign: 'left'}}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1"  style={{textAlign: 'left'}}>
                 <Form.Label>Country:</Form.Label>
               </Form.Group>
               <br/>
-              <Form.Group className="mb-3" controlId="postAnnouncementErasmusSemester"  style={{textAlign: 'left'}}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2"  style={{textAlign: 'left'}}>
                 <Form.Label>Erasmus Semester:</Form.Label>
               </Form.Group>
               <br/>
-              <Form.Group className="mb-3" controlId="postAnnouncementUniversity"  style={{textAlign: 'left'}}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea3"  style={{textAlign: 'left'}}>
                 <Form.Label>University:</Form.Label>
               </Form.Group>
               <br/>
-              <Form.Group className="mb-3" controlId="postAnnouncementNameID"  style={{textAlign: 'left'}}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea3"  style={{textAlign: 'left'}}>
                 <Form.Label>Query by Name/ID:</Form.Label>
               </Form.Group>
             </Form>

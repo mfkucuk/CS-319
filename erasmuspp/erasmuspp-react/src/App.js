@@ -2,14 +2,17 @@ import './App.css';
 import LoginScreen from './components/LoginScreen';
 import MainScreen from './components/MainScreen';
 import ProfileScreen from './components/ProfileScreen';
+import MyApplicationsN from './components/MyApplicationsN';
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
+import TopNavBar from './components/TopNavBar';
 import PostAnnouncementY from './components/PostAnnouncementY';
 import MyApplicationsN from './components/MyApplicationsN';
 import RegisterCandidateY from './components/RegisterCandidateY';
 import StudentsTableY from './components/StudentsTableY';
 import MyApplicationY from './components/MyApplicationY';
-import {useEffect} from 'react';
+import ApplicationFormEditY from './components/ApplicationFormEditY';
+import ApplicationFormViewY from './components/ApplicationFormViewY';
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
         <Route path ="/candidateRegistration" element = {<RegisterCandidateY />}> </Route>
         <Route path ="/studentsTable" element = {<StudentsTableY />}> </Route>
         <Route path ="/myApplication" element = {<MyApplicationY />}> </Route>
+        <Route path ="/editApplicationForm" element = {<ApplicationFormEditY/>}> </Route>
+        <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
       </Routes>  
     </>
   );
