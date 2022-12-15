@@ -58,7 +58,6 @@ export default function AnnouncementsY() {
           </Col>
         ))}
       </Row>
-      <AnnouncementCardBreakY/>
     </div>
   );
 }
