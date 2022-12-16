@@ -4,27 +4,35 @@ import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
+import { useNavigate } from 'react-router-dom';
 
-export default function ApplicationFormEditY(){
-
-  return(
-    <div style={{backgroundColor: "#C7D6D2"}}>
-      <TopNavBar/>
+export default function ApplicationFormEditY() {
+  let navigate = useNavigate();
+  function clickBack() {
+    navigate("/myApplication");
+  }
+ 
+  return (
+    <div style={{ backgroundColor: "#C7D6D2" }}>
+      <TopNavBar />
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+            <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
+              Go Back
+            </Button>
           </div>
-          <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
-            <br/><br/>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br /><br />
             <h1 style={{ color: '#f4eff2' }}>Application Form (View Mode)</h1>
-            <br/>
+            <br />
           </div>
         </div>
         <div class="row">
           <div class="col-md-2">
-            <LargeBreak/>
+            <LargeBreak />
           </div>
-          <div class="col-md-2" style={{backgroundColor: "#1F8F8E"}}>
+          <div class="col-md-2" style={{ backgroundColor: "#1F8F8E" }}>
             <Form>
               <Form.Group className="ps-4" controlId="applicationFormPersonalInformation">
                 <Form.Label style={{ color: '#f4eff2' }}><h5>Personal Information:</h5></Form.Label>
@@ -75,8 +83,8 @@ export default function ApplicationFormEditY(){
               </Form.Group>
             </Form>
           </div>
-          <div class="col-md-3" style={{backgroundColor: "#1F8F8E"}}>
-            <br/>
+          <div class="col-md-3" style={{ backgroundColor: "#1F8F8E" }}>
+            <br />
             <Form>
               <Form.Group className="pt-3 mb" controlId="applicationFormEditFirstNameForm">
                 <Form.Label>Mehmet Behnan</Form.Label>
@@ -90,7 +98,7 @@ export default function ApplicationFormEditY(){
               <Form.Group className="pt-1 mb" controlId="applicationFormEditNationalityForm">
                 <Form.Label>Turkey</Form.Label>
               </Form.Group>
-              <br/>
+              <br />
               <Form.Group className="pt-4 mb-1" controlId="applicationFormEditStudentIDForm">
                 <Form.Label>21602468</Form.Label>
               </Form.Group>
@@ -100,7 +108,7 @@ export default function ApplicationFormEditY(){
               <Form.Group className="pt-1 mb-3" controlId="applicationFormEditCumGPAForm">
                 <Form.Label>2.84</Form.Label>
               </Form.Group>
-              <br/>
+              <br />
               <Form.Group className="pt-1 mb-2" controlId="applicationFormEditUnivEmailForm">
                 <Form.Label>behnan.turkeri@ug.bilkent.edu.tr</Form.Label>
               </Form.Group>
@@ -114,11 +122,11 @@ export default function ApplicationFormEditY(){
                 <Form.Label>0312 555 6677</Form.Label>
               </Form.Group>
               <Form.Group className="me-5 mb-3" controlId="applicationFormEditPostalAddressForm">
-                <Form.Control disabled readonly as="textarea" rows={4}  placeholder="Postal Address"/>
+                <Form.Control disabled readonly as="textarea" rows={4} placeholder="Postal Address" />
               </Form.Group>
             </Form>
           </div>
-          <div class="col-md-3" style={{backgroundColor: "#1F8F8E"}}>
+          <div class="col-md-3" style={{ backgroundColor: "#1F8F8E" }}>
             <Form className="pe-2">
               <Form.Group controlId="applicationFormEditUnivPreferences">
                 <Form.Label style={{ color: '#f4eff2' }}><h5>Erasmus Host University Preferences:</h5></Form.Label>
@@ -153,15 +161,15 @@ export default function ApplicationFormEditY(){
         </div>
         <div class="row">
           <div class="col-md-2">
-            <br/><br/><br/><br/><br/><br/><br/>
+            <br /><br /><br /><br /><br /><br /><br />
           </div>
-          <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
-            <br/><br/><br/>
-            <Button style={{backgroundColor: "#3C7479"}}>Export Application Form</Button>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br /><br /><br />
+            <Button style={{ backgroundColor: "#3C7479" }}>Export Application Form</Button>
           </div>
         </div>
       </div>
-      <DefaultFooter/>
+      <DefaultFooter />
     </div>
   );
 }
