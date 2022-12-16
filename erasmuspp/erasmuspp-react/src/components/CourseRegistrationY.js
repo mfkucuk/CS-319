@@ -1,18 +1,13 @@
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
-import Navbar from 'react-bootstrap/Navbar';
-import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from "react-router-dom";
 import TopNavBar from './TopNavBar';
 
 export default function CourseRegistrationY() {
 
-  const [inputFields, setInputFields] = useState([{ courseIndex: "New Course "}])
+  const [inputFields, setInputFields] = useState([{ courseIndex: "New Course " }])
   const [coursesSize, setCoursesSize] = useState(2);
 
   const handleFormChange = (index, event) => {
@@ -34,6 +29,11 @@ export default function CourseRegistrationY() {
     let data = [...inputFields];
     data.splice(index, 1)
     setInputFields(data)
+  }
+
+  let navigate = useNavigate();
+  function handleClickCourseEquivalenceRequest() {
+    navigate("/courseEquivalenceRequest");
   }
 
   return (
@@ -64,7 +64,7 @@ export default function CourseRegistrationY() {
                 return (
                   <div key={index}>
                     <input class="form-control mb-4"
-                     style={{width: "14rem", height: "2rem"}}
+                      style={{ width: "14rem", height: "2rem" }}
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
@@ -89,19 +89,33 @@ export default function CourseRegistrationY() {
               Pre-approved Courses for Equivalence:
             </h5>
             <div class="form-group">
-            {inputFields.map((input, index) => {
+              {inputFields.map((input, index) => {
                 return (
                   <div key={index}>
                     <input class="form-control mb-4"
-                      style={{width: "14rem", height: "2rem"}}
+                      style={{ width: "14rem", height: "2rem" }}
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
                       onChange={event => handleFormChange(index, event)} />
+
                   </div>
                 )
               })}
+              <Button onClick={handleClickCourseEquivalenceRequest} style={{ backgroundColor: "#3C7479", width: "18rem" }}>
+                Request Course Equivalence
+              </Button>
             </div>
+            <LargeBreak></LargeBreak>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-center">
+          </div>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <Button style={{ backgroundColor: "#3C7479" }}>
+              Submit
+            </Button>
             <LargeBreak></LargeBreak>
           </div>
         </div>
