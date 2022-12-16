@@ -1,20 +1,26 @@
-import FormGroup from 'react-bootstrap/esm/FormGroup';
-import Form from 'react-bootstrap/Form';
 import DefaultFooter from './DefaultFooter';
 import TopNavBar from './TopNavBar';
-import Button from 'react-bootstrap/esm/Button';
-import FormCheckLabel from 'react-bootstrap/esm/FormCheckLabel';
-
-
+import Button from 'react-bootstrap/esm/Button';import FormCheckLabel from 'react-bootstrap/esm/FormCheckLabel';
+import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPasswordN() {
     let checked = false;
+    let navigate = useNavigate();
+    function clickBack(){
+        navigate("/login");
+    }
 
     return (
-        <div>
+        <div class="container-fluid" >
             <TopNavBar/>
-            <div class="container-fluid" style={{ backgroundColor: '#A7DFD7', height: '100vh'}}>
-                <div class="row"  className="col text-center">
+            <div class="row" style={{ backgroundColor: '#1F8F8E', height: '100vh'}}>
+                <div class="col-md-2 justify-content-end" style={{display: 'flex'}}>
+                    <Button style={{margin: '40px', height: '40px'}} onClick={clickBack}>
+                        Go Back
+                    </Button>
+                </div>
+
+                <div class="col-md-8 text-center">
                     <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '40px', color: 'black'}}>Forgot Password?</header>
                     <br></br><br></br>
@@ -22,16 +28,17 @@ export default function ForgotPasswordN() {
                     <br></br><br></br>
                     <input></input>
                     <br></br><br></br>
-                    <Button>Send</Button>
+                    <Button style={{backgroundColor: '#3C7479'}}>Send</Button>
                     <br></br><br></br>
                     <div style={{display: 'flex', justifyContent:'center'}}>
                         <input type="checkbox" disabled="true" checked={checked} style={{marginRight: '20px', scale: '2'}}></input>
-                        <header>Password is sent to your e-mail</header>
+                        <header style={{ color: 'white' }}>Password is sent to your e-mail</header>
                     </div>
-                    
-                    {/* <Form.Control class="col text-center" as="textarea" style={{width: '100px', display: 'inherit'}}/> */}
                 </div>
-                
+
+                <div class="col-md-2">
+
+                </div>
                 
             </div>
             <DefaultFooter/>
