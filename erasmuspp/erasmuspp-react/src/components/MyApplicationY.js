@@ -4,30 +4,38 @@ import DefaultFooter from './DefaultFooter';
 import UploadFileModalPopUpY from './UploadFileModalPopUp';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function MyApplicationY(){
-  const [statementOfPurpose, setStatementOfPurpose]= useState("");
+export default function MyApplicationY() {
+  const [statementOfPurpose, setStatementOfPurpose] = useState("");
   const [sopB64, setsopB64] = useState("");
 
   let navigate = useNavigate();
   function handleClickEditApplicationForm() {
-      navigate("/editApplicationForm");
+    navigate("/editApplicationForm");
   }
 
   function handleClickViewApplicationForm() {
     navigate("/viewApplicationForm");
   }
 
+  function handleCLickRoadmap() {
+    navigate("/roadmap");
+  }
+
+  function clickBack() {
+    navigate("/myApplications");
+  }
+
   const uploadStatemenetOfPurpose = async (e) => {
     const statementOfPurpose = e.target.files[0];
-    
+
     setsopB64(await sopToB64(statementOfPurpose));
   };
 
   const sopToB64 = (file) => {
-      return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
@@ -41,7 +49,7 @@ export default function MyApplicationY(){
 
   }
 
-  const uploadSOPFinal = ()=> { 
+  const uploadSOPFinal = () => {
     console.log(sopB64);
     const linkSource = sopB64
     const downloadLink = document.createElement("a");
@@ -49,6 +57,7 @@ export default function MyApplicationY(){
     downloadLink.download = "SA";
     downloadLink.click();
   }
+
 
   const uploadCVFinal = () => {
     console.log(sopB64);
@@ -60,65 +69,68 @@ export default function MyApplicationY(){
       <TopNavBar/>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+            <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
+              Go Back
+            </Button>
           </div>
-          <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
-            <br/><br/>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br /><br />
             <h3 style={{ color: '#f4eff2' }}>My Application</h3>
           </div>
         </div>
         <div class="row">
           <div class="col-md-2">
           </div>
-          <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
+          <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
           </div>
-          <div class="col-md-3" style={{backgroundColor: "#1F8F8E"}}>
+          <div class="col-md-3" style={{ backgroundColor: "#1F8F8E" }}>
             <Form.Group controlId="uploadStatementofPurposeForm" className="mb-3">
-              <Form.Label style={{color: '#f4eff2'}}>Upload Statement of Purpose</Form.Label>
-              <Form.Control type="file" size="lg" value = {statementOfPurpose} onChange = {(e) =>  {setStatementOfPurpose(e.target.value); uploadStatemenetOfPurpose(e); }} />
+              <Form.Label style={{ color: '#f4eff2' }}>Upload Statement of Purpose</Form.Label>
+              <Form.Control type="file" size="lg" value={statementOfPurpose} onChange={(e) => { setStatementOfPurpose(e.target.value); uploadStatemenetOfPurpose(e); }} />
             </Form.Group>
-            <br/>
+            <br />
             <Form.Group controlId="uploadCVForm" className="mb-3">
-              <Form.Label style={{color: '#f4eff2'}}>Upload CV</Form.Label>
+              <Form.Label style={{ color: '#f4eff2' }}>Upload CV</Form.Label>
               <Form.Control type="file" size="lg" />
             </Form.Group>
-            <br/>
+            <br />
             <Form.Group controlId="uploadApplicationForm" className="mb-3">
-              <Form.Label style={{color: '#f4eff2'}}>Upload Application Form</Form.Label>
+              <Form.Label style={{ color: '#f4eff2' }}>Upload Application Form</Form.Label>
               <Form.Control type="file" size="lg" />
             </Form.Group>
             <div className='pt-2'>
-              <Button onClick={handleClickEditApplicationForm} style={{backgroundColor: "#3C7479", width: "13rem"}}>
+              <Button onClick={handleClickEditApplicationForm} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 Fill Application Form
               </Button>
             </div>
             <div className='pt-2'>
-              <Button onClick={handleClickViewApplicationForm} style={{backgroundColor: "#3C7479", width: "13rem"}}>
+              <Button onClick={handleClickViewApplicationForm} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 View Application Form
               </Button>
             </div>
           </div>
-          <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
-            <br/>
+          <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
+            <br />
             <div className='pt-2'>
-            <Button style={{backgroundColor: "#3C7479"}} onClick={uploadSOPFinal}>
-            Upload
-            </Button>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadSOPFinal}>
+                Upload
+              </Button>
             </div>
-            <br/><br/><br/>
+            <br /><br /><br />
             <div className='pt-2'>
-            <Button style={{backgroundColor: "#3C7479"}}>
-            Upload
-            </Button>
+              <Button style={{ backgroundColor: "#3C7479" }}>
+                Upload
+              </Button>
             </div>
-            <br/><br/><br/>
+            <br /><br /><br />
             <div className='pt-2'>
-            <Button style={{backgroundColor: "#3C7479"}}>
-            Upload
-            </Button>
-            </div>             
+              <Button style={{ backgroundColor: "#3C7479" }}>
+                Upload
+              </Button>
+            </div>
           </div>
-          <div class="col-md-3 text-center" style={{backgroundColor: "#1F8F8E"}}>
+          <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
 
           </div>
           <div class="col-md-2">
@@ -127,16 +139,16 @@ export default function MyApplicationY(){
         <div class="row">
           <div class="col-md-2">
           </div>
-          <div class="col-md-8 text-center" style={{backgroundColor: "#1F8F8E"}}>
-            <br/><br/><br/><br/><br/>
-            <Button style={{backgroundColor: "#3C7479"}}>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br /><br /><br /><br /><br />
+            <Button onClick={handleCLickRoadmap} style={{ backgroundColor: "#3C7479" }}>
               Go to Roadmap
             </Button>
-            <br/><br/><br/><br/>
+            <br /><br /><br /><br />
           </div>
         </div>
       </div>
-      <DefaultFooter/>
+      <DefaultFooter />
     </div>
   );
 }

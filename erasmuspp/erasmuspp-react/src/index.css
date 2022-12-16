@@ -42,5 +42,9 @@ code {
   overflow-y: auto;
   overflow-x: hidden;
 }
+#printImage{
+  width: 80px;
+  height: 80px;
+}
 /* https://stackoverflow.com/questions/43608927/overflow-div-inside-fixed-div */
 

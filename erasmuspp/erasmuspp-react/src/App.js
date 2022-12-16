@@ -12,7 +12,13 @@ import MyApplicationY from './components/MyApplicationY';
 import ApplicationFormEditY from './components/ApplicationFormEditY';
 import ApplicationFormViewY from './components/ApplicationFormViewY';
 import ToDoListN from './components/ToDoListN';
+import ChangePasswordN from './components/ChangePasswordN';
 import RoadmapY from './components/RoadmapY';
+import LearningAgreementN from './components/LearningAgreementN';
+import PreApprovalFormN from './components/PreApprovalForm';
+import ForgotPasswordN from './components/ForgotPasswordN';
+import CourseRegistrationY from './components/CourseRegistrationY';
+import CourseEquivalenceRequestY from './components/CourseEquivalenceRequestY';
 
 function App() {
   return (
@@ -30,7 +36,14 @@ function App() {
         <Route path ="/editApplicationForm" element = {<ApplicationFormEditY/>}> </Route>
         <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
         <Route path ="/toDoList" element = {<ToDoListN/>}> </Route>
+        <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
+        <Route path ="/changePassword" element = {<ChangePasswordN/>}> </Route>
         <Route path ="/roadmap" element = {<RoadmapY/>}> </Route>
+        <Route path ="/learningAgreement" element = {<LearningAgreementN/>}> </Route>
+        <Route path ="/preApprovalForm" element = {<PreApprovalFormN/>}> </Route>
+        <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
+        <Route path ="/courseRegistration" element = {<CourseRegistrationY/>}> </Route>
+        <Route path ="/courseEquivalenceRequest" element = {<CourseEquivalenceRequestY/>}> </Route>
       </Routes>  
     </>
   );
