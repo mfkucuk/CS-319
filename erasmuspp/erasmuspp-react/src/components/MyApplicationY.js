@@ -58,9 +58,15 @@ export default function MyApplicationY() {
     downloadLink.click();
   }
 
-  return (
-    <div style={{ backgroundColor: "#C7D6D2" }}>
-      <TopNavBar />
+
+  const uploadCVFinal = () => {
+    console.log(sopB64);
+
+  }
+
+  return(
+    <div style={{backgroundColor: "#C7D6D2"}}>
+      <TopNavBar/>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
