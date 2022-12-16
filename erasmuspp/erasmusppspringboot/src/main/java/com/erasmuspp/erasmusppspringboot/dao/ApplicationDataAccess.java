@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.flywaydb.core.internal.jdbc.JdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.Application;
@@ -36,7 +36,8 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public int deleteApplicationById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM \"application\" WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
     }
 
     @Override

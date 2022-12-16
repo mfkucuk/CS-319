@@ -23,10 +23,18 @@ public class ApplicationService
 
     public int addApplication(Application application)
     {
+        for (int i = 0; i < 3; i++)
+        {
+            System.out.println(application.getFiles()[i].getFileName());
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            System.out.println(application.getChoices()[i]);
+        }
         return applicationDao.insertApplication(application);
     }
 
-    public List<Application> getAllApplication()
+    public List<Application> getAllApplications()
     {
         return applicationDao.selectAllApplications();
     }
