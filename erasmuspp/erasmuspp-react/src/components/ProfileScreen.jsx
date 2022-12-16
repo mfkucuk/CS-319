@@ -15,8 +15,7 @@ export default function ProfileScreen() {
   let navigate = useNavigate();
   function changeClick(){
     navigate("/changePassword");
-  };
-export default function ProfileScreen() {
+  }
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
@@ -25,47 +24,6 @@ export default function ProfileScreen() {
           <div class="col-md-3">
           </div>  
         <div class="col-md-2" style={{backgroundColor: "#be402d"}}>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <p style = {{textAlign: 'center'}}>
-            User Information
-          </p>	
-
-          <br/>
-          <br/>
-          <br/>
-
-          <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder="egeayan2001@gmail.com"/>
-      
-  </div>
-  <br/>
-
-  <div class="form-group">
-    <label for="exampleInputPhone1">Phone Number</label>
-    <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder="0531313131"/>
-  </div>
-          <br/>
-          
-          <br/>
-          
-          <p>
-            Date of Birth: 01.04.2001 
-          </p>
-          <br/>
-          <p>
-            Gender: Male
-          </p>
-          <LargeBreak></LargeBreak>
         </div>
         <div class="row">
           <div class="col-md-2">
@@ -137,5 +95,6 @@ export default function ProfileScreen() {
       </div>
       <DefaultFooter/>
     </div>
+  </div>
   )
 }

@@ -15,7 +15,6 @@ import ToDoListN from './components/ToDoListN';
 import ForgotPasswordN from './components/ForgotPasswordN';
 import ChangePasswordN from './components/ChangePasswordN';
 import RoadmapY from './components/RoadmapY';
-import ForgotPasswordN from './components/ForgotPasswordN'
 
 function App() {
   return (
