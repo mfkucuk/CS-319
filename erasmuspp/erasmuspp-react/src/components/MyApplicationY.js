@@ -50,6 +50,11 @@ export default function MyApplicationY(){
     downloadLink.click();
   }
 
+  const uploadCVFinal = () => {
+    console.log(sopB64);
+
+  }
+
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
       <TopNavBar/>
