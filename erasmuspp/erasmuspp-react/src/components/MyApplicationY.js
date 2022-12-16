@@ -24,6 +24,10 @@ export default function MyApplicationY() {
     navigate("/roadmap");
   }
 
+  function clickBack() {
+    navigate("/myApplications");
+  }
+
   const uploadStatemenetOfPurpose = async (e) => {
     const statementOfPurpose = e.target.files[0];
 
@@ -59,7 +63,10 @@ export default function MyApplicationY() {
       <TopNavBar />
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+            <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
+              Go Back
+            </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br />
