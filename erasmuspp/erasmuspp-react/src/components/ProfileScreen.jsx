@@ -15,16 +15,12 @@ export default function ProfileScreen() {
   let navigate = useNavigate();
   function changeClick(){
     navigate("/changePassword");
-  }
+  };
+
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
       <div class="container-fluid" >
-        <div class="row">
-          <div class="col-md-3">
-          </div>  
-        <div class="col-md-2" style={{backgroundColor: "#be402d"}}>
-        </div>
         <div class="row">
           <div class="col-md-2">
           </div>
@@ -92,6 +88,5 @@ export default function ProfileScreen() {
       </div>
       <DefaultFooter/>
     </div>
-  </div>
-  )
+  );
 }
