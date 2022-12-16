@@ -12,9 +12,10 @@ import MyApplicationY from './components/MyApplicationY';
 import ApplicationFormEditY from './components/ApplicationFormEditY';
 import ApplicationFormViewY from './components/ApplicationFormViewY';
 import ToDoListN from './components/ToDoListN';
-import ForgotPasswordN from './components/ForgotPasswordN';
 import ChangePasswordN from './components/ChangePasswordN';
 import RoadmapY from './components/RoadmapY';
+import ForgotPasswordN from './components/ForgotPasswordN';
+import CourseRegistrationY from './components/CourseRegistrationY';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path ="/changePassword" element = {<ChangePasswordN/>}> </Route>
         <Route path ="/roadmap" element = {<RoadmapY/>}> </Route>
         <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
+        <Route path ="/courseRegistration" element = {<CourseRegistrationY/>}> </Route>
       </Routes>  
     </>
   );
