@@ -27,7 +27,7 @@ public class UserController {
         userService.addUser(user);
     }
 
-    @GetMapping("/test")
+    @GetMapping()
     public List<User> getAllUsers()
     {
         return userService.getAllUsers();
