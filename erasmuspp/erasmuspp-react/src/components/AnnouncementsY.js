@@ -24,7 +24,7 @@ export default function AnnouncementsY() {
 
   let navigate = useNavigate();
   function handleClick() {
-      navigate("/addAnnouncement");
+    navigate("/addAnnouncement");
   }
   
   return (
