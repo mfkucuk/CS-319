@@ -27,7 +27,7 @@ public class UserController {
         userService.addUser(user);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<User> getAllUsers()
     {
         return userService.getAllUsers();
@@ -38,6 +38,12 @@ public class UserController {
     {
         return userService.getUserById(id).orElse(null);
     } 
+
+    @GetMapping(path = "{email}")
+    public User getUserByEmail(@PathVariable("email") String email)
+    {
+        return userService.getUserByEmail(email).orElse(null);
+    }
 
     @DeleteMapping(path = "{id}")
     public int deletePersonById(@PathVariable("id") UUID id)
