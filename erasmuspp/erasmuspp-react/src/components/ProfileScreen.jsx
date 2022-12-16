@@ -11,26 +11,16 @@ import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import TopNavBar from './TopNavBar';
 
-
-<<<<<<< Updated upstream
-export default function ProfileScreen(){
-    return(
-      <div style={{backgroundColor: "#2E2E2B"}}>
-       <TopNavBar/>
-       
-       <div class="container-fluid" >
-=======
 export default function ProfileScreen() {
   let navigate = useNavigate();
   function changeClick(){
     navigate("/changePassword");
   };
-  
+export default function ProfileScreen() {
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
       <div class="container-fluid" >
->>>>>>> Stashed changes
         <div class="row">
           <div class="col-md-3">
           </div>  
@@ -77,49 +67,21 @@ export default function ProfileScreen() {
           </p>
           <LargeBreak></LargeBreak>
         </div>
-<<<<<<< Updated upstream
-
-
-        <div class="col-md-2" style={{backgroundColor: "#667666"}}>
-          <br/>
-          <br/>
-          <view style={{padding: 40, alignSelf: 'flex-start', alignContent:'center'}}>
-            <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
-          </view>
-          <br/>
-          <p style={{textAlign: 'center'}}>
-            UserName
-          </p>	
-
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <Button>Change E-Mail</Button>
-          <br/>
-          <br/>
-          <br/>
-          
-          <Button style={{}}>Change Phone</Button>
-
-          
-
-          
-          <LargeBreak></LargeBreak>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br />
+            <br />
+            <view>
+              <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+            </view>
+            <br />
+            <h3 className="pt-4" style={{ color: "#f4eff2" }}>
+              User Name
+            </h3>
+          </div>
         </div>
-
-        <div class="col-md-2" style={{backgroundColor: "#EB9181"}}>
-          <br/>
-          <p style = {{textAlign: 'center', color: 'white'}}>
-            About Me
-          </p>	
-
-          <div class="form-group">
-          <label for="exampleFormControlTextarea1"></label>
-          <textarea class="form-control" id="profileScreenAboutMe" rows="4" placeholder='ABOUT ME HAKKINDA BOS ATILAN BILGI'></textarea>
-=======
         <div class="row">
           <div class="col-md-2">
           </div>
@@ -170,23 +132,10 @@ export default function ProfileScreen() {
             <LargeBreak></LargeBreak>
           </div>
           <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
->>>>>>> Stashed changes
           </div>
-          <br/>
-          <Button>Change About Me</Button>
-          <br/>
-          <br/>
-          <Button>Change Password</Button>
-          <LargeBreak></LargeBreak>
-          
         </div>
-
-        
-        
       </div>
+      <DefaultFooter/>
     </div>
-      </div>
-
-
-    )
+  )
 }
