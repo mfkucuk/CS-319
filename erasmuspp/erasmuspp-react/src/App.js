@@ -13,6 +13,7 @@ import ApplicationFormEditY from './components/ApplicationFormEditY';
 import ApplicationFormViewY from './components/ApplicationFormViewY';
 import ToDoListN from './components/ToDoListN';
 import ForgotPasswordN from './components/ForgotPasswordN';
+import ChangePasswordN from './components/ChangePasswordN';
 import RoadmapY from './components/RoadmapY';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path ="/viewApplicationForm" element = {<ApplicationFormViewY/>}> </Route>
         <Route path ="/toDoList" element = {<ToDoListN/>}> </Route>
         <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
+        <Route path ="/changePassword" element = {<ChangePasswordN/>}> </Route>
         <Route path ="/roadmap" element = {<RoadmapY/>}> </Route>
       </Routes>  
     </>
