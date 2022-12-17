@@ -11,6 +11,9 @@ export default function MyApplicationY() {
   const [statementOfPurpose, setStatementOfPurpose] = useState("");
   const [sopB64, setsopB64] = useState("");
 
+  const [cv, setCV] = useState("");
+
+
   let navigate = useNavigate();
   function handleClickEditApplicationForm() {
     navigate("/editApplicationForm");
@@ -51,13 +54,31 @@ export default function MyApplicationY() {
 
   const uploadSOPFinal = () => {
     console.log(sopB64);
-    const linkSource = sopB64
-    const downloadLink = document.createElement("a");
-    downloadLink.href = linkSource;
-    downloadLink.download = "SA";
-    downloadLink.click();
+    axios
+      .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"), 
+        { 
+          statementOfPurposeForm: sopB64 
+        } 
+        )
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("Statement of Purpose Uploaded Successfully")
+        }
+        else {
+          alert("Statement of Purpose Failed to Upload")
+        }
+      }).catch((err)=> {
+
+        alert("Statement of Purpose Failed to Upload")
+      });
   }
 
+  const downloadSop =() => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = sopB64;
+    downloadLink.download = "Fill Application Form";
+    downloadLink.click();
+  }
 
   const uploadCVFinal = () => {
     console.log(sopB64);
@@ -100,7 +121,7 @@ export default function MyApplicationY() {
               <Form.Control type="file" size="lg" />
             </Form.Group>
             <div className='pt-2'>
-              <Button onClick={handleClickEditApplicationForm} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
+              <Button onClick = {downloadSop} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 Fill Application Form
               </Button>
             </div>
