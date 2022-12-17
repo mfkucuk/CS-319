@@ -27,7 +27,7 @@ export default function LoginScreen() {
   };
 
   function handleClickForgotPassword() {
-      navigate("/forgotPassword");
+    navigate("/forgotPassword");
   }
 
 
@@ -38,9 +38,17 @@ export default function LoginScreen() {
           <div class="col-md-2">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-            <br /><br /><br />
-            <h1 style={{ color: "#f4eff2" }}>Erasmus++</h1>
+            <br />
+            <img
+              src="/E++-logos_white_square.png"
+              width="180rem"
+              height="180rem"
+              className="d-inline-block align-top"
+              alt="epp logo"
+            />
             <br /><br />
+            <h1 style={{ color: "#f4eff2" }}> Welcome to Erasmus++</h1>
+            <br />
             <h2 style={{ color: "#f4eff2" }}>Please Log In</h2>
             <div class="row">
               <div class="col-md-4">
@@ -49,7 +57,7 @@ export default function LoginScreen() {
                 <Card>
                   <Form className='text-center'>
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginEmail">
-                      <br/>
+                      <br />
                       <Form.Label>Email address</Form.Label>
                       <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
                       <Form.Text className="text-muted">
@@ -66,7 +74,7 @@ export default function LoginScreen() {
                     </Button>
                     <br /><br />
                     <a onClick={handleClickForgotPassword} class="link-primary">Forgot Your Password?</a>
-                    <br /><br />                    
+                    <br /><br />
                   </Form>
                 </Card>
                 <br /><br /><br /><br /><br /><br /><br /><br />
@@ -75,7 +83,7 @@ export default function LoginScreen() {
           </div>
         </div>
       </div>
-      <DefaultFooter/>
+      <DefaultFooter />
     </div>
   );
 }

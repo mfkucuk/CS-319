@@ -21,7 +21,14 @@ function TopNavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Erasmus++</Navbar.Brand>
+        <Navbar.Brand>
+          <img
+              src="/E++-logos_transparent_square.png"
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+              alt="epp logo"
+            /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
