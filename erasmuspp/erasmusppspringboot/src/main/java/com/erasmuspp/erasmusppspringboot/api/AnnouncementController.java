@@ -3,6 +3,8 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.erasmuspp.erasmusppspringboot.model.Announcement;
 import com.erasmuspp.erasmusppspringboot.service.AnnouncementService;
 
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
 
+@RequestMapping("/api/v1/announcement")
 @RestController
-@RequestMapping("/api/v1")
 public class AnnouncementController
 {
     private final AnnouncementService announcementService;
@@ -30,7 +30,7 @@ public class AnnouncementController
     }
 
     @PostMapping
-    public void addAnnounement(@Nonnull @Valid @RequestBody Announcement announcement)
+    public void addAnnouncement(@Valid @RequestBody Announcement announcement)
     {
         announcementService.addAnnouncement(announcement);
     }
@@ -54,7 +54,7 @@ public class AnnouncementController
     }
 
     @PutMapping(path = "{id}")
-    public int updateAnnouncementById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody Announcement announcement)
+    public int updateAnnouncementById(@PathVariable("id") UUID id, @Valid @RequestBody Announcement announcement)
     {
         return announcementService.updateAnnouncementById(id, announcement);
     }
