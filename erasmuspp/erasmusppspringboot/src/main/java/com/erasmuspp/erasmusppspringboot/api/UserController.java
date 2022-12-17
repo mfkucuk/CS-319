@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import com.erasmuspp.erasmusppspringboot.model.User;
 import com.erasmuspp.erasmusppspringboot.service.UserService;
 
+@RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/user")
-@RestController()
 public class UserController {
     private final UserService userService;
 
@@ -32,16 +33,22 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "id={id}")
     public User getUserById(@PathVariable("id") UUID id)
     {
         return userService.getUserById(id).orElse(null);
     } 
 
-    @GetMapping(path = "{email}")
+    @GetMapping(path = "email={email}")
     public User getUserByEmail(@PathVariable("email") String email)
     {
         return userService.getUserByEmail(email).orElse(null);
+    }
+
+    @GetMapping(path = "token={token}")
+    public User getUserByToken(@PathVariable("token") String token)
+    {
+        return userService.getUserByToken(token).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")

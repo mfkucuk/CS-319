@@ -18,12 +18,15 @@ public class User
 
     private String role;
 
+    private String token;
+
     public User(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
                 @JsonProperty("email") String email,
                 @JsonProperty("bilkentId") String bilkentId,
                 @JsonProperty("password") String password,
-                @JsonProperty("role") String role)
+                @JsonProperty("role") String role,
+                @JsonProperty("token") String token)
                 {
                     this.id = id;
                     this.name = name;
@@ -60,5 +63,9 @@ public class User
 
     public String getRole() {
         return role;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
