@@ -3,13 +3,12 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.erasmuspp.erasmusppspringboot.model.File;
 import com.erasmuspp.erasmusppspringboot.service.FileService;
-
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
 
 @RequestMapping("api/v1/file")
 @RestController
@@ -21,7 +20,7 @@ public class FileController {
     }
 
     @PostMapping
-    public void addFile(@Nonnull @Valid @RequestBody File file) {
+    public void addFile(@Valid @RequestBody File file) {
         fileService.addFile(file);
     }
 
@@ -41,7 +40,7 @@ public class FileController {
     }
 
     @PutMapping(path = "{id}")
-    public int updateFileById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody File file) {
+    public int updateFileById(@PathVariable("id") UUID id, @Valid @RequestBody File file) {
         return fileService.updateFileById(id, file);
     }
 }

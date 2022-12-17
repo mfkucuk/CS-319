@@ -3,6 +3,8 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.erasmuspp.erasmusppspringboot.model.Application;
 import com.erasmuspp.erasmusppspringboot.service.ApplicationService;
 
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
 
 
 @RequestMapping(value = "api/v1/application", consumes = "application/json")
@@ -31,7 +31,7 @@ public class ApplicationController
     }
 
     @PostMapping
-    public void addApplication(@Nonnull @Valid @RequestBody Application application)
+    public void addApplication( @Valid @RequestBody Application application)
     {
         applicationService.addApplication(application);
     }
@@ -55,7 +55,7 @@ public class ApplicationController
     }
 
     @PutMapping(path = "{id}")
-    public int updateApplicationById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody Application application)
+    public int updateApplicationById(@PathVariable("id") UUID id, @Valid @RequestBody Application application)
     {
         return applicationService.updateApplicationById(id, application);
     }

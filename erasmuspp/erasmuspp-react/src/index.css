@@ -11,7 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -31,9 +30,21 @@ code {
 }
 #scrollable {
   position: absolute;
+  height: 122%;
+  /* width: 100%; */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#scrollableMyApps{
   height: 100%;
   /* width: 100%; */
   overflow-y: auto;
   overflow-x: hidden;
 }
+#printImage{
+  width: 80px;
+  height: 80px;
+}
 /* https://stackoverflow.com/questions/43608927/overflow-div-inside-fixed-div */
+
