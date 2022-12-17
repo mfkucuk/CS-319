@@ -73,9 +73,6 @@ export default function ProfileScreen() {
                 Date of Birth: 01.04.2001
               </p>
               <br />
-              <p style={{ color: "#f4eff2" }}>
-                Gender: Male
-              </p>
               <LargeBreak></LargeBreak>
             </div>
             <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
