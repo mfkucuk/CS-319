@@ -11,6 +11,7 @@ import com.erasmuspp.erasmusppspringboot.model.File;
 import com.erasmuspp.erasmusppspringboot.service.FileService;
 
 @RequestMapping("api/v1/file")
+@CrossOrigin(origins = "*")
 @RestController
 public class FileController {
     private final FileService fileService;
