@@ -10,20 +10,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.erasmuspp.erasmusppspringboot.model.User;
 
+import lombok.RequiredArgsConstructor;
+
 @Repository("user") @Transactional 
+@RequiredArgsConstructor
 public class UserDataAccess implements UserDao, UserDetailsService {
 
     private final JdbcTemplate jdbcTemplate;
-
-    public UserDataAccess(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
