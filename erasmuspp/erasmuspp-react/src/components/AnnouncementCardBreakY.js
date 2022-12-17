@@ -1,4 +1,4 @@
-export default function LargeBreak() {
+export default function AnnouncementCardBreakY() {
   return (
     <div>
       <br/>

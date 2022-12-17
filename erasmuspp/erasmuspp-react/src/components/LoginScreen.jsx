@@ -2,42 +2,92 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import DefaultFooter from './DefaultFooter';
 
-export default function LoginScreen(){
-    
-    let navigate = useNavigate();
-    function handleClick() {
-        navigate("/main");
-    }
+
+export default function LoginScreen() {
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+
+  let navigate = useNavigate();
+  const login = (e) => {
+    e.preventDefault();
+    const loginRequest = {  
+      email: emailInput,
+      password: passwordInput
+    };
+    console.log(emailInput);
+    console.log(passwordInput);
+    axios
+      .post("http://192.168.0.79:8080/api/v1/auth/login", 
+        { email: emailInput,
+        password: passwordInput } )
+      .then((res) => {
+        if (res.data.status === true) {
+          navigate("/main");
+        }
+        else {
+          console.log(res.data.status);
+        }
+      });
+  };
+
+  function handleClickForgotPassword() {
+      navigate("/forgotPassword");
+  }
+
+
   return (
-    <div class="position-absolute top-50 start-50 translate-middle">
-    <h1>LOGIN</h1>
-      <Card style={{ width: '18rem' }}>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+    <div style={{ backgroundColor: "#C7D6D2" }}>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+            <br /><br /><br />
+            <h1 style={{ color: "#f4eff2" }}>Erasmus++</h1>
+            <br /><br />
+            <h2 style={{ color: "#f4eff2" }}>Please Log In</h2>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4" style={{ backgroundColor: "#1F8F8E" }}>
+                <Card>
+                  <Form className='text-center'>
+                    <Form.Group className="ms-3 me-3 mb-3" controlId="loginEmail">
+                      <br/>
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control type="email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="Enter email" />
+                      <Form.Text className="text-muted">
+                        Login via your instutition e-mail
+                      </Form.Text>
+                    </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" type="submit" onClick = {handleClick}>
-            Submit
-          </Button>
-        </Form>
-      </Card>
-    </div> 
+                    <Form.Group className="ms-3 me-3 mb-3" controlId="loginPassword">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} placeholder="Password" />
+                    </Form.Group>
+                    <Button style={{ backgroundColor: "#3C7479" }} type="submit" onClick={login}>
+                      Login
+                    </Button>
+                    <br /><br />
+                    <a onClick={handleClickForgotPassword} class="link-primary">Forgot Your Password?</a>
+                    <br /><br />                    
+                  </Form>
+                </Card>
+                <br /><br /><br /><br /><br /><br /><br /><br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <DefaultFooter/>
+    </div>
   );
 }
 
 function navigateMainScreen() {
-    
+
 }
