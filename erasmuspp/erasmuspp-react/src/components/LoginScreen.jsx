@@ -8,21 +8,29 @@ import DefaultFooter from './DefaultFooter';
 
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
 
   let navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+    const loginRequest = {  
+      email: emailInput,
+      password: passwordInput
+    };
+    console.log(emailInput);
+    console.log(passwordInput);
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .post("http://192.168.0.79:8080/api/v1/auth/login", 
+        { email: emailInput,
+        password: passwordInput } )
       .then((res) => {
-        if (res.data[0].id === 1) {
+        if (res.data.status === true) {
           navigate("/main");
         }
-
+        else {
+          console.log(res.data.status);
+        }
       });
   };
 
@@ -51,7 +59,7 @@ export default function LoginScreen() {
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginEmail">
                       <br/>
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
+                      <Form.Control type="email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="Enter email" />
                       <Form.Text className="text-muted">
                         Login via your instutition e-mail
                       </Form.Text>
@@ -59,7 +67,7 @@ export default function LoginScreen() {
 
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginPassword">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                      <Form.Control type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} placeholder="Password" />
                     </Form.Group>
                     <Button style={{ backgroundColor: "#3C7479" }} type="submit" onClick={login}>
                       Login
