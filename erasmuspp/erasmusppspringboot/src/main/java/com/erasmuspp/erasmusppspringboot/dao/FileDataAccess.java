@@ -1,6 +1,5 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,39 +24,22 @@ public class FileDataAccess implements FileDao {
     }
 
     @Override
-    public List<File> selectAllFiles() {
-        final String sql = "SELECT * FROM \"file\"";
-        List<File> files = jdbcTemplate.query(sql, (resultSet, i) -> {
+    public Optional<File> selectFileById(UUID id) {
+        final String sql = "SELECT * FROM \"file\" WHERE id = ?";
+        File file = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID fileId = UUID.fromString(resultSet.getString("id"));
-            byte[] content = resultSet.getBytes("content");
+            String content = resultSet.getString("content");
             String fileName = resultSet.getString("fileName");
             String uploadTime = resultSet.getString("uploadTime");
             return new File(
+                id,
                 fileId,
                 content,
                 fileName,
                 uploadTime
             );
-        });
-        return files;
+        }, new Object[] {id});
+        return Optional.ofNullable(file);
     }
 
-    @Override
-    public Optional<File> selectFileById(UUID id) {
-
-        return Optional.empty();
-    }
-
-    @Override
-    public int deleteFileById(UUID id) {
-
-        return 0;
-    }
-
-    @Override
-    public int updateFileById(UUID id, File newFile) {
-
-        return 0;
-    }
-    
 }
