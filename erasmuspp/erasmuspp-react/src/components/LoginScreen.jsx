@@ -18,14 +18,14 @@ export default function LoginScreen() {
       email: emailInput,
       password: passwordInput
     };
-    console.log(emailInput);
-    console.log(passwordInput);
     axios
-      .post("http://192.168.0.79:8080/api/v1/auth/login", 
-        { email: emailInput,
-        password: passwordInput } )
+      .post("http://localhost:8080/api/v1/auth/login", 
+        { 
+            email: emailInput,
+            password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
+          window.localStorage.setItem("USER_TOKEN", res.data.jwt);
           navigate("/main");
         }
         else {

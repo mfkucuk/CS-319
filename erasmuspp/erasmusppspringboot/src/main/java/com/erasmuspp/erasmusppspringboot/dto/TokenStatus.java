@@ -4,20 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TokenStatus {
     private final boolean status; 
-    private final String jwt;
+    private final String token;
 
     public TokenStatus(
         @JsonProperty("status") boolean status,
-        @JsonProperty("jwt") String jwt) {
+        @JsonProperty("token") String token) {
         this.status = status;
-        this.jwt = jwt;
+        this.token = token;
     }
 
     public boolean getStatus() {
         return status;
     }
 
-    public String getJwt() {
-        return jwt;
+    public String getToken() {
+        return token;
     }
 }
