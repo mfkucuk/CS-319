@@ -39,6 +39,10 @@ public class UserService {
         return userDao.selectUserByEmail(email);
     }
 
+    public Optional<User> getUserByToken(String token) {
+        return userDao.selectUserByToken(token);
+    }
+
     public int deleteUserById(UUID id)
     {
         return userDao.deleteUserById(id);
