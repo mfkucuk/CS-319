@@ -11,7 +11,7 @@ export default function AnnouncementsY() {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/announcement/")
       .then(res => {
         setAnnouncements(res.data);
       })
@@ -50,10 +50,10 @@ export default function AnnouncementsY() {
               <Card.Body>
                 <Card.Title >{announcement.title}</Card.Title>
                 <Card.Text>
-                  {announcement.body}
+                  {announcement.content}
                 </Card.Text>
               </Card.Body>
-              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.body} />
+              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.content} />
             </Card>
           </Col>
         ))}

@@ -11,6 +11,7 @@ export default function LoginScreen() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  
   let navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
