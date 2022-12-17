@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.erasmuspp.erasmusppspringboot.service.AnnouncementService;
 
 
 @RequestMapping("/api/v1/announcement")
+@CrossOrigin(origins = "*")
 @RestController
 public class AnnouncementController
 {
@@ -48,7 +50,7 @@ public class AnnouncementController
     } 
 
     @DeleteMapping(path = "{id}")
-    public int deletePersonById(@PathVariable("id") UUID id)
+    public int deleteAnnouncementById(@PathVariable("id") UUID id)
     {
         return announcementService.deleteAnnouncementById(id);
     }
