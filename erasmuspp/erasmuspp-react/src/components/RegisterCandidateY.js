@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/esm/Button';
 import React, { useState } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfoModalPopUpY from './SaveCandidateInfoModalPopUpY';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
