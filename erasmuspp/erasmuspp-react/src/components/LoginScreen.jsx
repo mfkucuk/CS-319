@@ -21,7 +21,9 @@ export default function LoginScreen() {
     console.log(emailInput);
     console.log(passwordInput);
     axios
-      .get("http://192.168.0.79:8080/api/v1/auth/login", {loginRequest } )
+      .post("http://192.168.0.79:8080/api/v1/auth/login", 
+        { email: emailInput,
+        password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
           navigate("/main");
