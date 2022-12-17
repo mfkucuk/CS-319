@@ -13,11 +13,13 @@ export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName] = useState("");
 
-  var userToken = window.localStorage.getItem('USER_TOKEN');
+  
   
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/user/")
-         .then(res => setuserName(res.data[0].title));
+    var userToken = 
+    console.log(userToken);
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+         .then(res => setuserName(res.data.name));
   }, [userName]) 
 
   let navigate = useNavigate();

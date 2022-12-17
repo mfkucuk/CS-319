@@ -73,7 +73,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
 
     @Override
     public Optional<User> selectUserById(UUID id) {
-        final String sql = "SELECT * FROM \"user\" WHERE \"id\" = ?";
+        final String sql = "SELECT * FROM \"user\" WHERE id = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -97,7 +97,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
 
     @Override
     public Optional<User> selectUserByEmail(String emailQuery) {
-        final String sql = "SELECT * FROM \"user\" WHERE \"email\" = ?";
+        final String sql = "SELECT * FROM \"user\" WHERE email = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -138,9 +138,27 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     }
 
     @Override
-    public Optional<User> selectUserByToken(String token) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+    public Optional<User> selectUserByToken(String tokenQuery) {
+        final String sql = "SELECT * FROM \"user\" WHERE token = ?";
+        User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
+            String bilkentId = resultSet.getString("bilkentId");
+            String password = resultSet.getString("password");
+            String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
+            return new User(
+                userId,
+                name,
+                email,
+                bilkentId,
+                password,
+                role,
+                token
+            );
+        }, new Object[] {tokenQuery});
+        return Optional.ofNullable(user);
     }
 
     
