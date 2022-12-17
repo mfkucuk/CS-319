@@ -1,4 +1,6 @@
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
@@ -7,12 +9,22 @@ import Table from 'react-bootstrap/Table';
 
 
 export default function PostAnnouncementY(){
+  
+  let navigate = useNavigate();
+
+  function clickBack() {
+    navigate("/main");
+  }
+
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
       <TopNavBar/>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+            <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
+              Go Back
+            </Button>
           </div>
           <div class="col-md-8">
             <div class="row">
