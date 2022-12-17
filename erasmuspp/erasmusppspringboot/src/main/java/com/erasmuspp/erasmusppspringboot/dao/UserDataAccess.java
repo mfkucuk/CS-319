@@ -43,7 +43,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "INSERT INTO \"user\"\nVALUES(?, ?, ?, ?, ?, ?, ?);";
         UserDetails userDetails = loadUserByUsername(user.getEmail());
         String token = jwtUtils.generateToken(userDetails);
-        return jdbcTemplate.update(sql, new Object[] { id, user.getName(), user.getEmail(), user.getBilkentId(), user.getPassword(), user.getRole(), token });
+        return jdbcTemplate.update(sql, new Object[] { id, user.getFirstName(), user.getLastName(), user.getDob(), user.getNationality(), user.getEmail(), user.getBilkentId(), user.getDepartment(), user.getGpa(), user.getPersonalEmail(), user.getMobilePhone(), user.getAboutMe(), user.getPassword(), user.getRole(), token });
     }
 
     @Override
@@ -52,17 +52,33 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "SELECT * FROM \"user\"";
         List<User> users = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String bilkentId = resultSet.getString("bilkentId");
-            String password = resultSet.getString("password"); 
+            String firstName = resultSet.getString("name");
+            String lastName = resultSet.getString("email");
+            String dob = resultSet.getString("bilkentId");
+            String nationality = resultSet.getString("password"); 
+            String email = resultSet.getString("role");
+            String bilkentID = resultSet.getString("bilkentID");
+            String department = resultSet.getString("department");
+            String gpa = resultSet.getString("gpa");
+            String personalEmail = resultSet.getString("personalEmail");
+            String mobilePhone = resultSet.getString("mobilePhone");
+            String aboutMe = resultSet.getString("aboutMe");
+            String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
             return new User(
                 userId,
-                name,
+                firstName,
+                lastName,
+                dob,
+                nationality,
                 email,
-                bilkentId,
+                bilkentID,
+                department,
+                gpa,
+                personalEmail,
+                mobilePhone,
+                aboutMe,
                 password,
                 role,
                 token
@@ -76,17 +92,33 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "SELECT * FROM \"user\" WHERE id = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String bilkentId = resultSet.getString("bilkentId");
+            String firstName = resultSet.getString("name");
+            String lastName = resultSet.getString("email");
+            String dob = resultSet.getString("bilkentId");
+            String nationality = resultSet.getString("password"); 
+            String email = resultSet.getString("role");
+            String bilkentID = resultSet.getString("bilkentID");
+            String department = resultSet.getString("department");
+            String gpa = resultSet.getString("gpa");
+            String personalEmail = resultSet.getString("personalEmail");
+            String mobilePhone = resultSet.getString("mobilePhone");
+            String aboutMe = resultSet.getString("aboutMe");
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
             return new User(
                 userId,
-                name,
+                firstName,
+                lastName,
+                dob,
+                nationality,
                 email,
-                bilkentId,
+                bilkentID,
+                department,
+                gpa,
+                personalEmail,
+                mobilePhone,
+                aboutMe,
                 password,
                 role,
                 token
@@ -100,17 +132,33 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "SELECT * FROM \"user\" WHERE email = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String bilkentId = resultSet.getString("bilkentId");
+            String firstName = resultSet.getString("name");
+            String lastName = resultSet.getString("email");
+            String dob = resultSet.getString("bilkentId");
+            String nationality = resultSet.getString("password"); 
+            String email = resultSet.getString("role");
+            String bilkentID = resultSet.getString("bilkentID");
+            String department = resultSet.getString("department");
+            String gpa = resultSet.getString("gpa");
+            String personalEmail = resultSet.getString("personalEmail");
+            String mobilePhone = resultSet.getString("mobilePhone");
+            String aboutMe = resultSet.getString("aboutMe");
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
             return new User(
                 userId,
-                name,
+                firstName,
+                lastName,
+                dob,
+                nationality,
                 email,
-                bilkentId,
+                bilkentID,
+                department,
+                gpa,
+                personalEmail,
+                mobilePhone,
+                aboutMe,
                 password,
                 role,
                 token
@@ -142,17 +190,33 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "SELECT * FROM \"user\" WHERE token = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String bilkentId = resultSet.getString("bilkentId");
+            String firstName = resultSet.getString("name");
+            String lastName = resultSet.getString("email");
+            String dob = resultSet.getString("bilkentId");
+            String nationality = resultSet.getString("password"); 
+            String email = resultSet.getString("role");
+            String bilkentID = resultSet.getString("bilkentID");
+            String department = resultSet.getString("department");
+            String gpa = resultSet.getString("gpa");
+            String personalEmail = resultSet.getString("personalEmail");
+            String mobilePhone = resultSet.getString("mobilePhone");
+            String aboutMe = resultSet.getString("aboutMe");
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
             return new User(
                 userId,
-                name,
+                firstName,
+                lastName,
+                dob,
+                nationality,
                 email,
-                bilkentId,
+                bilkentID,
+                department,
+                gpa,
+                personalEmail,
+                mobilePhone,
+                aboutMe,
                 password,
                 role,
                 token
@@ -161,5 +225,18 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         return Optional.ofNullable(user);
     }
 
+    @Override
+    public int updateTokenByEmail(String token, String email) {
+        final String sql = "UPDATE \"user\" SET \"token\" = ? WHERE \"email\" = ?";
+        return jdbcTemplate.update(sql, token, email);
+    }
+
+    @Override
+    public int updatePasswordByToken(String token, String password) {
+        final String sql = "UPDATE \"user\" SET \"password\" = ? WHERE \"token\" = ?";
+        return jdbcTemplate.update(sql, password, token);
+    }
+
+    
     
 }

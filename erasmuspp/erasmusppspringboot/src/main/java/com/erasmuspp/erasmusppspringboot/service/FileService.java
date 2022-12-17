@@ -1,6 +1,5 @@
 package com.erasmuspp.erasmusppspringboot.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,19 +21,8 @@ public class FileService {
         return fileDao.insertFile(file);
     }
 
-    public List<File> getAllFiles() {
-        return fileDao.selectAllFiles();
-    }
-
     public Optional<File> getFileById(UUID id) {
         return fileDao.selectFileById(id);
     }
 
-    public int deleteFileById(UUID id) {
-        return fileDao.deleteFileById(id);
-    }
-
-    public int updateFileById(UUID id, File file) {
-        return fileDao.updateFileById(id, file);
-    }
 }
