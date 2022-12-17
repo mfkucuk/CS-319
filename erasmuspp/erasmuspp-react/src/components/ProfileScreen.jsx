@@ -7,7 +7,8 @@ import TopNavBar from './TopNavBar';
 import axios from 'axios';
 
 export default function ProfileScreen() {
-  const [userNameInit, setUserNameInit] = useState("");
+  const [userFirstNameInit, setUserFirstNameInit] = useState("");
+  const [userLastNameInit, setUserLastNameInit] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [userEmailInit, setUserEmailInit] = useState("");
@@ -24,8 +25,13 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserNameInit(res.data[0].title));
-  }, [userNameInit])
+      .then(res => setUserFirstNameInit(res.data[0].title));
+  }, [userFirstNameInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setUserLastNameInit(res.data[0].title));
+  }, [userLastNameInit])
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts")
@@ -57,7 +63,7 @@ export default function ProfileScreen() {
     axios
       .put("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
         {
-          email: userEmail
+          personalEmail: userEmail
         })
       .then((res) => {
         if (res.data === true) {
@@ -140,7 +146,7 @@ export default function ProfileScreen() {
               </view>
               <br />
               <h3 className="pt-4" style={{ color: "#f4eff2" }}>
-                {userNameInit}
+                {userFirstNameInit} {userLastNameInit}
               </h3>
             </div>
           </div>
