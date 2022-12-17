@@ -11,10 +11,11 @@ import {useEffect, useState} from 'react';
 
 export default function LeftSideBarAndAnnouncements(){
 
-  const [userName, setuserName]= useState("");
+  const [userName, setuserName] = useState("");
   
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setuserName(res.data[0].title));
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+         .then(res => setuserName(res.data[0].title));
   }, [userName]) 
 
   let navigate = useNavigate();

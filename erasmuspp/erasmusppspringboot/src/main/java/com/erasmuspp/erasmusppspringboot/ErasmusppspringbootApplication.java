@@ -10,4 +10,6 @@ public class ErasmusppspringbootApplication {
 		SpringApplication.run(ErasmusppspringbootApplication.class, args);
 	}
 
+	
+
 }
