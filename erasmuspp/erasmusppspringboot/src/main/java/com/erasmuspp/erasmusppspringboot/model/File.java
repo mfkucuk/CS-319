@@ -7,17 +7,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class File {
     private final UUID id;
 
-    private final byte[] content;
+    private final String content;
 
     private final String fileName;
 
     private final String uploadTime;
 
+    private final UUID applicationId;
+
     public File(@JsonProperty("id") UUID id,
-                @JsonProperty("content") byte[] content,
+                @JsonProperty("application") UUID applicationId,
+                @JsonProperty("content") String content,
                 @JsonProperty("fileName") String fileName,
                 @JsonProperty("uploadTime") String uploadTime) {
 
+        this.applicationId = applicationId;
         this.id = id;    
         this.content = content;
         this.fileName = fileName;
@@ -28,7 +32,7 @@ public class File {
         return id;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
@@ -38,5 +42,10 @@ public class File {
 
     public String getUploadTime() {
         return uploadTime;
+    }
+
+    public UUID getApplicationId()
+    {
+        return applicationId;
     }
 }
