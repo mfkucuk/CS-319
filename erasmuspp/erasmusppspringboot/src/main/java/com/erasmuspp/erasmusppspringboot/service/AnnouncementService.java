@@ -15,7 +15,7 @@ public class AnnouncementService
 {
     private final AnnouncementDao announcementDao;
 
-    public AnnouncementService(@Qualifier("postgres") AnnouncementDao announcementDao)
+    public AnnouncementService(@Qualifier("announcement") AnnouncementDao announcementDao)
     {
         this.announcementDao = announcementDao;
     }
