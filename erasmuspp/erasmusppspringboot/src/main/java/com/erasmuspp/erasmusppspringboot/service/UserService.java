@@ -5,14 +5,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.erasmuspp.erasmusppspringboot.dao.UserDao;
 import com.erasmuspp.erasmusppspringboot.model.User;
 
+@Service
 public class UserService {
     private final UserDao userDao;
 
-    public UserService(@Qualifier("postgres") UserDao userDao)
+    public UserService(@Qualifier("user") UserDao userDao)
     {
         this.userDao = userDao;
     }
@@ -30,6 +32,11 @@ public class UserService {
     public Optional<User> getUserById(UUID id)
     {
         return userDao.selectUserById(id);
+    }
+
+    public Optional<User> getUserByEmail(String email)
+    {
+        return userDao.selectUserByEmail(email);
     }
 
     public int deleteUserById(UUID id)
