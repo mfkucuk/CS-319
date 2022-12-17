@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Image from "./lastPrint.png";
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
-
+import axios from 'axios';
 export default function PreApprovalFormN() {
 
     let checked = false;
@@ -15,8 +15,22 @@ export default function PreApprovalFormN() {
         navigate("/myApplication");
     }
 
-    function clickPrint(){
 
+
+
+    function clickPrint(){
+        // using Java Script method to get PDF file
+        fetch('PreApprovalForm.docx').then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'PreApprovalForm.docx';
+                alink.click();
+            })
+        })
     }
 
     function clickUpload() {
@@ -47,7 +61,7 @@ export default function PreApprovalFormN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Print Pre-Approval Form </header>
                     <br></br>
-                    <img id="printImage" src={Image} onClick={clickPrint} style={{cursor: 'pointer'}}></img>
+                    <img id="printImage" src={Image} onClick ={clickPrint}></img>
                     <br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Upload Signed Pre-Approval Form </header>
                     <br></br>
