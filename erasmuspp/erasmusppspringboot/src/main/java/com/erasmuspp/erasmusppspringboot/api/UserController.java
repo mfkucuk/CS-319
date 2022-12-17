@@ -3,13 +3,12 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.erasmuspp.erasmusppspringboot.model.User;
 import com.erasmuspp.erasmusppspringboot.service.UserService;
-
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
 
 @RequestMapping("/api/v1/user")
 @RestController()
@@ -22,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@Nonnull @Valid @RequestBody User user)
+    public void addUser(@Valid @RequestBody User user)
     {
         userService.addUser(user);
     }
@@ -52,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping(path = "{id}")
-    public int updateUserById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody User user)
+    public int updateUserById(@PathVariable("id") UUID id, @Valid @RequestBody User user)
     {
         return userService.updateUserById(id, user);
     }
