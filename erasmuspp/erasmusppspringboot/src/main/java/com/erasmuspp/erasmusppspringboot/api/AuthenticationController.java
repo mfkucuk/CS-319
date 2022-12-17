@@ -35,7 +35,9 @@ public class AuthenticationController {
         if (user != null) {
             System.out.println(user.getPassword());
             if (user.getPassword().equals(request.getPassword())) {
-                return new TokenStatus(true, jwtUtils.generateToken(user));
+                String token = jwtUtils.generateToken(user);
+                userDataAccess.updateTokenByEmail(request.getEmail(), token);
+                return new TokenStatus(true, token);
             }
             else {
                 return new TokenStatus(false, jwtUtils.generateToken(user));
