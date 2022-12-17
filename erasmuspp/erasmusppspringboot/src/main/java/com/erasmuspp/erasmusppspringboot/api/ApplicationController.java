@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.erasmuspp.erasmusppspringboot.service.ApplicationService;
 
 
 @RequestMapping(value = "api/v1/application", consumes = "application/json")
+@CrossOrigin(origins = "*")
 @RestController
 public class ApplicationController 
 {
