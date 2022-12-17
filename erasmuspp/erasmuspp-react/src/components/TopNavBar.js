@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 function TopNavBar() {
 
@@ -21,24 +22,30 @@ function TopNavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Erasmus++</Navbar.Brand>
+        <Navbar.Brand>
+          <img
+            src="/E++-logos_transparent_square.png"
+            width="50"
+            height="50"
+            className="d-inline-block align-top"
+            alt="epp logo"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={handleClick}>Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4" onClick={clickLogOut}>Log Out</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.5">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+            <NavDropdown title="Miscellaneous" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">How to Use Erasmus++</NavDropdown.Item>
+              <NavDropdown.Item href="https://github.com/mfkucuk/CS-319">Project GitHub Repository</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="https://erasmuspp.mynotice.io/">
+                FAQ
+              </NavDropdown.Item>
+            </NavDropdown>
+            <div style={{ display: "flex" }}>
+              <Button onClick={clickLogOut} style={{ width: "7rem", marginLeft: "62rem" }} variant="danger">Log Out</Button>{' '}
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

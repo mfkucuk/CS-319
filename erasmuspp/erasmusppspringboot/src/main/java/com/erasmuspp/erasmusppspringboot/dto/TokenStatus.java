@@ -17,7 +17,7 @@ public class TokenStatus {
         return status;
     }
 
-    public String getJwt() {
+    public String getToken() {
         return token;
     }
 }

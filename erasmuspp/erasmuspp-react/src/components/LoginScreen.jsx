@@ -18,8 +18,6 @@ export default function LoginScreen() {
       email: emailInput,
       password: passwordInput
     };
-    console.log(emailInput);
-    console.log(passwordInput);
     axios
       .post("http://localhost:8080/api/v1/auth/login", 
         { 
@@ -27,8 +25,8 @@ export default function LoginScreen() {
             password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
+          window.localStorage.setItem("USER_TOKEN", res.data.jwt);
           navigate("/main");
-          window.localStorage.setItem("USER_TOKEN", res.data.token);
         }
         else {
           console.log(res.data.status);
@@ -37,7 +35,7 @@ export default function LoginScreen() {
   };
 
   function handleClickForgotPassword() {
-      navigate("/forgotPassword");
+    navigate("/forgotPassword");
   }
 
 
@@ -48,9 +46,17 @@ export default function LoginScreen() {
           <div class="col-md-2">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-            <br /><br /><br />
-            <h1 style={{ color: "#f4eff2" }}>Erasmus++</h1>
+            <br />
+            <img
+              src="/E++-logos_white_square.png"
+              width="180rem"
+              height="180rem"
+              className="d-inline-block align-top"
+              alt="epp logo"
+            />
             <br /><br />
+            <h1 style={{ color: "#f4eff2" }}> Welcome to Erasmus++</h1>
+            <br />
             <h2 style={{ color: "#f4eff2" }}>Please Log In</h2>
             <div class="row">
               <div class="col-md-4">
@@ -59,7 +65,7 @@ export default function LoginScreen() {
                 <Card>
                   <Form className='text-center'>
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginEmail">
-                      <br/>
+                      <br />
                       <Form.Label>Email address</Form.Label>
                       <Form.Control type="email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="Enter email" />
                       <Form.Text className="text-muted">
@@ -76,7 +82,7 @@ export default function LoginScreen() {
                     </Button>
                     <br /><br />
                     <a onClick={handleClickForgotPassword} class="link-primary">Forgot Your Password?</a>
-                    <br /><br />                    
+                    <br /><br />
                   </Form>
                 </Card>
                 <br /><br /><br /><br /><br /><br /><br /><br />
@@ -85,7 +91,7 @@ export default function LoginScreen() {
           </div>
         </div>
       </div>
-      <DefaultFooter/>
+      <DefaultFooter />
     </div>
   );
 }
