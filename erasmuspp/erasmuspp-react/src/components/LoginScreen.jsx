@@ -20,10 +20,13 @@ export default function LoginScreen() {
     };
     console.log(emailInput);
     console.log(passwordInput);
+    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios
-      .post("http://192.168.0.79:8080/api/v1/auth/login", 
-        { email: emailInput,
-        password: passwordInput } )
+      .post("http://localhost:8080/api/v1/auth/login", 
+        { 
+            email: emailInput,
+            password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
           navigate("/main");
