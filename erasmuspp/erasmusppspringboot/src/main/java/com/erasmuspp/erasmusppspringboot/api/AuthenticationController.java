@@ -15,6 +15,7 @@ import com.erasmuspp.erasmusppspringboot.filter.JwtUtils;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
@@ -23,7 +24,6 @@ public class AuthenticationController {
     private final UserDataAccess userDataAccess;
     private final JwtUtils jwtUtils;
 
-    @CrossOrigin
     @PostMapping("/login")
     public TokenStatus authenticate(
         @RequestBody AuthenticationRequest request
