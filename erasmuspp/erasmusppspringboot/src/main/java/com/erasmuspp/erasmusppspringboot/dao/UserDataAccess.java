@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.erasmuspp.erasmusppspringboot.filter.JwtUtils;
 import com.erasmuspp.erasmusppspringboot.model.User;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class UserDataAccess implements UserDao, UserDetailsService {
 
     private final JdbcTemplate jdbcTemplate;
+    private final JwtUtils jwtUtils;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,8 +40,10 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     
     @Override
     public int insertUser(UUID id, User user) {    
-        final String sql = "INSERT INTO \"user\"\nVALUES(?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, user.getName(), user.getEmail(), user.getBilkentId(), user.getPassword(), user.getRole() });
+        final String sql = "INSERT INTO \"user\"\nVALUES(?, ?, ?, ?, ?, ?, ?);";
+        UserDetails userDetails = loadUserByUsername(user.getEmail());
+        String token = jwtUtils.generateToken(userDetails);
+        return jdbcTemplate.update(sql, new Object[] { id, user.getName(), user.getEmail(), user.getBilkentId(), user.getPassword(), user.getRole(), token });
     }
 
     @Override
@@ -53,13 +57,15 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String bilkentId = resultSet.getString("bilkentId");
             String password = resultSet.getString("password"); 
             String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
             return new User(
                 userId,
                 name,
                 email,
                 bilkentId,
                 password,
-                role
+                role,
+                token
             );
         });
         return users; 
@@ -67,7 +73,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
 
     @Override
     public Optional<User> selectUserById(UUID id) {
-        final String sql = "SELECT * FROM \"user\" WHERE \"id\" = ?";
+        final String sql = "SELECT * FROM \"user\" WHERE id = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -75,13 +81,15 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String bilkentId = resultSet.getString("bilkentId");
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
             return new User(
                 userId,
                 name,
                 email,
                 bilkentId,
                 password,
-                role
+                role,
+                token
             );
         }, new Object[] {id});
         return Optional.ofNullable(user);
@@ -89,7 +97,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
 
     @Override
     public Optional<User> selectUserByEmail(String emailQuery) {
-        final String sql = "SELECT * FROM \"user\" WHERE \"email\" = ?";
+        final String sql = "SELECT * FROM \"user\" WHERE email = ?";
         User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
             UUID userId = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -97,13 +105,15 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String bilkentId = resultSet.getString("bilkentId");
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
             return new User(
                 userId,
                 name,
                 email,
                 bilkentId,
                 password,
-                role
+                role,
+                token
             );
         }, new Object[] {emailQuery});
         return Optional.ofNullable(user);
@@ -125,6 +135,30 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     public int setUserRoleById(UUID id, String newRole) {
         final String sql = "UPDATE \"user\" SET \"role\" = ? WHERE \"id\" = ?";
         return jdbcTemplate.update(sql, newRole, id);
+    }
+
+    @Override
+    public Optional<User> selectUserByToken(String tokenQuery) {
+        final String sql = "SELECT * FROM \"user\" WHERE token = ?";
+        User user = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
+            String bilkentId = resultSet.getString("bilkentId");
+            String password = resultSet.getString("password");
+            String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
+            return new User(
+                userId,
+                name,
+                email,
+                bilkentId,
+                password,
+                role,
+                token
+            );
+        }, new Object[] {tokenQuery});
+        return Optional.ofNullable(user);
     }
 
     
