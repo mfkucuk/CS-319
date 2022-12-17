@@ -20,6 +20,8 @@ public interface UserDao {
 
     Optional<User> selectUserByEmail(String email);
 
+    Optional<User> selectUserByToken(String token);
+
     int deleteUserById(UUID id);
 
     int updateUserById(UUID id, User newUser);

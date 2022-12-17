@@ -20,8 +20,6 @@ export default function LoginScreen() {
     };
     console.log(emailInput);
     console.log(passwordInput);
-    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios
       .post("http://localhost:8080/api/v1/auth/login", 
         { 
@@ -30,6 +28,7 @@ export default function LoginScreen() {
       .then((res) => {
         if (res.data.status === true) {
           navigate("/main");
+          window.localStorage.setItem("USER_TOKEN", res.data.token);
         }
         else {
           console.log(res.data.status);
