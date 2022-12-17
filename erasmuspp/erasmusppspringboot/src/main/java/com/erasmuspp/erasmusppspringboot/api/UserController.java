@@ -3,16 +3,15 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.erasmuspp.erasmusppspringboot.model.User;
 import com.erasmuspp.erasmusppspringboot.service.UserService;
 
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
-
-@RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
+@RestController()
 public class UserController {
     private final UserService userService;
 
@@ -22,12 +21,12 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@Nonnull @Valid @RequestBody User user)
+    public void addUser(@Valid @RequestBody User user)
     {
         userService.addUser(user);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<User> getAllUsers()
     {
         return userService.getAllUsers();
@@ -39,6 +38,12 @@ public class UserController {
         return userService.getUserById(id).orElse(null);
     } 
 
+    @GetMapping(path = "{email}")
+    public User getUserByEmail(@PathVariable("email") String email)
+    {
+        return userService.getUserByEmail(email).orElse(null);
+    }
+
     @DeleteMapping(path = "{id}")
     public int deletePersonById(@PathVariable("id") UUID id)
     {
@@ -46,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping(path = "{id}")
-    public int updateUserById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody User user)
+    public int updateUserById(@PathVariable("id") UUID id, @Valid @RequestBody User user)
     {
         return userService.updateUserById(id, user);
     }
