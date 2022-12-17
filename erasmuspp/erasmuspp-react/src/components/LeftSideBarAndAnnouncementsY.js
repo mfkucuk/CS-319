@@ -12,9 +12,11 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName] = useState("");
+
+  var userToken = window.localStorage.getItem('USER_TOKEN');
   
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user/")
          .then(res => setuserName(res.data[0].title));
   }, [userName]) 
 
