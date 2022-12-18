@@ -69,7 +69,7 @@ export default function AnnouncementsY() {
           <Card.Title>
             <div style={{ display: "flex" }}>
             <h1>Announcements</h1>
-            <Button className='ms-5' hidden={addAnnouncementHidden} onClick={handleClick} style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
+            <Button className='me-2' hidden={addAnnouncementHidden} onClick={handleClick} style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
               Add New Announcement+
             </Button>
             </div>

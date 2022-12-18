@@ -12,7 +12,7 @@ export default function PostAnnouncementY() {
   const [candidateList, setCandidateList] = useState([]);
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user")
       .then(res => setCandidateList(res.data));
   }, [candidateList])
 
