@@ -49,8 +49,8 @@ export default function ProfileScreen() {
   }, [userDoBInit])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserAboutMeInit(res.data[4].title));
+    axios.get("http://localhost:8080/api/v1/announcement/")
+      .then(res => setUserAboutMeInit(res.data[0].content));
   }, [userAboutMeInit])
 
   useEffect(() => {

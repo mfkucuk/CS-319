@@ -82,13 +82,13 @@ export default function ToDoListN() {
 
                     </div>
 
-                    <div class="col-md-2" style={{ paddingTop: '150px', textAlign: 'right' }}>
+                    <div class="col-md-2" style={{ paddingTop: '100px', textAlign: 'right' }}>
                         <FormText style={{ fontSize: '20px', color: 'black' }}>Stage: </FormText>
                         <br></br><br></br>
                         <FormText style={{ fontSize: '20px', color: 'black' }}>Erasmus Semester: </FormText>
                     </div>
 
-                    <div class="col-md-2" style={{ paddingTop: '150px', textAlign: 'left' }}>
+                    <div class="col-md-2" style={{ paddingTop: '100px', textAlign: 'left' }}>
                         <Form.Select>
                             {[
                                 "Stage 1",
