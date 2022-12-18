@@ -65,9 +65,12 @@ export default function MyApplicationY() {
   const uploadSOPFinal = () => {
     console.log(sopB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          statementOfPurposeForm: sopB64 
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: sopB64,
+          fileName: "Statemenet of Purpose Form",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
@@ -99,9 +102,12 @@ export default function MyApplicationY() {
   const uploadAppFormFinal = () => {
     console.log(appFormB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadApplicationForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          applicationForm: appFormB64
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: appFormB64,
+          fileName: "Application Form",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
@@ -122,7 +128,7 @@ export default function MyApplicationY() {
     axios
       .post("http://localhost:8080/api/v1/file/", 
         { 
-          applicationId: "3",
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
           content: CVB64,
           fileName: "CV",
           uploadTime: "18.12.2022"
@@ -208,7 +214,7 @@ export default function MyApplicationY() {
             </div>
             <br /><br /><br />
             <div className='pt-2'>
-              <Button style={{ backgroundColor: "#3C7479" }} onClick ={downloadExternal}>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick ={uploadAppFormFinal}>
                 Upload
               </Button>
             </div>
