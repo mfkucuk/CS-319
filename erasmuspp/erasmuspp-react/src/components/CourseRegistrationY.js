@@ -1,19 +1,66 @@
 import Button from 'react-bootstrap/Button';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import { useNavigate } from "react-router-dom";
 import TopNavBar from './TopNavBar';
+import axios from 'axios';
 
 export default function CourseRegistrationY() {
 
-  const [inputFields, setInputFields] = useState([{ courseIndex: "New Course " }])
   const [coursesSize, setCoursesSize] = useState(2);
+  const [bilkentCourses, setBilkentCourses] = useState([])
+  const [preApprovedCourses, setPreApprovedCourses] = useState([])
 
-  const handleFormChange = (index, event) => {
-    let data = [...inputFields];
+
+  const postBilkentCourses = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          bilkentCourse: bilkentCourses
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Email updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const postPreApprovedCourses = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          preApprovedCourse: preApprovedCourses
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Email updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const handleBilkentChange = (index, event) => {
+    let data = [...bilkentCourses];
     data[index][event.target.courseIndex] = event.target.value;
-    setInputFields(data);
+    setBilkentCourses(data);
+  }
+
+  const handleApprovedChange = (index, event) => {
+    let data = [...preApprovedCourses];
+    data[index][event.target.courseIndex] = event.target.value;
+    setPreApprovedCourses(data)
   }
 
   const addFields = (index) => {
@@ -21,14 +68,18 @@ export default function CourseRegistrationY() {
 
     let newfield = { courseIndex: "New Course" }
 
-    setInputFields([...inputFields, newfield])
+    setBilkentCourses([...bilkentCourses, newfield])
+    setPreApprovedCourses([...preApprovedCourses, newfield])
   }
 
   const removeFields = (index) => {
     setCoursesSize(coursesSize - 1);
-    let data = [...inputFields];
-    data.splice(index, 1)
-    setInputFields(data)
+    let data1 = [...bilkentCourses];
+    let data2 = [...preApprovedCourses];
+    data1.splice(index, 1)
+    data2.splice(index, 1)
+    setBilkentCourses(data1)
+    setPreApprovedCourses(data2)
   }
 
   let navigate = useNavigate();
@@ -67,7 +118,7 @@ export default function CourseRegistrationY() {
               Bilkent Courses:
             </h5>
             <div class="form-group">
-              {inputFields.map((input, index) => {
+              {bilkentCourses.map((input, index) => {
                 return (
                   <div key={index}>
                     <input class="form-control mb-4"
@@ -75,7 +126,7 @@ export default function CourseRegistrationY() {
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
-                      onChange={event => handleFormChange(index, event)} />
+                      onChange={event => handleBilkentChange(index, event)} />
                   </div>
                 )
               })}
@@ -96,7 +147,7 @@ export default function CourseRegistrationY() {
               Pre-approved Courses for Equivalence:
             </h5>
             <div class="form-group">
-              {inputFields.map((input, index) => {
+              {preApprovedCourses.map((input, index) => {
                 return (
                   <div key={index}>
                     <input class="form-control mb-4"
@@ -104,7 +155,7 @@ export default function CourseRegistrationY() {
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
-                      onChange={event => handleFormChange(index, event)} />
+                      onChange={event => handleApprovedChange(index, event)} />
 
                   </div>
                 )
@@ -120,7 +171,7 @@ export default function CourseRegistrationY() {
           <div class="col-md-2 text-center">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-            <Button style={{ backgroundColor: "#3C7479" }}>
+            <Button onClick={(e) => { postBilkentCourses(e); postPreApprovedCourses(e);}} style={{ backgroundColor: "#3C7479" }}>
               Submit
             </Button>
             <LargeBreak></LargeBreak>
