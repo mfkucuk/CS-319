@@ -1,18 +1,64 @@
-import React, { useState } from 'react';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function ApplicationFormEditY() {
+  const [userFirstNameInit, setUserFirstNameInit] = useState("");
+  const [userLastNameInit, setUserLastNameInit] = useState("");
+  const [userNationality, setUserNationality] = useState("");
+  const [userDepartment, setUserDepartment] = useState("");
+  const [userGpa, setUserGpa] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userEmailInit, setUserEmailInit] = useState("");
+
+
+  const[uni1, setUni1] = useState("")
+  const[uni2, setUni2] = useState("")
+  const[uni3, setUni3] = useState("")
+  const[uni4, setUni4] = useState("")
+  const[uni5, setUni5] = useState("")
+  const[selectedSemester, setSelectedSemester] = useState("");
+
+  const [userMobilePhoneNo, setUserMobilePhoneNo] = useState("");
+  const [userMobilePhoneNoInit, setUserMobilePhoneNoInit] = useState("");
+
+  const [userId, setUserId] = useState("");
+
+  const [userDoBInit, setUserDoBInit] = useState("");
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+      .then((res) => {setUserFirstNameInit(res.data.firstName); 
+                      setUserLastNameInit(res.data.lastName);
+                      setUserEmailInit(res.data.email);
+                      setUserNationality(res.data.nationality);
+                      setUserId(res.data.bilkentId);
+                      setUserDepartment(res.data.department);
+                      setUserGpa(res.data.gpa);
+                      setUserMobilePhoneNoInit(res.data.mobilePhone);
+                      setUserDoBInit(res.data.dob)}
+            )
+  }, [userFirstNameInit][userLastNameInit])
 
   let navigate = useNavigate();
   function clickBack() {
-    navigate("/myApplication");
+    navigate("/myApplications");
   }
 
+  function submitForm() {
+    axios.post("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"), {
+    universityChoices: [
+      uni1, uni2, uni3, uni4, uni5
+    ],
+    semester: selectedSemester
+
+    })
+      .then((res) => {})
+  }
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
@@ -88,39 +134,39 @@ export default function ApplicationFormEditY() {
             <br />
             <Form>
               <Form.Group className="pt-3 mb" controlId="applicationFormEditFirstNameForm">
-                <Form.Label>Mehmet Behnan</Form.Label>
+                <Form.Label>{userFirstNameInit}</Form.Label>
               </Form.Group>
               <Form.Group className="pt-1 mb-1" controlId="applicationFormEditLastNameForm">
-                <Form.Label>Türkeri</Form.Label>
+                <Form.Label>{userLastNameInit}</Form.Label>
               </Form.Group>
               <Form.Group className="pt-1 mb-1" controlId="applicationFormEditDoBForm">
-                <Form.Label>28/05/1998</Form.Label>
+                <Form.Label>{userDoBInit}</Form.Label>
               </Form.Group>
               <Form.Group className="pt-1 mb" controlId="applicationFormEditNationalityForm">
-                <Form.Label>Turkey</Form.Label>
+                <Form.Label>{userNationality}</Form.Label>
               </Form.Group>
               <br />
               <Form.Group className="pt-4 mb-1" controlId="applicationFormEditStudentIDForm">
-                <Form.Label>21602468</Form.Label>
+                <Form.Label>{userId}</Form.Label>
               </Form.Group>
               <Form.Group className="pt-1 mb-1" controlId="applicationFormEditDepartmentForm">
-                <Form.Label>Management</Form.Label>
+                <Form.Label>{userDepartment}</Form.Label>
               </Form.Group>
               <Form.Group className="pt-1 mb-3" controlId="applicationFormEditCumGPAForm">
-                <Form.Label>2.84</Form.Label>
+                <Form.Label>{userGpa}</Form.Label>
               </Form.Group>
               <br />
               <Form.Group className="pt-1 mb-1" controlId="applicationFormEditUnivEmailForm">
-                <Form.Label>behnan.turkeri@ug.bilkent.edu.tr</Form.Label>
+                <Form.Label>{userEmailInit}</Form.Label>
               </Form.Group>
               <Form.Group className="me-5 mb-1" controlId="applicationformEditPersonalEmailForm">
-                <Form.Control placeholder="Personal E-mail Address" />
+                <Form.Control placeholder={userEmailInit} />
               </Form.Group>
               <Form.Group className="me-5 mb-1" controlId="applicationFormEditMobilePhoneNoForm">
-                <Form.Control placeholder="Mobile Phone Number" />
+                <Form.Control placeholder={userMobilePhoneNoInit} />
               </Form.Group>
               <Form.Group className="me-5 mb-1" controlId="applicationFormEditLocalPhoneNoForm">
-                <Form.Control placeholder="Local Phone Number" />
+                <Form.Control placeholder={userMobilePhoneNoInit} />
               </Form.Group>
               <Form.Group className="me-5 mb-3" controlId="applicationFormEditPostalAddressForm">
                 <Form.Control as="textarea" rows={4} placeholder="Postal Address" />
@@ -135,17 +181,17 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>1.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 1">
+              <Form.Select aria-label="University Selection 1" onChange={(e)=> setUni1(e.target.value)}>
                 <option>Select</option>
-                <option value="1">Aberystwyth University</option>
-                <option value="2">Adam Mickiewicz Universitesi</option>
-                <option value="3">AGH University of Science and Technology</option>
-                <option value="4">Akademia Sztuk Pięknych w Gdańsku</option>
-                <option value="5">Amsterdam University College</option>
-                <option value="6">Architectural Institution in Prague</option>
-                <option value="7">Aston University</option>
-                <option value="8">Athlone Institute of Technology</option>
-                <option value="9">Bamberg Üniversitesi</option>
+                <option value="Aberystwyth University">Aberystwyth University</option>
+                <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
+                <option value="AGH University of Science and Technology">AGH University of Science and Technology</option>
+                <option value="Akademia Sztuk Pięknych w Gdańsku">Akademia Sztuk Pięknych w Gdańsku</option>
+                <option value="Amsterdam University College">Amsterdam University College</option>
+                <option value="Architectural Institution in Prague">Architectural Institution in Prague</option>
+                <option value="Aston University">Aston University</option>
+                <option value="Athlone Institute of Technology">Athlone Institute of Technology</option>
+                <option value="Bamberg Üniversitesi">Bamberg Üniversitesi</option>
                 <option value="10">Bergen Üniversitesi</option>
                 <option value="11">Bocconi University</option>
                 <option value="12">Bournemouth University</option>
@@ -259,14 +305,14 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>2.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 2">
+              <Form.Select aria-label="University Selection 2" onChange={(e)=> setUni2(e.target.value)}>
                 <option>Select</option>
-                <option value="1">Aberystwyth University</option>
-                <option value="2">Adam Mickiewicz Universitesi</option>
-                <option value="3">AGH University of Science and Technology</option>
-                <option value="4">Akademia Sztuk Pięknych w Gdańsku</option>
-                <option value="5">Amsterdam University College</option>
-                <option value="6">Architectural Institution in Prague</option>
+                <option value="Aberystwyth University">Aberystwyth University</option>
+                <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
+                <option value="AGH University of Science and Technology">AGH University of Science and Technology</option>
+                <option value="Akademia Sztuk Pięknych w Gdańsku">Akademia Sztuk Pięknych w Gdańsku</option>
+                <option value="Amsterdam University College">Amsterdam University College</option>
+                <option value="Architectural Institution in Prague">Architectural Institution in Prague</option>
                 <option value="7">Aston University</option>
                 <option value="8">Athlone Institute of Technology</option>
                 <option value="9">Bamberg Üniversitesi</option>
@@ -383,13 +429,13 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>3.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 3">
+              <Form.Select aria-label="University Selection 3" onChange={(e)=> setUni3(e.target.value)}>
                 <option>Select</option>
-                <option value="1">Aberystwyth University</option>
-                <option value="2">Adam Mickiewicz Universitesi</option>
-                <option value="3">AGH University of Science and Technology</option>
-                <option value="4">Akademia Sztuk Pięknych w Gdańsku</option>
-                <option value="5">Amsterdam University College</option>
+                <option value="Aberystwyth University">Aberystwyth University</option>
+                <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
+                <option value="AGH University of Science and Technology">AGH University of Science and Technology</option>
+                <option value="Akademia Sztuk Pięknych w Gdańsku">Akademia Sztuk Pięknych w Gdańsku</option>
+                <option value="Amsterdam University College">Amsterdam University College</option>
                 <option value="6">Architectural Institution in Prague</option>
                 <option value="7">Aston University</option>
                 <option value="8">Athlone Institute of Technology</option>
@@ -507,13 +553,13 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>4.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 4">
+              <Form.Select aria-label="University Selection 4" onChange={(e)=> setUni4(e.target.value)}>
                 <option>Select</option>
-                <option value="1">Aberystwyth University</option>
-                <option value="2">Adam Mickiewicz Universitesi</option>
-                <option value="3">AGH University of Science and Technology</option>
-                <option value="4">Akademia Sztuk Pięknych w Gdańsku</option>
-                <option value="5">Amsterdam University College</option>
+                <option value="Aberystwyth University">Aberystwyth University</option>
+                <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
+                <option value="AGH University of Science and Technology">AGH University of Science and Technology</option>
+                <option value="Akademia Sztuk Pięknych w Gdańsku">Akademia Sztuk Pięknych w Gdańsku</option>
+                <option value="Amsterdam University College">Amsterdam University College</option>
                 <option value="6">Architectural Institution in Prague</option>
                 <option value="7">Aston University</option>
                 <option value="8">Athlone Institute of Technology</option>
@@ -631,13 +677,13 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>5.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 5">
+              <Form.Select aria-label="University Selection 5" onChange={(e)=> setUni5(e.target.value)}>
                 <option>Select</option>
-                <option value="1">Aberystwyth University</option>
-                <option value="2">Adam Mickiewicz Universitesi</option>
-                <option value="3">AGH University of Science and Technology</option>
-                <option value="4">Akademia Sztuk Pięknych w Gdańsku</option>
-                <option value="5">Amsterdam University College</option>
+                <option value="Aberystwyth University">Aberystwyth University</option>
+                <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
+                <option value="AGH University of Science and Technology">AGH University of Science and Technology</option>
+                <option value="Akademia Sztuk Pięknych w Gdańsku">Akademia Sztuk Pięknych w Gdańsku</option>
+                <option value="Amsterdam University College">Amsterdam University College</option>
                 <option value="6">Architectural Institution in Prague</option>
                 <option value="7">Aston University</option>
                 <option value="8">Athlone Institute of Technology</option>
@@ -759,6 +805,7 @@ export default function ApplicationFormEditY() {
                     inline
                     label="Fall"
                     name="group1"
+                    onClick={setSelectedSemester("Fall")}
                     type='radio'
                     id={`inline-radio-1`}
                     className="ms-1"
@@ -767,6 +814,7 @@ export default function ApplicationFormEditY() {
                     inline
                     label="Spring"
                     name="group1"
+                    onClick={setSelectedSemester("Spring")}
                     type='radio'
                     id={`inline-radio-2`}
                   />
