@@ -1,6 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,27 +19,27 @@ public class FileDataAccess implements FileDao {
 
     @Override
     public int insertFile(UUID id, File file) {
-        final String sql = "INSERT INTO \"file\"\nVALUES(?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, file.getContent(), file.getFileName(), file.getUploadTime() });
+        final String sql = "INSERT INTO \"file\"\nVALUES(?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, file.getApplicationId(), file.getContent(), file.getFileName(), file.getUploadTime() });
     }
 
     @Override
-    public Optional<File> selectFileById(UUID id) {
-        final String sql = "SELECT * FROM \"file\" WHERE id = ?";
-        File file = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+    public List<File> selectFilesByApplication(String application) {
+        final String sql = "SELECT * FROM \"file\" WHERE application = ?";
+        List<File> files = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID fileId = UUID.fromString(resultSet.getString("id"));
             String content = resultSet.getString("content");
             String fileName = resultSet.getString("fileName");
             String uploadTime = resultSet.getString("uploadTime");
             return new File(
-                id,
                 fileId,
+                application,
                 content,
                 fileName,
                 uploadTime
             );
-        }, new Object[] {id});
-        return Optional.ofNullable(file);
+        });
+        return files;
     }
 
 }

@@ -1,17 +1,121 @@
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
-import Navbar from 'react-bootstrap/Navbar';
-import LeftSideBarAndAnnouncements from './LeftSideBarAndAnnouncementsY';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import TopNavBar from './TopNavBar';
+import axios from 'axios';
 
 export default function ProfileScreen() {
+  const [userFirstNameInit, setUserFirstNameInit] = useState("");
+  const [userLastNameInit, setUserLastNameInit] = useState("");
+
+  const [userEmail, setUserEmail] = useState("");
+  const [userEmailInit, setUserEmailInit] = useState("");
+
+  const [userMobilePhoneNo, setUserMobilePhoneNo] = useState("");
+  const [userMobilePhoneNoInit, setUserMobilePhoneNoInit] = useState("");
+
+  const [userDoBInit, setUserDoBInit] = useState("");
+
+  const [userAboutMe, setUserAboutMe] = useState("");
+  const [userAboutMeInit, setUserAboutMeInit] = useState("");
+
+  const [userImageSrc, setUserImageSrc] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+      .then((res) => {setUserFirstNameInit(res.data.firstName); setUserAboutMeInit(res.data.aboutMe);}
+            )
+  }, [userFirstNameInit] [userAboutMeInit])
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+  //     .then(res => setUserLastNameInit(res.data.lastName))
+  // }, [userLastNameInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setUserEmailInit(res.data[1].title));
+  }, [userEmailInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setUserMobilePhoneNoInit(res.data[2].title));
+  }, [userMobilePhoneNoInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setUserDoBInit(res.data[3].title));
+  }, [userDoBInit])
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/v1/announcement/")
+  //     .then(res => setUserAboutMeInit(res.data[0].content));
+  // }, [userAboutMeInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/photos")
+      .then(res => setUserImageSrc(res.data[5].url));
+  }, [userImageSrc])
+
+  const putUserEmail = (e) => {
+    e.preventDefault();
+    axios
+      .put("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          personalEmail: userEmail
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Email updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const putUserMobilePhoneNo = (e) => {
+    e.preventDefault();
+    axios
+      .put("http://localhost:8080/api/v1/user/changeMobilePhoneNo/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          mobilePhone: userMobilePhoneNo
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Mobile phone number updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const putUserAboutMe = (e) => {
+    e.preventDefault();
+    axios
+      .put("http://localhost:8080/api/v1/user/changeAboutMe/token=" + window.localStorage.getItem("USER_TOKEN"),
+        
+          userAboutMe
+        )
+      .then((res) => {
+        if (res.data === 1) {
+          alert("About me updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
   let navigate = useNavigate();
   function changeClick() {
     navigate("/changePassword");
@@ -39,11 +143,11 @@ export default function ProfileScreen() {
               <br />
               <br />
               <view>
-                <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                <img style={{ width: "12rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrc} />
               </view>
               <br />
               <h3 className="pt-4" style={{ color: "#f4eff2" }}>
-                User Name
+                {userFirstNameInit} {userLastNameInit}
               </h3>
             </div>
           </div>
@@ -59,23 +163,20 @@ export default function ProfileScreen() {
               <br />
               <div class="form-group">
                 <label style={{ color: "#f4eff2" }} for="exampleInputEmail1">Personal E-mail Address:</label>
-                <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder="egeayan2001@gmail.com" />
-                <Button className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change E-Mail</Button>
+                <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder={userEmailInit} onChange={(e) => setUserEmail(e.target.value)}/>
+                <Button onClick={putUserEmail} className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change E-Mail</Button>
               </div>
               <br />
               <div class="form-group">
                 <label style={{ color: "#f4eff2" }} for="exampleInputPhone1">Phone Number:</label>
-                <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder="0531313131" />
-                <Button className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change Phone</Button>
+                <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder={userMobilePhoneNoInit} onChange={(e) => setUserMobilePhoneNo(e.target.value)}/>
+                <Button onClick={putUserMobilePhoneNo} className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change Phone</Button>
               </div>
               <br /><br />
               <p style={{ color: "#f4eff2" }}>
-                Date of Birth: 01.04.2001
+                Date of Birth: {userDoBInit}
               </p>
               <br />
-              <p style={{ color: "#f4eff2" }}>
-                Gender: Male
-              </p>
               <LargeBreak></LargeBreak>
             </div>
             <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
@@ -87,10 +188,10 @@ export default function ProfileScreen() {
               </h3>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1"></label>
-                <textarea class="form-control" id="profileScreenAboutMe" rows="4" placeholder='ABOUT ME HAKKINDA BOS ATILAN BILGI'></textarea>
+                <textarea class="form-control" id="profileScreenAboutMe" rows="4" placeholder={userAboutMeInit} onChange={(e) => setUserAboutMe(e.target.value)}></textarea>
               </div>
               <br />
-              <Button style={{ backgroundColor: "#3C7479", width: "13rem" }}>Change About Me</Button>
+              <Button onClick={putUserAboutMe} style={{ backgroundColor: "#3C7479", width: "13rem" }}>Change About Me</Button>
               <br />
               <br />
               <Button style={{ backgroundColor: "#3C7479", width: "13rem" }} onClick={changeClick}>Change Password</Button>

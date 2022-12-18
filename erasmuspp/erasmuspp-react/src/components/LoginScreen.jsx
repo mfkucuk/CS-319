@@ -11,6 +11,7 @@ export default function LoginScreen() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  
   let navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ export default function LoginScreen() {
             password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
-          window.localStorage.setItem("USER_TOKEN", res.data.jwt);
+          window.localStorage.setItem("USER_TOKEN", res.data.token);
           navigate("/main");
         }
         else {

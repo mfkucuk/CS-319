@@ -6,7 +6,8 @@ import Image from "./lastPrint.png";
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-export default function PreApprovalFormN() {
+
+export default function CoordinatorPreApprovalFormN() {
     const [preApprovalF, setpreApprovalF] = useState("");
     const [preApprovalFb64, setpreApprovalFb64] = useState("");
   
@@ -14,7 +15,7 @@ export default function PreApprovalFormN() {
     let submissionSuccess = false;
     let navigate = useNavigate();
     function clickBack() {
-        navigate("/myApplication");
+        navigate("/toDoList");
     }
 
     const uploadpreApprovalF = async (e) => {
@@ -95,21 +96,17 @@ export default function PreApprovalFormN() {
                     <br></br>
                     <header style={{ fontSize: '50px', color: '#FBFCF8' }}>Pre-Approval Form </header>
                     <br></br><br></br><br></br><br></br>
-                    <header style={{ fontSize: '18px', color: 'black' }}>Print Pre-Approval Form </header>
+                    <header style={{ fontSize: '18px', color: 'black' }}>Download Pre-Approval Form </header>
                     <br></br>
                     <img id="printImage" src={Image} onClick ={clickPrint} style={{cursor: 'pointer'}}></img>
                     <br></br><br></br>
-                    <header style={{ fontSize: '18px', color: 'black' }}>Upload Signed Pre-Approval Form </header>
-                    <br></br>
-                    <div class="justify-content-center" style={{ display: 'flex' }}>
-                        <Form.Group style={{ width: '270px', justifyContent: 'center'}}>
-                            <Form.Control type="file" value={preApprovalF} onChange={(e) => { setpreApprovalF(e.target.value); uploadpreApprovalF(e); }} size="lg" />
-                        </Form.Group>
-                    </div>
                    
                     <br></br><br></br><br></br>
-                    <Button onClick={uploadPreApprovalFinal} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
-                        Upload and Submit
+                    <Button onClick={uploadPreApprovalFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                        Approve
+                    </Button>
+                    <Button onClick={uploadPreApprovalFinal} style={{ margin:'1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                        Disapprove
                     </Button>
                 </div>
 

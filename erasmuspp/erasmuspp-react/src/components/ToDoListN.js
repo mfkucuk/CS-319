@@ -23,6 +23,9 @@ export default function ToDoListN() {
         navigate("/main");
     }
 
+    function clickView() {
+        navigate("/coordinatorViewApplication")
+    }
     return (
         <div>
             <TopNavBar />
@@ -62,7 +65,7 @@ export default function ToDoListN() {
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{ alignContent: 'center', justifyContent: 'center', }}>
-                                        <Button style={{ textAlign: 'left', margin: '5px' }}>
+                                        <Button onClick={clickView} style={{ textAlign: 'left', margin: '5px' }}>
                                             View
                                         </Button>
                                         <Button style={{ textAlign: 'right', margin: '5px' }}>
@@ -82,13 +85,13 @@ export default function ToDoListN() {
 
                     </div>
 
-                    <div class="col-md-2" style={{ paddingTop: '150px', textAlign: 'right' }}>
+                    <div class="col-md-2" style={{ paddingTop: '100px', textAlign: 'right' }}>
                         <FormText style={{ fontSize: '20px', color: 'black' }}>Stage: </FormText>
                         <br></br><br></br>
                         <FormText style={{ fontSize: '20px', color: 'black' }}>Erasmus Semester: </FormText>
                     </div>
 
-                    <div class="col-md-2" style={{ paddingTop: '150px', textAlign: 'left' }}>
+                    <div class="col-md-2" style={{ paddingTop: '100px', textAlign: 'left' }}>
                         <Form.Select>
                             {[
                                 "Stage 1",

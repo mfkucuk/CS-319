@@ -6,11 +6,29 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 export default function MyApplicationsN() {
+
+
+    const [myApplications, setmyAnnouncements] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => {
+        setmyAnnouncements(res.data);
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+
+  }, [])
+
+
     let navigate = useNavigate();
-    function handleClickMyApplication() {
+    const handleClickMyApplication = (id) => {
+        window.localStorage.setItem("LAST_APPLICATION", id);
         navigate("/myApplication");
     }
 
@@ -55,35 +73,25 @@ export default function MyApplicationsN() {
                             padding: '50px',
 
                         }}>
-                            {[
-                                'Primary',
-                                'Secondary',
-                                'Success',
-                                'Danger',
-                                'Warning',
-                                'Info',
-                                'Light',
-                                'Dark',
-                            ].map((variant) => (
+                            {myApplications.map((attributes) => (
                                 <Card
-                                    key={variant}
-                                    text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
+                                    key= {attributes.id}
+                                    text={attributes.body}
                                     style={{ width: '18rem', background: "#EB9181", margin: 'auto', alignItems: 'center' }}
                                     className="mb-2"
                                 >
-                                    <Card.Header>Header</Card.Header>
+                                    <Card.Header>{attributes.id}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>{variant} Card Title </Card.Title>
+                                        <Card.Title>{attributes.title} Card Title </Card.Title>
                                         <Card.Text>
-                                            Some quick example text to build on the card title and make up the
-                                            bulk of the card's content.
+                                            {attributes.body}
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{
                                         alignContent: 'center',
                                         justifyContent: 'center',
                                     }}>
-                                        <Button onClick={handleClickMyApplication} style={{
+                                        <Button onClick={() =>handleClickMyApplication(attributes.id)} style={{
                                             textAlign: 'center',
                                         }}>
                                             Go to Application
