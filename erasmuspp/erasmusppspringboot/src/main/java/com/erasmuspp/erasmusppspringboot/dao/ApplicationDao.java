@@ -16,6 +16,8 @@ public interface ApplicationDao
         return insertApplication(id, application);
     }
 
+    List<Application> selectApplicationsByToken(String token);
+
     List<Application> selectAllApplications();
 
     Optional<Application> selectApplicationById(UUID id);

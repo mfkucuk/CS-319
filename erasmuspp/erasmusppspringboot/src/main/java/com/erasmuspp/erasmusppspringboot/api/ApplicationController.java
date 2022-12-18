@@ -44,6 +44,12 @@ public class ApplicationController
         return applicationService.getAllApplications();
     }
 
+    @GetMapping(path="token={token}")
+    public List<Application> getApplicationsByToken(@PathVariable("token") String token)
+    {
+        return applicationService.getApplicationsByToken(token);
+    }
+
     @GetMapping(path="{id}")
     public Application getApplicationById(@PathVariable("id") UUID id)
     {
