@@ -27,7 +27,7 @@ public class FileDataAccess implements FileDao {
     public Optional<File> selectFileById(UUID id) {
         final String sql = "SELECT * FROM \"file\" WHERE id = ?";
         File file = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
-            UUID fileId = UUID.fromString(resultSet.getString("id"));
+            String fileId = resultSet.getString("id");
             String content = resultSet.getString("content");
             String fileName = resultSet.getString("fileName");
             String uploadTime = resultSet.getString("uploadTime");
