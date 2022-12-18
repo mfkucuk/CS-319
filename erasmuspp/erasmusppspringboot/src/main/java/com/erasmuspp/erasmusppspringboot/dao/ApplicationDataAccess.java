@@ -24,8 +24,8 @@ public class ApplicationDataAccess implements ApplicationDao
     @Override
     public int insertApplication(UUID id, Application application, String token) {
         User user = userDataAccess.selectUserByToken(token).get();
-        final String sql = "INSERT INTO \"application\" (id, semester, stage, isequivalance, ispreapprovalapproved, universitychoices, userid)\nVALUES(?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), application.getEquivalanceApproved(), application.getPreApprovalApproved(), application.getChoices(), user.getId()});
+        final String sql = "INSERT INTO \"application\" (id, semester, stage, isequivalanceapproved, ispreapprovalapproved, universitychoices, userid)\nVALUES(?, ?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), application.getStage(), application.getEquivalanceApproved(), application.getPreApprovalApproved(), application.getChoices(), user.getId()});
     }
 
     @Override

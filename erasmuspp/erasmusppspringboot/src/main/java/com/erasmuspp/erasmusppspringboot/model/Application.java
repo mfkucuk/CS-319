@@ -2,7 +2,6 @@ package com.erasmuspp.erasmusppspringboot.model;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Application
 {
@@ -14,20 +13,6 @@ public class Application
     private boolean isPreApprovalApproved;
     private String[] universityChoices;
 
-    public Application(@JsonProperty("id") UUID id,
-                       @JsonProperty("semester") String semester,
-                       @JsonProperty("choices") String[] universityChocies)
-                       
-    {
-        this.id = id;
-        this.userId = "";
-        this.semester = semester;
-        this.stage = 0;
-        this.isEquivalanceApproved = false;
-        this.isPreApprovalApproved = false;
-        this.universityChoices = universityChocies;
-    }
-
     public Application(UUID id, String userId, String semester, int stage, boolean isEquivalanceApproved, boolean isPreApprovalApproved, String[] universityChoices)
     {
         this.id = id;
@@ -38,7 +23,6 @@ public class Application
         this.isPreApprovalApproved = isPreApprovalApproved;
         this.universityChoices = universityChoices;
     }
-
 
 
     public void setSemester(String semester)

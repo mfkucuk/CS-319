@@ -1,6 +1,7 @@
 package com.erasmuspp.erasmusppspringboot.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -33,8 +34,10 @@ public class ApplicationController
     }
 
     @PostMapping(path="token={token}")
-    public void addApplication( @Valid @RequestBody @PathVariable("token") String token, Application application)
+    public void addApplication( @Valid @RequestBody @PathVariable("token") String token, Map<String, String> json )
     {
+        String[] choices = new String[] {json.get("choices")};
+        Application application = new Application(UUID.fromString("9d77e231-7b7f-4f67-8da6-c696eb31f31e"), "", json.get("semester"), 0, false, false, choices);
         applicationService.addApplication(application, token);
     }
 
