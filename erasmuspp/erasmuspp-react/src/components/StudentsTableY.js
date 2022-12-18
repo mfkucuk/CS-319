@@ -18,6 +18,7 @@ export default function PostAnnouncementY() {
       .then(res => setCandidateList(res.data));
   }, [candidateList])
 
+
   let navigate = useNavigate();
 
   function clickBack() {
