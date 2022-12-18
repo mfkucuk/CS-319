@@ -46,7 +46,7 @@ export default function PostAnnouncementY() {
       {
         title: announcementTitle,
         content: announcementDescription,
-        postDate: Date.now().toString(),
+        postDate: Date(),
         expireDate: "",
         filters: [
           departmentName,
