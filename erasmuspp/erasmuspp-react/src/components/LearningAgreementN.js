@@ -8,6 +8,10 @@ import { useEffect, useState } from 'react';
 
 export default function LearningAgreementN() {
 
+    const [LearningAgreementF, setLearningAgreementF] = useState("");
+    const [LearningAgreementFb64, setpreApprovalFb64] = useState("");
+
+
     let checked = false;
     let submissionSuccess = false;
     let navigate = useNavigate();
