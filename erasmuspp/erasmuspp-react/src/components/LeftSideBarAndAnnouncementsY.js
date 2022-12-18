@@ -9,7 +9,8 @@ import {useEffect, useState} from 'react';
 
 export default function LeftSideBarAndAnnouncements(){
 
-  const [userName, setuserName] = useState("");
+  const [userFirstName, setuserFirstName] = useState("");
+  const [userSecondName, setuserSecondName] = useState("");
   const [userRole, setuserRole] = useState("");
 
   const [myAppsHidden, setMyAppsHidden] = useState(true);
@@ -23,10 +24,11 @@ export default function LeftSideBarAndAnnouncements(){
     console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then((res) => {
-          setuserName(res.data.name);
+          setuserFirstName(res.data.firstName);
+          setuserSecondName(res.data.lastName);
           setPP(res.data.profilePhoto);
         });
-  }, [userName]) 
+  }, [userFirstName]) 
 
   useEffect(() => {
     var userToken = 
@@ -92,7 +94,7 @@ export default function LeftSideBarAndAnnouncements(){
               <img style={{ width: "10rem", height: "10rem" }} alt="Bootstrap Image Preview" src={pp}/>
             </view>
             <p style={{textAlign: "center"}}>
-              {userName}
+              {userFirstName} {userSecondName}
               <br/>
               <br/>
               <br/>
