@@ -23,6 +23,9 @@ export default function ToDoListN() {
         navigate("/main");
     }
 
+    function clickView() {
+        navigate("/coordinatorViewApplication")
+    }
     return (
         <div>
             <TopNavBar />
@@ -62,7 +65,7 @@ export default function ToDoListN() {
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{ alignContent: 'center', justifyContent: 'center', }}>
-                                        <Button style={{ textAlign: 'left', margin: '5px' }}>
+                                        <Button onClick={clickView} style={{ textAlign: 'left', margin: '5px' }}>
                                             View
                                         </Button>
                                         <Button style={{ textAlign: 'right', margin: '5px' }}>
