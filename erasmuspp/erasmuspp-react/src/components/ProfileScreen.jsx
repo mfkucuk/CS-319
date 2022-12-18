@@ -5,6 +5,7 @@ import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import axios from 'axios';
+import Form from 'react-bootstrap/Form';
 
 export default function ProfileScreen() {
   const [userFirstNameInit, setUserFirstNameInit] = useState("");
@@ -25,14 +26,16 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
-      .then((res) => {setUserFirstNameInit(res.data.firstName); 
-                      setUserLastNameInit(res.data.lastName);
-                      setUserAboutMeInit(res.data.aboutMe);
-                      setUserEmailInit(res.data.email);
-                      setUserMobilePhoneNoInit(res.data.mobilePhone);
-                      setUserDoBInit(res.data.dob)}
-            )
-  }, [userFirstNameInit] [userAboutMeInit])
+      .then((res) => {
+        setUserFirstNameInit(res.data.firstName);
+        setUserLastNameInit(res.data.lastName);
+        setUserAboutMeInit(res.data.aboutMe);
+        setUserEmailInit(res.data.email);
+        setUserMobilePhoneNoInit(res.data.mobilePhone);
+        setUserDoBInit(res.data.dob)
+      }
+      )
+  }, [userFirstNameInit][userAboutMeInit])
 
 
   useEffect(() => {
@@ -82,9 +85,9 @@ export default function ProfileScreen() {
     e.preventDefault();
     axios
       .put("http://localhost:8080/api/v1/user/changeAboutMe/token=" + window.localStorage.getItem("USER_TOKEN"),
-        
-          userAboutMe
-        )
+
+        userAboutMe
+      )
       .then((res) => {
         if (res.data === 1) {
           alert("About me updated successfully.");
@@ -126,6 +129,20 @@ export default function ProfileScreen() {
               <view>
                 <img style={{ width: "12rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrc} />
               </view>
+              <br /><br />
+              <div className="row">
+                <div className="col-md-4" />
+                <div className="col-md-4">
+                  <Form.Control type="file" size="lg" />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-4" />
+                <div className="col-md-4">
+                  <br />
+                  <Button style={{ backgroundColor: "#3C7479", width: "13rem" }}>Change Profile Photo</Button>
+                </div>
+              </div>
               <br />
               <h3 className="pt-4" style={{ color: "#f4eff2" }}>
                 {userFirstNameInit} {userLastNameInit}
@@ -144,13 +161,13 @@ export default function ProfileScreen() {
               <br />
               <div class="form-group">
                 <label style={{ color: "#f4eff2" }} for="exampleInputEmail1">Personal E-mail Address:</label>
-                <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder={userEmailInit} onChange={(e) => setUserEmail(e.target.value)}/>
+                <input type="email" class="form-control" id="profileScreenEmail" aria-describedby="emailHelp" placeholder={userEmailInit} onChange={(e) => setUserEmail(e.target.value)} />
                 <Button onClick={putUserEmail} className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change E-Mail</Button>
               </div>
               <br />
               <div class="form-group">
                 <label style={{ color: "#f4eff2" }} for="exampleInputPhone1">Phone Number:</label>
-                <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder={userMobilePhoneNoInit} onChange={(e) => setUserMobilePhoneNo(e.target.value)}/>
+                <input type="email" class="form-control" id="profileScreenPhone" aria-describedby="emailHelp" placeholder={userMobilePhoneNoInit} onChange={(e) => setUserMobilePhoneNo(e.target.value)} />
                 <Button onClick={putUserMobilePhoneNo} className='mt-3' style={{ backgroundColor: "#3C7479" }}>Change Phone</Button>
               </div>
               <br /><br />
