@@ -16,6 +16,12 @@ public interface UserDao {
 
     List<User> selectAllUsers();
 
+    List<String> selectAllDepartments();
+
+    List<String> selectAllUniversities();
+
+    List<String> selectAllCountries();
+
     Optional<User> selectUserById(UUID id);
 
     Optional<User> selectUserByEmail(String email);
