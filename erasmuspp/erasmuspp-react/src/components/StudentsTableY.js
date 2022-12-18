@@ -7,7 +7,6 @@ import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
 import SaveCandidateInfo from './SaveCandidateInfoModalPopUpY';
 import Table from 'react-bootstrap/Table';
-import axios from 'axios';
 
 
 export default function PostAnnouncementY() {
@@ -18,6 +17,7 @@ export default function PostAnnouncementY() {
     axios.get("https://jsonplaceholder.typicode.com/posts")
       .then(res => setCandidateList(res.data));
   }, [candidateList])
+
 
   let navigate = useNavigate();
 
