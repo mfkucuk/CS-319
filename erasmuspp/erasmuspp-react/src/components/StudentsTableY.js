@@ -12,7 +12,7 @@ export default function PostAnnouncementY() {
   const [candidateList, setCandidateList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/user")
+    axios.get("http://localhost:8080/api/v1/user/candidates")
       .then(res => setCandidateList(res.data));
   }, [candidateList])
 
@@ -69,7 +69,7 @@ export default function PostAnnouncementY() {
                           </td>
                           <td>{candidateList[index].firstName}</td>
                           <td>{candidateList[index].lastName}</td>
-                          <td>{candidateList[index].bilkentID}</td>
+                          <td>{candidateList[index].bilkentId}</td>
                           <td>{candidateList[index].department}</td>
                           <td>{candidateList[index].email}</td>
                           <td>{candidateList[index].nationality}</td>
