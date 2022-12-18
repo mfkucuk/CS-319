@@ -5,7 +5,60 @@ import TopNavBar from './TopNavBar';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 export default function CourseEquivalenceRequestY() {
+  
+  const [courseSyllabus, setcourseSyllabus] =useState("");
+  const [courseSyllabusb64, setcourseSyllabusb64] = useState("");
+  
+
+  const uploadSyllabus = async (e) => {
+    const courseSyllabus = e.target.files[0];
+
+    setcourseSyllabusb64(await toB64(courseSyllabus));
+  };
+
+  const toB64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    })
+  }
+
+  const submitRequest = () => {
+    console.log(courseSyllabusb64);
+    axios
+      .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
+        { 
+          syllabus: courseSyllabusb64
+        } 
+        )
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("Course Syllabus Uploaded Successfully")
+        }
+        else {
+          alert("Course Syllabus Failed to Upload")
+        }
+      }).catch((err)=> {
+
+        alert("Course Syllabus Failed to Upload")
+      });
+  }
+
+
+  let navigate = useNavigate();
+  function clickBack() {
+    navigate("/courseRegistration");
+  }
 
   let navigate = useNavigate();
   function clickBack() {
@@ -90,7 +143,7 @@ export default function CourseEquivalenceRequestY() {
               <div class="col-md-1">
               </div>
               <div class="col-md-4 ms-3" style={{ color: "#f4eff2" }}>
-                <Form.Control type="file" size="lg" />
+                <Form.Control type="file" value={courseSyllabus} onChange={(e) => { setcourseSyllabus(e.target.value); uploadSyllabus(e); }} size="lg" />
               </div>
             </div>
             <div class='row'>
@@ -115,7 +168,7 @@ export default function CourseEquivalenceRequestY() {
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br/><br/><br/><br/>
-            <Button style={{ backgroundColor: "#3C7479", width: "10rem", height: "3rem"}}>
+            <Button onClick={submitRequest} style={{ backgroundColor: "#3C7479", width: "10rem", height: "3rem"}}>
               Submit
             </Button>
             <LargeBreak></LargeBreak>

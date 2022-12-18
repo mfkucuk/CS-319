@@ -7,7 +7,9 @@ import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function PreApprovalFormN() {
-
+    const [preApprovalF, setpreApprovalF] = useState("");
+    const [preApprovalFb64, setpreApprovalFb64] = useState("");
+  
     let checked = false;
     let submissionSuccess = false;
     let navigate = useNavigate();
@@ -15,11 +17,48 @@ export default function PreApprovalFormN() {
         navigate("/myApplication");
     }
 
-
+    const uploadpreApprovalF = async (e) => {
+        const preApprovalF = e.target.files[0];
+    
+        setpreApprovalFb64(await toB64(preApprovalF));
+      };
+    
+      const toB64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        })
+      }
+    
+      const uploadPreApprovalFinal = () => {
+        console.log(preApprovalFb64);
+        axios
+          .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
+            { 
+              preApprovalForm: preApprovalFb64
+            } 
+            )
+          .then((res) => {
+            if (res.data.status === true) {
+              alert("Pre Approval Form Uploaded Successfully")
+            }
+            else {
+              alert("Pre Approval Form Failed to Upload")
+            }
+          }).catch((err)=> {
+    
+            alert("Pre Approval Form Failed to Upload")
+          });
+      }
 
 
     const clickPrint = () =>{
-    
         fetch("PreApprovalForm.docx").then(response => {
             response.blob().then(blob => {
                 const fileURL = window.URL.createObjectURL(blob);
@@ -32,9 +71,7 @@ export default function PreApprovalFormN() {
     
     }
 
-    function clickUpload() {
 
-    }
 
     function clickSubmit() {
         if(submissionSuccess)
@@ -66,16 +103,13 @@ export default function PreApprovalFormN() {
                     <br></br>
                     <div class="justify-content-center" style={{ display: 'flex' }}>
                         <Form.Group style={{ width: '270px', justifyContent: 'center'}}>
-                            <Form.Control type="file" size="lg" />
+                            <Form.Control type="file" value={preApprovalF} onChange={(e) => { setpreApprovalF(e.target.value); uploadpreApprovalF(e); }} size="lg" />
                         </Form.Group>
                     </div>
-                    <br></br>
-                    <Button onClick={clickUpload} style={{backgroundColor: '#3C7479'}}>
-                        Upload
-                    </Button>
-                    <br></br><br></br><br></br><br></br>
-                    <Button onClick={clickSubmit} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
-                        Submit
+                   
+                    <br></br><br></br><br></br>
+                    <Button onClick={uploadPreApprovalFinal} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
+                        Upload and Submit
                     </Button>
                 </div>
 
