@@ -82,7 +82,7 @@ export default function MyApplicationsN() {
                                     style={{ width: '18rem', background: "#EB9181", margin: 'auto', alignItems: 'center' }}
                                     className="mb-2"
                                 >
-                                    <Card.Header>Application for {attributes.choices[0]}</Card.Header>
+                                    <Card.Header>Application for {attributes.choice1}</Card.Header>
                                     <Card.Body>
                                         <Card.Text>Semester: {attributes.semester}</Card.Text>
                                         <Card.Text>
