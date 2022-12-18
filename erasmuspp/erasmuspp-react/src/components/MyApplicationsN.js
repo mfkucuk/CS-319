@@ -15,7 +15,7 @@ export default function MyApplicationsN() {
     const [myApplications, setmyAnnouncements] = useState([]);
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"))
       .then(res => {
         setmyAnnouncements(res.data);
       })

@@ -20,7 +20,7 @@ import com.erasmuspp.erasmusppspringboot.service.ApplicationService;
 
 
 
-@RequestMapping(value = "api/v1/application", consumes = "application/json")
+@RequestMapping(value = "api/v1/application")
 @CrossOrigin(origins = "*")
 @RestController
 public class ApplicationController 
@@ -42,6 +42,12 @@ public class ApplicationController
     public List<Application> getAllApplication()
     {
         return applicationService.getAllApplications();
+    }
+
+    @GetMapping(path="token={token}")
+    public List<Application> getApplicationsByToken(@PathVariable("token") String token)
+    {
+        return applicationService.getApplicationsByToken(token);
     }
 
     @GetMapping(path="{id}")

@@ -11,6 +11,7 @@ import com.erasmuspp.erasmusppspringboot.dao.ApplicationDao;
 import com.erasmuspp.erasmusppspringboot.model.Application;
 
 
+
 @Service
 public class ApplicationService 
 {
@@ -24,6 +25,11 @@ public class ApplicationService
     public int addApplication(Application application)
     {
         return applicationDao.insertApplication(application);
+    }
+
+    public List<Application> getApplicationsByToken(String token)
+    {
+        return applicationDao.selectApplicationsByToken(token);
     }
 
     public List<Application> getAllApplications()

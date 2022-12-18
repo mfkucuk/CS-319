@@ -97,7 +97,7 @@ export default function PreApprovalFormN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Print Pre-Approval Form </header>
                     <br></br>
-                    <img id="printImage" src={Image} onClick ={clickPrint}></img>
+                    <img id="printImage" src={Image} onClick ={clickPrint} style={{cursor: 'pointer'}}></img>
                     <br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Upload Signed Pre-Approval Form </header>
                     <br></br>
