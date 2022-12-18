@@ -30,6 +30,10 @@ public class AnnouncementService
         return announcementDao.selectAllAnnouncements();
     }
 
+    public List<Announcement> getFilteredAnnouncements(String token) {
+        return announcementDao.selectFilteredAnnoucements(token);
+    }
+
     public Optional<Announcement> getAnnouncementById(UUID id)
     {
         return announcementDao.selectAnnouncementById(id);
