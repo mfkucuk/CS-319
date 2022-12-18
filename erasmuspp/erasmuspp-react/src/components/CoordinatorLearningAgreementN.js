@@ -9,80 +9,28 @@ import axios from 'axios';
 
 export default function CoordinatorLearningAgreementN() {
 
-    const [learningAgreementF, setlearningAgreementF] = useState("");
+
     const [learningAgreementFb64, setlearningAgreementFb64] = useState("");
 
 
-    let checked = false;
-    let submissionSuccess = false;
+    useEffect(() => {
+      axios.get("http://localhost:8080/api/v1/announcement/")
+        .then(res => {
+          setlearningAgreementFb64(res.data);
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+  
+    }, [learningAgreementFb64])
     let navigate = useNavigate();
     function clickBack() {
         navigate("/toDoList");
     }
 
 
-    const uploadlearningAgreementF = async (e) => {
-        const learningAgreementF = e.target.files[0];
-    
-        setlearningAgreementFb64(await toB64(learningAgreementF));
-      };
-    
-      const toB64 = (file) => {
-        return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file);
-          fileReader.onload = () => {
-            resolve(fileReader.result);
-          };
-          fileReader.onerror = (error) => {
-            reject(error);
-          };
-        })
-      }
-    
-      const uploadLearningAgreementFinal = () => {
-        console.log(learningAgreementFb64);
-        axios
-          .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
-            { 
-              learningAgreement: learningAgreementFb64
-            } 
-            )
-          .then((res) => {
-            if (res.data.status === true) {
-              alert("Pre Approval Form Uploaded Successfully")
-            }
-            else {
-              alert("Pre Approval Form Failed to Upload")
-            }
-          }).catch((err)=> {
-    
-            alert("Pre Approval Form Failed to Upload")
-          });
-      }
 
-    function clickPrint(){
-        fetch("ErasmusLearningAgreement.docx").then(response => {
-            response.blob().then(blob => {
-                const fileURL = window.URL.createObjectURL(blob);
-                let alink = document.createElement('a');
-                alink.href = fileURL;
-                alink.download = 'Erasmus Learning Agreement.docx';
-                alink.click();
-            })
-        })
-    }
 
-    function clickUpload() {
-        
-    }
-
-    function clickSubmit() {
-        if(submissionSuccess)
-            alert("Learning Agreement Submitted Succesfully!");
-        else
-            alert("Learning Agreement Submission Failed.");
-    }
 
     return (
         <div class="container-fluid">
@@ -101,14 +49,14 @@ export default function CoordinatorLearningAgreementN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Download Learning Agreement </header>
                     <br></br>
-                    <img id="printImage" src={Image} onClick={clickPrint} style={{cursor: 'pointer'}}></img>
+                    <img id="printImage" src={Image} style={{cursor: 'pointer'}}></img>
                     <br></br><br></br>
                     
                    <br></br><br></br><br></br>
-                    <Button onClick={uploadLearningAgreementFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
                         Approve
                     </Button>
-                    <Button onClick={uploadLearningAgreementFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
                         Disapprove
                     </Button>
                 </div>

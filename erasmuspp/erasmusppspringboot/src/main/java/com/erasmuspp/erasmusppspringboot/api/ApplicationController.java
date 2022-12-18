@@ -20,7 +20,7 @@ import com.erasmuspp.erasmusppspringboot.service.ApplicationService;
 
 
 
-@RequestMapping(value = "api/v1/application", consumes = "application/json")
+@RequestMapping(value = "api/v1/application")
 @CrossOrigin(origins = "*")
 @RestController
 public class ApplicationController 
