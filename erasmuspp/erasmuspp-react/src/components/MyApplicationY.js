@@ -111,9 +111,12 @@ export default function MyApplicationY() {
   const uploadCVFinal = () => {
     console.log(CVB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          CVForm: CV
+          applicationId: "3",
+          content: CVB64,
+          fileName: "CV",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
