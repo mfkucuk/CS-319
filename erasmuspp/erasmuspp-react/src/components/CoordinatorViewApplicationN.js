@@ -17,7 +17,7 @@ export default function CoordinatorViewApplicationN() {
     const [appFormB64, setappFormB64] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/announcement/")
+        axios.get("http://localhost:8080/api/v1/application/")
           .then(res => {
             setsopB64(res.data);
           })
