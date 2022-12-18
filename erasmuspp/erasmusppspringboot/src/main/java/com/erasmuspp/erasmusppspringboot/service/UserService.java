@@ -29,6 +29,18 @@ public class UserService {
         return userDao.selectAllUsers();
     }
 
+    public List<String> getAllDepartments() {
+        return userDao.selectAllDepartments();
+    }
+
+    public List<String> getAllCountries() {
+        return userDao.selectAllCountries();
+    }
+
+    public List<String> getAllUniversities() {
+        return userDao.selectAllUniversities();
+    }
+
     public Optional<User> getUserById(UUID id)
     {
         return userDao.selectUserById(id);

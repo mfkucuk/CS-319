@@ -31,10 +31,10 @@ public class AnnouncementController
         this.announcementService = announcementService;
     }
 
-    @PostMapping
-    public void addAnnouncement(@Valid @RequestBody Announcement announcement)
+    @PostMapping(path = "token={token}")
+    public void addAnnouncement(@PathVariable("token") String token, @Valid @RequestBody Announcement announcement)
     {
-        announcementService.addAnnouncement(announcement);
+        announcementService.addAnnouncement(announcement, token);
     }
 
     @GetMapping
