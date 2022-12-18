@@ -25,7 +25,7 @@ export default function LoginScreen() {
             password: passwordInput } )
       .then((res) => {
         if (res.data.status === true) {
-          window.localStorage.setItem("USER_TOKEN", res.data.jwt);
+          window.localStorage.setItem("USER_TOKEN", res.data.token);
           navigate("/main");
         }
         else {
