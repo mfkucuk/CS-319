@@ -33,6 +33,23 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping(path = "department")
+    public List<String> getAllDepartmets() {
+        return userService.getAllDepartments();
+    }
+
+    @GetMapping(path = "university")
+    public String[] getAllUniversities() {
+        // return userService.getAllUniversities();
+
+        return new String[]{"Bilkent University", "ODTU"};
+    }
+
+    @GetMapping(path = "country")
+    public List<String> getAllCountries() {
+        return userService.getAllCountries();
+    }
+
     @GetMapping(path = "id={id}")
     public User getUserById(@PathVariable("id") UUID id)
     {

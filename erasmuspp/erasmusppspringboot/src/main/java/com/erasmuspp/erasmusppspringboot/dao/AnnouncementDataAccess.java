@@ -20,16 +20,19 @@ public class AnnouncementDataAccess implements AnnouncementDao
    private final UserDataAccess userDataAccess;
    
    @Override
-   public int insertAnnouncement(UUID id, Announcement announcement)
+   public int insertAnnouncement(UUID id, Announcement announcement, String token)
    {
-        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate, filters)\nVALUES(?, ?, ?, ?, ?, ?);";
+        User posterUser = userDataAccess.selectUserByToken(token).orElse(null);
+        String poster = posterUser.getFirstName() + " " + posterUser.getLastName();
+        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate, filters, poster)\nVALUES(?, ?, ?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, new Object[] {
             id, 
             announcement.getTitle(), 
             announcement.getContent(), 
             announcement.getPostDate(), 
             announcement.getExpireDate(),
-            announcement.getFilters()
+            announcement.getFilters(),
+            poster
         });
    }
 
@@ -44,13 +47,15 @@ public class AnnouncementDataAccess implements AnnouncementDao
             String postDate = resultSet.getString("postDate");
             String expireDate = resultSet.getString("expireDate");
             String[] filters = (String[]) resultSet.getArray("filters").getArray();
+            String poster = resultSet.getString("poster");
             return new Announcement(
                 announcementId,
                 title,
                 content,
                 postDate,
                 expireDate,
-                filters
+                filters,
+                poster
             );
         });
         return announcements; 
@@ -67,13 +72,15 @@ public class AnnouncementDataAccess implements AnnouncementDao
             String postDate = resultSet.getString("postDate");
             String expireDate = resultSet.getString("expireDate");
             String[] filters = (String[]) resultSet.getArray("filters").getArray();
+            String poster = resultSet.getString("poster");
             return new Announcement(
                 announcementId,
                 title,
                 content,
                 postDate,
                 expireDate,
-                filters
+                filters,
+                poster
             );
         });
 
@@ -92,13 +99,15 @@ public class AnnouncementDataAccess implements AnnouncementDao
                 String postDate = resultSet.getString("postDate");
                 String expireDate = resultSet.getString("expireDate");
                 String[] filters = (String[]) resultSet.getArray("filters").getArray();
+                String poster = resultSet.getString("poster");
                 return new Announcement(
                     announcementId,
                     title,
                     content,
                     postDate,
                     expireDate,
-                    filters
+                    filters,
+                    poster
                 );
             }, new Object[] {id});
             return Optional.ofNullable(announcement); 
