@@ -228,7 +228,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     }
 
     @Override
-    public int updatePasswordByToken(String token, String password) {
+    public int updatePasswordByToken(String password, String token) {
         final String sql = "UPDATE \"user\" SET \"password\" = ? WHERE \"token\" = ?";
         return jdbcTemplate.update(sql, password, token);
     }
