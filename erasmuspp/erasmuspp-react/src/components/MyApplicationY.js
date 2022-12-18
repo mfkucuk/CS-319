@@ -160,7 +160,7 @@ export default function MyApplicationY() {
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
             <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
-              {window.localStorage.getItem("LAST_APPLICATION")}
+              GO BACK
             </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
