@@ -9,14 +9,46 @@ import axios from 'axios';
 import LargeBreak from './LargeBreak';
 
 export default function CoordinatorViewApplicationN() {
-    const [statementOfPurpose, setStatementOfPurpose] = useState("");
+
     const [sopB64, setsopB64] = useState("");
 
-    const [CV, setCV] = useState("");
     const [CVB64, setCVB64] = useState("");
 
-    const [appForm, setAppForm] = useState("");
     const [appFormB64, setappFormB64] = useState("");
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/announcement/")
+          .then(res => {
+            setsopB64(res.data);
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+    
+      }, [sopB64])
+
+      useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/announcement/")
+          .then(res => {
+            setCVB64(res.data);
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+    
+      }, [CVB64])
+
+      useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/announcement/")
+          .then(res => {
+            setappFormB64(res.data);
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+    
+      }, [appFormB64])
+      
 
     let navigate = useNavigate();
     function handleClickEditApplicationForm() {
@@ -35,46 +67,6 @@ export default function CoordinatorViewApplicationN() {
         navigate("/toDoList");
     }
 
-    const uploadStatemenetOfPurpose = async (e) => {
-        const statementOfPurpose = e.target.files[0];
-
-        setsopB64(await toB64(statementOfPurpose));
-    };
-
-    const toB64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        })
-    }
-
-    const uploadSOPFinal = () => {
-        console.log(sopB64);
-        axios
-            .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"),
-                {
-                    statementOfPurposeForm: sopB64
-                }
-            )
-            .then((res) => {
-                if (res.data.status === true) {
-                    alert("Statement of Purpose Uploaded Successfully")
-                }
-                else {
-                    alert("Statement of Purpose Failed to Upload")
-                }
-            }).catch((err) => {
-
-                alert("Statement of Purpose Failed to Upload")
-            });
-    }
-
     const downloadSop = () => {
         const downloadLink = document.createElement("a");
         downloadLink.href = sopB64;
@@ -82,62 +74,21 @@ export default function CoordinatorViewApplicationN() {
         downloadLink.click();
     }
 
-    const uploadCV = async (e) => {
-        const CV = e.target.files[0];
-
-        setCVB64(await toB64(CV));
+    
+    const downloadApplicationForm = () => {
+        const downloadLink = document.createElement("a");
+        downloadLink.href = appFormB64;
+        downloadLink.download = "Fill Application Form";
+        downloadLink.click();
     }
 
-    const uploadAppFormFinal = () => {
-        console.log(appFormB64);
-        axios
-            .post("http://localhost:8080/api/v1/application/uploadApplicationForm/token=" + window.localStorage.getItem("USER_TOKEN"),
-                {
-                    applicationForm: appFormB64
-                }
-            )
-            .then((res) => {
-                if (res.data.status === true) {
-                    alert("Application Form Uploaded Successfully")
-                }
-                else {
-                    alert("Application Form Failed to Upload")
-                }
-            }).catch((err) => {
-
-                alert("Application Form Failed to Upload")
-            });
+    const downloadCV = () => {
+        const downloadLink = document.createElement("a");
+        downloadLink.href = CVB64;
+        downloadLink.download = "Fill Application Form";
+        downloadLink.click();
     }
 
-    const uploadCVFinal = () => {
-        console.log(CVB64);
-        axios
-            .post("http://localhost:8080/api/v1/file/",
-                {
-                    applicationId: "3",
-                    content: CVB64,
-                    fileName: "CV",
-                    uploadTime: "18.12.2022"
-                }
-            )
-            .then((res) => {
-                if (res.data.status === true) {
-                    alert("CV Uploaded Successfully")
-                }
-                else {
-                    alert("CV Failed to Upload")
-                }
-            }).catch((err) => {
-
-                alert("CV Failed to Upload")
-            });
-    }
-
-    const uploadApplicationForm = async (e) => {
-        const appForm = e.target.files[0];
-
-        setappFormB64(await toB64(appForm));
-    };
 
     return (
         <div style={{ backgroundColor: "#C7D6D2" }}>
@@ -188,19 +139,19 @@ export default function CoordinatorViewApplicationN() {
 
                         <br />
                         <div className='pt-2'>
-                            <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadSOPFinal}>
+                            <Button style={{ backgroundColor: "#3C7479" }} onClick={downloadSop}>
                                 Download
                             </Button>
                         </div>
                         <br /><br /><br />
                         <div className='pt-2'>
-                            <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadCVFinal}>
+                            <Button style={{ backgroundColor: "#3C7479" }} onClick={downloadCV}>
                                 Download
                             </Button>
                         </div>
                         <br /><br /><br />
                         <div className='pt-2'>
-                            <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadAppFormFinal}>
+                            <Button style={{ backgroundColor: "#3C7479" }} onClick={downloadApplicationForm}>
                                 Download
                             </Button>
                         </div>
