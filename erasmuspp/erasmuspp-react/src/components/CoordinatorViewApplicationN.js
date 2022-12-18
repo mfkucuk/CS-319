@@ -48,7 +48,7 @@ export default function CoordinatorViewApplicationN() {
           })
     
       }, [appFormB64])
-      
+
 
     let navigate = useNavigate();
     function handleClickEditApplicationForm() {
@@ -137,6 +137,7 @@ export default function CoordinatorViewApplicationN() {
                     </div>
                     <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
 
+                        <br />
                         <br />
                         <div className='pt-2'>
                             <Button style={{ backgroundColor: "#3C7479" }} onClick={downloadSop}>
