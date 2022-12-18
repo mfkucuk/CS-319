@@ -60,4 +60,8 @@ public class UserService {
     public int updatePasswordByToken(String token, String password) {
         return userDao.updatePasswordByToken(token, password);
     }
+
+    public int updateAboutMeByToken(String token, String aboutMe) {
+        return userDao.updateAboutMeByToken(token, aboutMe);
+    }
 }
