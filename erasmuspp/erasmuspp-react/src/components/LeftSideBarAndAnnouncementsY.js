@@ -17,12 +17,15 @@ export default function LeftSideBarAndAnnouncements(){
   const [registerCandidateHidden, setRegisterCandidateHidden] = useState(true);
   const [studentsListHidden, setStudentsListHidden] = useState(true);
   
-  
+  const[pp, setPP] = useState("");
   useEffect(() => {
     var userToken = 
     console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
-         .then(res => setuserName(res.data.name));
+         .then((res) => {
+          setuserName(res.data.name);
+          setPP(res.data.profilePhoto);
+        });
   }, [userName]) 
 
   useEffect(() => {
@@ -86,7 +89,7 @@ export default function LeftSideBarAndAnnouncements(){
             <br/>
             <br/>
             <view style={{padding: 40, alignSelf: 'flex-start'}}>
-              <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
+              <img style={{ width: "10rem", height: "10rem" }} alt="Bootstrap Image Preview" src={pp}/>
             </view>
             <p style={{textAlign: "center"}}>
               {userName}

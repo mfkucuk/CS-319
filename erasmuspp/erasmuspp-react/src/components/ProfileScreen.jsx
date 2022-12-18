@@ -22,7 +22,10 @@ export default function ProfileScreen() {
   const [userAboutMe, setUserAboutMe] = useState("");
   const [userAboutMeInit, setUserAboutMeInit] = useState("");
 
-  const [userImageSrc, setUserImageSrc] = useState("");
+  const [userImageSrcInit, setUserImageSrcInit] = useState("");
+
+  const[userPP, setuserPP] = useState("");
+  const[userPPB64, setuserPPB64] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
@@ -32,16 +35,32 @@ export default function ProfileScreen() {
         setUserAboutMeInit(res.data.aboutMe);
         setUserEmailInit(res.data.email);
         setUserMobilePhoneNoInit(res.data.mobilePhone);
-        setUserDoBInit(res.data.dob)
+        setUserDoBInit(res.data.dob);
+        setUserImageSrcInit(res.data.profilePhoto);
       }
       )
   }, [userFirstNameInit][userAboutMeInit])
 
 
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/photos")
-      .then(res => setUserImageSrc(res.data[5].url));
-  }, [userImageSrc])
+  const uploadPP = async (e) => {
+    const userPP = e.target.files[0];
+
+    setuserPPB64(await toB64(userPP));
+  };
+
+  const toB64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    })
+  }
+
 
   const putUserEmail = (e) => {
     e.preventDefault();
@@ -81,8 +100,8 @@ export default function ProfileScreen() {
       });
   };
 
-  const putUserAboutMe = (e) => {
-    e.preventDefault();
+  const putUserAboutMe = () => {
+
     axios
       .put("http://localhost:8080/api/v1/user/changeAboutMe/token=" + window.localStorage.getItem("USER_TOKEN"),
 
@@ -91,6 +110,24 @@ export default function ProfileScreen() {
       .then((res) => {
         if (res.data === 1) {
           alert("About me updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const putUserPP = () => {
+    axios
+      .put("http://localhost:8080/api/v1/user/changeProfilePhoto/token=" + window.localStorage.getItem("USER_TOKEN"),
+
+        userPPB64
+      )
+      .then((res) => {
+        if (res.data === 1) {
+          alert("Profile Photo updated successfully.");
         }
         else {
           alert("Something went wrong.");
@@ -127,20 +164,20 @@ export default function ProfileScreen() {
               <br />
               <br />
               <view>
-                <img style={{ width: "12rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrc} />
+                <img style={{ width: "12rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrcInit} />
               </view>
               <br /><br />
               <div className="row">
                 <div className="col-md-4" />
                 <div className="col-md-4">
-                  <Form.Control type="file" size="lg" />
+                  <Form.Control type="file" size="lg" onChange={(e) => { setuserPP(e.target.value); uploadPP(e);}} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-4" />
                 <div className="col-md-4">
                   <br />
-                  <Button style={{ backgroundColor: "#3C7479", width: "13rem" }}>Change Profile Photo</Button>
+                  <Button style={{ backgroundColor: "#3C7479", width: "13rem" }} onClick ={putUserPP}>Change Profile Photo</Button>
                 </div>
               </div>
               <br />

@@ -809,7 +809,7 @@ export default function ApplicationFormEditY() {
                     label="Fall"
                     name="group1"
                     value = "Fall"
-                    onClick={(e)=> {setSelectedSemester(e.target.value); console.log(e.target.value)}}
+                    onClick={(e)=> {setSelectedSemester(e.target.value); }}
                     type='radio'
                     id={`inline-radio-1`}
                     className="ms-1"
