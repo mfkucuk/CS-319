@@ -54,6 +54,7 @@ export default function CourseEquivalenceRequestY() {
       });
   }
 
+
   let navigate = useNavigate();
   function clickBack() {
     navigate("/courseRegistration");
