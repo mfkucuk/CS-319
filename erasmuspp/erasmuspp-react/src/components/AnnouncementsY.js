@@ -55,6 +55,10 @@ export default function AnnouncementsY() {
       setAddAnnouncementHidden(false);
     }
 
+    if(userRole == "ROLE_ADMIN"){
+      setAddAnnouncementHidden(false);
+    }
+
   }
 
   let navigate = useNavigate();
