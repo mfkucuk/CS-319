@@ -60,7 +60,6 @@ export default function CourseEquivalenceRequestY() {
     navigate("/courseRegistration");
   }
 
-  let navigate = useNavigate();
   function clickBack() {
     navigate("/courseRegistration");
   }

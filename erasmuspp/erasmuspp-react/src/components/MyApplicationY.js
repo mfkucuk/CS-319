@@ -17,6 +17,14 @@ export default function MyApplicationY() {
   const [appForm, setAppForm] = useState("");
   const [appFormB64, setappFormB64] = useState("");
 
+  const[external, setExternal] = useState("");
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setExternal(res.data[2].content));
+  }, [external])
+
+
   let navigate = useNavigate();
   function handleClickEditApplicationForm() {
     navigate("/editApplicationForm");
@@ -74,9 +82,9 @@ export default function MyApplicationY() {
       });
   }
 
-  const downloadSop =() => {
+  const downloadExternal =() => {
     const downloadLink = document.createElement("a");
-    downloadLink.href = sopB64;
+    downloadLink.href = external;
     downloadLink.download = "Fill Application Form";
     downloadLink.click();
   }
@@ -174,7 +182,7 @@ export default function MyApplicationY() {
               <Form.Control type="file" size="lg" value = {appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }}/>
             </Form.Group>
             <div className='pt-2'>
-              <Button onClick = {downloadSop} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
+              <Button onClick = {downloadExternal} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 Fill Application Form
               </Button>
             </div>
@@ -199,7 +207,7 @@ export default function MyApplicationY() {
             </div>
             <br /><br /><br />
             <div className='pt-2'>
-              <Button style={{ backgroundColor: "#3C7479" }} onClick ={uploadAppFormFinal}>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick ={downloadExternal}>
                 Upload
               </Button>
             </div>
