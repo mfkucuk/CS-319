@@ -60,10 +60,6 @@ export default function CourseEquivalenceRequestY() {
     navigate("/courseRegistration");
   }
 
-  function clickBack() {
-    navigate("/courseRegistration");
-  }
-
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />

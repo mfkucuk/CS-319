@@ -42,7 +42,7 @@ public class User
                 @JsonProperty("dob") String dob,
                 @JsonProperty("nationality") String nationality,
                 @JsonProperty("email") String email,
-                @JsonProperty("bilkentID") String bilkentID,
+                @JsonProperty("bilkentId") String bilkentID,
                 @JsonProperty("department") String department,
                 @JsonProperty("gpa") String gpa,
                 @JsonProperty("personalEmail") String personalEmail,

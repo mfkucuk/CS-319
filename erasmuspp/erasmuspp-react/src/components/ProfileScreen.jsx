@@ -24,14 +24,15 @@ export default function ProfileScreen() {
   const [userImageSrc, setUserImageSrc] = useState("");
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserFirstNameInit(res.data[0].title));
-  }, [userFirstNameInit])
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+      .then((res) => {setUserFirstNameInit(res.data.firstName); setUserAboutMeInit(res.data.aboutMe);}
+            )
+  }, [userFirstNameInit] [userAboutMeInit])
 
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserLastNameInit(res.data[0].title));
-  }, [userLastNameInit])
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+  //     .then(res => setUserLastNameInit(res.data.lastName))
+  // }, [userLastNameInit])
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts")
@@ -48,10 +49,10 @@ export default function ProfileScreen() {
       .then(res => setUserDoBInit(res.data[3].title));
   }, [userDoBInit])
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/announcement/")
-      .then(res => setUserAboutMeInit(res.data[0].content));
-  }, [userAboutMeInit])
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/v1/announcement/")
+  //     .then(res => setUserAboutMeInit(res.data[0].content));
+  // }, [userAboutMeInit])
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/photos")
@@ -99,12 +100,12 @@ export default function ProfileScreen() {
   const putUserAboutMe = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8080/api/v1/user/changeMobilePhoneNo/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
-          aboutMe: userAboutMe
-        })
+      .put("http://localhost:8080/api/v1/user/changeAboutMe/token=" + window.localStorage.getItem("USER_TOKEN"),
+        
+          userAboutMe
+        )
       .then((res) => {
-        if (res.data === true) {
+        if (res.data === 1) {
           alert("About me updated successfully.");
         }
         else {
