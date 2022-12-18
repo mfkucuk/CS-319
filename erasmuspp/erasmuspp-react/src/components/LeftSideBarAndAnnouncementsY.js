@@ -14,11 +14,10 @@ export default function LeftSideBarAndAnnouncements(){
   const [userName, setuserName] = useState("");
   const [userRole, setuserRole] = useState("");
 
-  const [myAppsHidden, setMyAppsHidden] = useState(false);
-  const [toDoListHidden, setToDoListHidden] = useState(false);
-  const [registerCandidateHidden, setRegisterCandidateHidden] = useState(false);
-  const [studentsListHidden, setStudentsListHidden] = useState(false);
-  const [addAnnouncement, setAddAnnouncement] = useState(false);
+  const [myAppsHidden, setMyAppsHidden] = useState(true);
+  const [toDoListHidden, setToDoListHidden] = useState(true);
+  const [registerCandidateHidden, setRegisterCandidateHidden] = useState(true);
+  const [studentsListHidden, setStudentsListHidden] = useState(true);
   
   
   useEffect(() => {
@@ -39,16 +38,24 @@ export default function LeftSideBarAndAnnouncements(){
     // 👇️ only runs once
     console.log(userRole);
     setButtons();
-  }, []);
+  });
 
-  let coordinatorOutput;
 
   function setButtons(){
     if(userRole == "ROLE_CANDIDATE"){
-      setToDoListHidden(true);
-      setRegisterCandidateHidden(true);
-      setStudentsListHidden(true);
+      setMyAppsHidden(false);
     }
+
+    if(userRole == "ROLE_COORDINATOR"){
+      setToDoListHidden(false);
+      setStudentsListHidden(false);
+    }
+
+    if(userRole == "ROLE_ADMIN"){
+      setRegisterCandidateHidden(false);
+      setStudentsListHidden(false);
+    }
+
   }
 
   let navigate = useNavigate();
