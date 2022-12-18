@@ -33,6 +33,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping(path = "candidates")
+    public List<User> getAllCandidates()
+    {
+        return userService.getAllCandidates();
+    }
+
     @GetMapping(path = "department")
     public List<String> getAllDepartmets() {
         return userService.getAllDepartments();
