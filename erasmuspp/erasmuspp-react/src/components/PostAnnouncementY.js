@@ -118,11 +118,11 @@ export default function PostAnnouncementY() {
             <Form>
               <Form.Group className="mb-3" controlId="postAnnouncementTitle">
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type='text' placeholder={announcementTitleInit} />
+                <Form.Control type='text' placeholder={announcementTitleInit} onChange={(e) => setAnnouncementTitle(e.target.value)}/>
               </Form.Group>
               <Form.Group className="mb-3" controlId="postAnnouncementDescription">
                 <Form.Label>Announcement Description:</Form.Label>
-                <Form.Control as="textarea" rows={3} placeholder={announcementDescriptionInit} />
+                <Form.Control as="textarea" rows={3} placeholder={announcementDescriptionInit} onChange={(e) => setAnnouncementDescription(e.target.value)}/>
               </Form.Group>
             </Form>
           </div>
@@ -208,7 +208,7 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br /><br />
-            <Button onClick={postAnnouncementTitle} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
+            <Button onClick={(e) => { postAnnouncementTitle(e); postAnnouncementDescription(e);}} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
           </div>
         </div>
       </div>
