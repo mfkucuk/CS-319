@@ -13,9 +13,9 @@ export default function MyApplicationsN() {
 
 
     const [myApplications, setmyAnnouncements] = useState([]);
-
+    let preapproval, equivalance;
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"))
       .then(res => {
         setmyAnnouncements(res.data);
       })
@@ -84,11 +84,17 @@ export default function MyApplicationsN() {
                                     style={{ width: '18rem', background: "#EB9181", margin: 'auto', alignItems: 'center' }}
                                     className="mb-2"
                                 >
-                                    <Card.Header>{attributes.id}</Card.Header>
+                                    <Card.Header>Application for {attributes.choices[0]}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>{attributes.title} Card Title </Card.Title>
+                                        <Card.Text>Semester: {attributes.semester}</Card.Text>
                                         <Card.Text>
-                                            {attributes.body}
+                                            Stage: {attributes.stage} 
+                                        </Card.Text> 
+                                        <Card.Text> 
+                                            Preapproval Approved: {attributes.ispreapprovalapproved ? 'Yes' : 'No'}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Equivalance Approved: {attributes.isequivalanceapproved ? 'Yes' : 'No'} 
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{

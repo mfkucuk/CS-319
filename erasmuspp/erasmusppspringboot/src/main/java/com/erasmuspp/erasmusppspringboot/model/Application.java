@@ -7,38 +7,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Application
 {
     private final UUID id;
-    private String[] applicationFiles;
     private String semester;
+    private String userId;
     private int stage;
     private boolean isEquivalanceApproved;
     private boolean isPreApprovalApproved;
     private String[] universityChoices;
 
     public Application(@JsonProperty("id") UUID id,
-                       @JsonProperty("files") String[] applicationFiles,
                        @JsonProperty("semester") String semester,
-                       @JsonProperty("stage") int stage,
-                       @JsonProperty("equivalance") boolean isEquivalanceApproved,
-                       @JsonProperty("preapproval") boolean isPreApprovalApproved,
                        @JsonProperty("choices") String[] universityChocies)
                        
     {
         this.id = id;
-        this.applicationFiles = applicationFiles;
+        this.userId = "";
+        this.semester = semester;
+        this.stage = 0;
+        this.isEquivalanceApproved = false;
+        this.isPreApprovalApproved = false;
+        this.universityChoices = universityChocies;
+    }
+
+    public Application(UUID id, String userId, String semester, int stage, boolean isEquivalanceApproved, boolean isPreApprovalApproved, String[] universityChoices)
+    {
+        this.id = id;
+        this.userId = userId;
         this.semester = semester;
         this.stage = stage;
         this.isEquivalanceApproved = isEquivalanceApproved;
         this.isPreApprovalApproved = isPreApprovalApproved;
-        this.universityChoices = universityChocies;
+        this.universityChoices = universityChoices;
     }
 
 
-    public void setApplicationFiles(String[] applicationFiles)
-    {
-        this.applicationFiles = applicationFiles;
-        applicationFiles = new String[5]; 
-        universityChoices = new String[3];
-    }
 
     public void setSemester(String semester)
     {
@@ -48,6 +49,11 @@ public class Application
     public void setStage(int stage)
     {
         this.stage = stage;
+    }
+
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
     }
 
     public void setEquivalanceApproved(boolean bool)
@@ -70,14 +76,14 @@ public class Application
         return id;
     }
 
-    public String[] getFiles()
-    {
-        return applicationFiles;
-    }
-
     public String getSemester()
     {
         return semester;
+    }
+
+    public String getUserId()
+    {
+        return userId;
     }
 
     public int getStage()
@@ -99,5 +105,4 @@ public class Application
     {
         return universityChoices;
     }
-
 }

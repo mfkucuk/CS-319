@@ -8,13 +8,15 @@ import com.erasmuspp.erasmusppspringboot.model.Application;
 
 public interface ApplicationDao 
 {
-    int insertApplication(UUID id, Application application);
+    int insertApplication(UUID id, Application application, String token);
 
-    default int insertApplication(Application application)
+    default int insertApplication(Application application, String token)
     {
         UUID id = UUID.randomUUID();
-        return insertApplication(id, application);
+        return insertApplication(id, application, token);
     }
+
+    List<Application> selectApplicationsByToken(String token);
 
     List<Application> selectAllApplications();
 
