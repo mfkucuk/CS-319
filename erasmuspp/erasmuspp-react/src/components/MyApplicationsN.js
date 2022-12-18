@@ -31,6 +31,10 @@ export default function MyApplicationsN() {
         window.localStorage.setItem("LAST_APPLICATION", id);
         navigate("/myApplication");
     }
+    function newApplication(){
+
+        navigate("/editApplicationForm");
+    }
 
     function clickBack(){
         navigate("/main");
@@ -100,13 +104,14 @@ export default function MyApplicationsN() {
                                 </Card>
 
                             ))}
-                            <div class="col text-center">
-                                <Button>
-                                    Apply
-                                </Button>
-                            </div>
 
                         </Form>
+                        <br></br>
+                        <div class="col text-center">
+                                <Button onClick= {newApplication}>
+                                    New Application
+                                </Button>
+                            </div>
                     </div>
                     <div class="col-md-2">
 

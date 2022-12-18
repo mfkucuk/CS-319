@@ -188,16 +188,7 @@ export default function MyApplicationY() {
               <Form.Label style={{ color: '#f4eff2' }}>Upload Application Form</Form.Label>
               <Form.Control type="file" size="lg" value = {appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }}/>
             </Form.Group>
-            <div className='pt-2'>
-              <Button onClick = {downloadExternal} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
-                Fill Application Form
-              </Button>
-            </div>
-            <div className='pt-2'>
-              <Button onClick={handleClickViewApplicationForm} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
-                View Application Form
-              </Button>
-            </div>
+        
           </div>
           <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
             <br />
