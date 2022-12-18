@@ -15,13 +15,20 @@ public class Application
     private String[] universityChoices;
 
     public Application(@JsonProperty("id") UUID id,
-                        @JsonProperty("userId") String userId,
                        @JsonProperty("semester") String semester,
-                       @JsonProperty("stage") int stage,
-                       @JsonProperty("equivalance") boolean isEquivalanceApproved,
-                       @JsonProperty("preapproval") boolean isPreApprovalApproved,
                        @JsonProperty("choices") String[] universityChocies)
                        
+    {
+        this.id = id;
+        this.userId = "";
+        this.semester = semester;
+        this.stage = 0;
+        this.isEquivalanceApproved = false;
+        this.isPreApprovalApproved = false;
+        this.universityChoices = universityChocies;
+    }
+
+    public Application(UUID id, String userId, String semester, int stage, boolean isEquivalanceApproved, boolean isPreApprovalApproved, String[] universityChoices)
     {
         this.id = id;
         this.userId = userId;
@@ -29,8 +36,9 @@ public class Application
         this.stage = stage;
         this.isEquivalanceApproved = isEquivalanceApproved;
         this.isPreApprovalApproved = isPreApprovalApproved;
-        this.universityChoices = universityChocies;
+        this.universityChoices = universityChoices;
     }
+
 
 
     public void setSemester(String semester)

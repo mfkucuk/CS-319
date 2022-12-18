@@ -13,7 +13,7 @@ export default function MyApplicationsN() {
 
 
     const [myApplications, setmyAnnouncements] = useState([]);
-
+    let preapproval, equivalance;
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"))
       .then(res => {
@@ -30,6 +30,10 @@ export default function MyApplicationsN() {
     const handleClickMyApplication = (id) => {
         window.localStorage.setItem("LAST_APPLICATION", id);
         navigate("/myApplication");
+    }
+    function newApplication(){
+
+        navigate("/editApplicationForm");
     }
 
     function clickBack(){
@@ -80,11 +84,17 @@ export default function MyApplicationsN() {
                                     style={{ width: '18rem', background: "#EB9181", margin: 'auto', alignItems: 'center' }}
                                     className="mb-2"
                                 >
-                                    <Card.Header>{attributes.id}</Card.Header>
+                                    <Card.Header>Application for {attributes.choices[0]}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>{attributes.title} Card Title </Card.Title>
+                                        <Card.Text>Semester: {attributes.semester}</Card.Text>
                                         <Card.Text>
-                                            {attributes.body}
+                                            Stage: {attributes.stage} 
+                                        </Card.Text> 
+                                        <Card.Text> 
+                                            Preapproval Approved: {attributes.ispreapprovalapproved ? 'Yes' : 'No'}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Equivalance Approved: {attributes.isequivalanceapproved ? 'Yes' : 'No'} 
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{
@@ -100,13 +110,14 @@ export default function MyApplicationsN() {
                                 </Card>
 
                             ))}
-                            <div class="col text-center">
-                                <Button>
-                                    Apply
-                                </Button>
-                            </div>
 
                         </Form>
+                        <br></br>
+                        <div class="col text-center">
+                                <Button onClick= {newApplication}>
+                                    New Application
+                                </Button>
+                            </div>
                     </div>
                     <div class="col-md-2">
 

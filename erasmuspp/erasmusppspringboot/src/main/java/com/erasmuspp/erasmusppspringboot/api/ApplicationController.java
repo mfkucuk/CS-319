@@ -32,10 +32,10 @@ public class ApplicationController
         this.applicationService = applicationService;
     }
 
-    @PostMapping
-    public void addApplication( @Valid @RequestBody Application application)
+    @PostMapping(path="token={token}")
+    public void addApplication( @Valid @RequestBody @PathVariable("token") String token, Application application)
     {
-        applicationService.addApplication(application);
+        applicationService.addApplication(application, token);
     }
 
     @GetMapping

@@ -36,7 +36,7 @@ function TopNavBar() {
           <Nav className="me-auto">
             <Nav.Link onClick={handleClick}>Home</Nav.Link>
             <NavDropdown title="Miscellaneous" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">How to Use Erasmus++</NavDropdown.Item>
+              <NavDropdown.Item href="https://drive.google.com/drive/folders/16VwM1YjW53XOtcHAYXdp8shglOiEr1YY?usp=share_link">How to Use Erasmus++</NavDropdown.Item>
               <NavDropdown.Item href="https://github.com/mfkucuk/CS-319">Project GitHub Repository</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://erasmuspp.mynotice.io/">
