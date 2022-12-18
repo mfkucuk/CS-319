@@ -22,9 +22,9 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@Valid @RequestBody User user)
+    public int addUser(@Valid @RequestBody User user)
     {
-        userService.addUser(user);
+        return userService.addUser(user);
     }
 
     @GetMapping()
