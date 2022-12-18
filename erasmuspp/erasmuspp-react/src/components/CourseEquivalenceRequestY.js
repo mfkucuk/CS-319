@@ -54,7 +54,16 @@ export default function CourseEquivalenceRequestY() {
       });
   }
 
+<<<<<<< HEAD
   let navigate = useNavigate();
+=======
+
+  let navigate = useNavigate();
+  function clickBack() {
+    navigate("/courseRegistration");
+  }
+
+>>>>>>> alp
   function clickBack() {
     navigate("/courseRegistration");
   }
