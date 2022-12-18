@@ -62,8 +62,7 @@ export default function ProfileScreen() {
   }
 
 
-  const putUserEmail = (e) => {
-    e.preventDefault();
+  const putUserEmail = () => {
     axios
       .put("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
         {
@@ -81,8 +80,7 @@ export default function ProfileScreen() {
       });
   };
 
-  const putUserMobilePhoneNo = (e) => {
-    e.preventDefault();
+  const putUserMobilePhoneNo = () => {
     axios
       .put("http://localhost:8080/api/v1/user/changeMobilePhoneNo/token=" + window.localStorage.getItem("USER_TOKEN"),
         {
