@@ -8,6 +8,10 @@ import { useEffect, useState } from 'react';
 
 export default function LearningAgreementN() {
 
+    const [LearningAgreementF, setLearningAgreementF] = useState("");
+    const [LearningAgreementFb64, setpreApprovalFb64] = useState("");
+
+
     let checked = false;
     let submissionSuccess = false;
     let navigate = useNavigate();
@@ -16,7 +20,15 @@ export default function LearningAgreementN() {
     }
 
     function clickPrint(){
-
+        fetch("ErasmusLearningAgreement.docx").then(response => {
+            response.blob().then(blob => {
+                const fileURL = window.URL.createObjectURL(blob);
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'Erasmus Learning Agreement.docx';
+                alink.click();
+            })
+        })
     }
 
     function clickUpload() {
