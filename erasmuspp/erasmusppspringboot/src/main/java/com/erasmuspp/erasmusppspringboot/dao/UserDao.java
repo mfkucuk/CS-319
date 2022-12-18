@@ -37,4 +37,6 @@ public interface UserDao {
     int updatePersonalEmailByToken(String token, String personalEmail);
 
     int updateMobilePhoneByToken(String token, String mobilePhone);
+
+    int updateProfilePhotoByToken(String token, String profilePhoto);
 }

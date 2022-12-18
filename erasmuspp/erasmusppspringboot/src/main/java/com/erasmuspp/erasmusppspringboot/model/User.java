@@ -36,6 +36,8 @@ public class User
 
     private String token;
 
+    private String profilePhoto;
+
     public User(@JsonProperty("id") UUID id,
                 @JsonProperty("firstName") String firstName,
                 @JsonProperty("lastName") String lastName,
@@ -50,7 +52,8 @@ public class User
                 @JsonProperty("aboutMe") String aboutMe,
                 @JsonProperty("password") String password,
                 @JsonProperty("role") String role,
-                @JsonProperty("token") String token)
+                @JsonProperty("token") String token,
+                @JsonProperty("profilePhoto") String profilePhoto)
                 {
                     this.id = id;
                     this.firstName = firstName;
@@ -67,6 +70,7 @@ public class User
                     this.password = password;
                     this.role = role;
                     this.token = token;
+                    this.profilePhoto = profilePhoto;
                 }
     public UUID getId()
     {
@@ -148,4 +152,7 @@ public class User
         aboutMe = newAboutMe;
     }
 
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
 }

@@ -83,4 +83,8 @@ public class UserController {
         return userService.updateMobilePhoneByToken(token, newMobilePhone);
     }
 
+    @PutMapping(path = "changeProfilePhoto/token={token}")
+    public int updateProfilePhotoByToken(@PathVariable("token") String token, @Valid @RequestBody String newProfilePhoto) {
+        return userService.updateProfilePhotoByToken(token, newProfilePhoto);
+    }
 }
