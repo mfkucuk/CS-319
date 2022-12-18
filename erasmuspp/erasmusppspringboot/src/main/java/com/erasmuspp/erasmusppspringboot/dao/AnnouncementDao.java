@@ -18,6 +18,8 @@ public interface AnnouncementDao
 
     List<Announcement> selectAllAnnouncements();
 
+    List<Announcement> selectFilteredAnnoucements(String token);
+
     Optional<Announcement> selectAnnouncementById(UUID id);
 
     int deleteAnnouncementById(UUID id);

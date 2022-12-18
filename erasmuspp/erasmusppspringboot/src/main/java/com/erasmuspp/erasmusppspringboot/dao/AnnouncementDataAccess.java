@@ -8,60 +8,97 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.Announcement;
+import com.erasmuspp.erasmusppspringboot.model.User;
+
+import lombok.RequiredArgsConstructor;
 
 @Repository("announcement")
+@RequiredArgsConstructor
 public class AnnouncementDataAccess implements AnnouncementDao
 {
    private final JdbcTemplate jdbcTemplate;
+   private final UserDataAccess userDataAccess;
    
-   public AnnouncementDataAccess(JdbcTemplate jdbcTemplate)
-   {
-    this.jdbcTemplate = jdbcTemplate;
-   }
-
    @Override
    public int insertAnnouncement(UUID id, Announcement announcement)
    {
-        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate)\nVALUES(?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] {id, announcement.getTitle(), announcement.getContent(), announcement.getPostDate(), announcement.getExpireDate()});
+        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate, filters)\nVALUES(?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] {
+            id, 
+            announcement.getTitle(), 
+            announcement.getContent(), 
+            announcement.getPostDate(), 
+            announcement.getExpireDate(),
+            announcement.getFilters()
+        });
    }
 
    @Override
    public List<Announcement> selectAllAnnouncements()
    {
-        final String sql = "SELECT id, title, content, postDate, expireDate FROM \"announcement\"";
+        final String sql = "SELECT * FROM \"announcement\"";
         List<Announcement> announcements = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID announcementId = UUID.fromString(resultSet.getString("id"));
             String title = resultSet.getString("title");
             String content = resultSet.getString("content");
             String postDate = resultSet.getString("postDate");
             String expireDate = resultSet.getString("expireDate");
+            String[] filters = (String[]) resultSet.getArray("filters").getArray();
             return new Announcement(
                 announcementId,
                 title,
                 content,
                 postDate,
-                expireDate
+                expireDate,
+                filters
             );
         });
         return announcements; 
    }
 
+   @Override
+   public List<Announcement> selectFilteredAnnoucements(String token)
+   {
+        final String sql = "SELECT * FROM \"announcement\"";
+        List<Announcement> announcements = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID announcementId = UUID.fromString(resultSet.getString("id"));
+            String title = resultSet.getString("title");
+            String content = resultSet.getString("content");
+            String postDate = resultSet.getString("postDate");
+            String expireDate = resultSet.getString("expireDate");
+            String[] filters = (String[]) resultSet.getArray("filters").getArray();
+            return new Announcement(
+                announcementId,
+                title,
+                content,
+                postDate,
+                expireDate,
+                filters
+            );
+        });
+
+        filter(announcements, token);
+
+        return announcements; 
+   }
+
     @Override
     public Optional<Announcement> selectAnnouncementById(UUID id) {
-            final String sql = "SELECT id, title, content, postDate, expireDate FROM \"announcement\" WHERE id = ?";
+            final String sql = "SELECT * FROM \"announcement\" WHERE id = ?";
             Announcement announcement = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
                 UUID announcementId = UUID.fromString(resultSet.getString("id"));
                 String title = resultSet.getString("title");
                 String content = resultSet.getString("content");
                 String postDate = resultSet.getString("postDate");
                 String expireDate = resultSet.getString("expireDate");
+                String[] filters = (String[]) resultSet.getArray("filters").getArray();
                 return new Announcement(
                     announcementId,
                     title,
                     content,
                     postDate,
-                    expireDate
+                    expireDate,
+                    filters
                 );
             }, new Object[] {id});
             return Optional.ofNullable(announcement); 
@@ -77,4 +114,44 @@ public class AnnouncementDataAccess implements AnnouncementDao
     public int updateAnnouncementById(UUID id, Announcement announcement) {
         return 0;
     }
+
+    private void filter(List<Announcement> announcements, String token) {
+        User user = userDataAccess.selectUserByToken(token).orElse(null);
+
+        // Filter by department
+        for (Announcement announcement : announcements) {
+            if (!user.getDepartment().equals(announcement.getFilters()[0])) {
+                announcements.remove(announcement);
+            }
+        }
+
+        // Filter by country
+        // for (Announcement announcement : announcements) {
+        //     if (!user.getCountry().equals(announcement.getFilters()[1])) {
+        //         announcements.remove(announcement);
+        //     }
+        // }
+
+        // Filter by semester
+        // for (Announcement announcement : announcements) {
+        //     if (!user.getSemester().equals(announcement.getFilters()[2])) {
+        //         announcements.remove(announcement);
+        //     }
+        // }
+
+        // Filter by university
+        // for (Announcement announcement : announcements) {
+        //     if (!user.getUniversity().equals(announcement.getFilters()[3])) {
+        //         announcements.remove(announcement);
+        //     }
+        // }
+
+        // Filter by bilkent ID
+        for (Announcement announcement : announcements) {
+            if (!user.getBilkentId().equals(announcement.getFilters()[4])) {
+                announcements.remove(announcement);
+            }
+        }
+    }
+
 }
