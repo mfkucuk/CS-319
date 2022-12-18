@@ -38,8 +38,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     
     @Override
     public int insertUser(UUID id, User user) {    
-        final String sql = "INSERT INTO \"user\"\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, user.getFirstName(), user.getLastName(), user.getDob(), user.getNationality(), user.getEmail(), user.getBilkentId(), user.getDepartment(), user.getGpa(), user.getPersonalEmail(), user.getMobilePhone(), user.getAboutMe(), user.getPassword(), user.getRole(), user.getToken() });
+        final String sql = "INSERT INTO \"user\"\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, user.getFirstName(), user.getLastName(), user.getDob(), user.getNationality(), user.getEmail(), user.getBilkentId(), user.getDepartment(), user.getGpa(), user.getPersonalEmail(), user.getMobilePhone(), user.getAboutMe(), user.getPassword(), user.getRole(), user.getToken(), user.getProfilePhoto() });
     }
 
     @Override
@@ -62,6 +62,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
+            String profilePhoto = resultSet.getString("profilePhoto");
             return new User(
                 userId,
                 firstName,
@@ -77,7 +78,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
                 aboutMe,
                 password,
                 role,
-                token
+                token,
+                profilePhoto
             );
         });
         return users; 
@@ -102,6 +104,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
+            String profilePhoto = resultSet.getString("profilePhoto");
             return new User(
                 userId,
                 firstName,
@@ -117,7 +120,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
                 aboutMe,
                 password,
                 role,
-                token
+                token,
+                profilePhoto
             );
         }, new Object[] {id});
         return Optional.ofNullable(user);
@@ -142,6 +146,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
+            String profilePhoto = resultSet.getString("profilePhoto");
             return new User(
                 userId,
                 firstName,
@@ -157,7 +162,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
                 aboutMe,
                 password,
                 role,
-                token
+                token,
+                profilePhoto
             );
         }, new Object[] {emailQuery});
         return Optional.ofNullable(user);
@@ -200,6 +206,7 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String token = resultSet.getString("token");
+            String profilePhoto = resultSet.getString("profilePhoto");
             return new User(
                 userId,
                 firstName,
@@ -215,7 +222,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
                 aboutMe,
                 password,
                 role,
-                token
+                token,
+                profilePhoto
             );
         }, new Object[] {tokenQuery});
         return Optional.ofNullable(user);
@@ -249,5 +257,11 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     public int updateMobilePhoneByToken(String token, String newMobilePhone) {
         final String sql = "UPDATE \"user\" SET \"mobilePhone\" = ? WHERE \"token\" = ?";
         return jdbcTemplate.update(sql, newMobilePhone, token);
+    }
+
+    @Override
+    public int updateProfilePhotoByToken(String token, String newProfilePhoto) {
+        final String sql = "UPDATE \"user\" SET \"profilePhoto\" = ? WHERE \"token\" = ?";
+        return jdbcTemplate.update(sql, newProfilePhoto, token);
     }
 }

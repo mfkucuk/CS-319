@@ -72,4 +72,8 @@ public class UserService {
     public int updateMobilePhoneByToken(String token, String mobilePhone) {
         return userDao.updateMobilePhoneByToken(token, mobilePhone);
     }
+
+    public int updateProfilePhotoByToken(String token, String profilePhoto) {
+        return userDao.updateProfilePhotoByToken(token, profilePhoto);
+    }
 }

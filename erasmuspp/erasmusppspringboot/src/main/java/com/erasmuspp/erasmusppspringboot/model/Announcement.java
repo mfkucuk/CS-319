@@ -39,10 +39,12 @@ public class Announcement
     {
         return title;
     }
+
     public String getContent()
     {
         return content;
     }
+    
     public String getPostDate()
     {
         return postDate;
