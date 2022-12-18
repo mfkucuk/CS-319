@@ -8,8 +8,18 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function CoordinatorPreApprovalFormN() {
-    const [preApprovalF, setpreApprovalF] = useState("");
+  
     const [preApprovalFb64, setpreApprovalFb64] = useState("");
+    useEffect(() => {
+      axios.get("http://localhost:8080/api/v1/announcement/")
+        .then(res => {
+          setpreApprovalFb64(res.data);
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+  
+    }, [preApprovalFb64])
   
     let checked = false;
     let submissionSuccess = false;
@@ -18,58 +28,12 @@ export default function CoordinatorPreApprovalFormN() {
         navigate("/toDoList");
     }
 
-    const uploadpreApprovalF = async (e) => {
-        const preApprovalF = e.target.files[0];
-    
-        setpreApprovalFb64(await toB64(preApprovalF));
-      };
-    
-      const toB64 = (file) => {
-        return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file);
-          fileReader.onload = () => {
-            resolve(fileReader.result);
-          };
-          fileReader.onerror = (error) => {
-            reject(error);
-          };
-        })
-      }
-    
-      const uploadPreApprovalFinal = () => {
-        console.log(preApprovalFb64);
-        axios
-          .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
-            { 
-              preApprovalForm: preApprovalFb64
-            } 
-            )
-          .then((res) => {
-            if (res.data.status === true) {
-              alert("Pre Approval Form Uploaded Successfully")
-            }
-            else {
-              alert("Pre Approval Form Failed to Upload")
-            }
-          }).catch((err)=> {
-    
-            alert("Pre Approval Form Failed to Upload")
-          });
-      }
 
-
-    const clickPrint = () =>{
-        fetch("PreApprovalForm.docx").then(response => {
-            response.blob().then(blob => {
-                const fileURL = window.URL.createObjectURL(blob);
-                let alink = document.createElement('a');
-                alink.href = fileURL;
-                alink.download = 'Pre Approval Form.docx';
-                alink.click();
-            })
-        })
-    
+    const downloadPreApproval = () => {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = preApprovalFb64;
+      downloadLink.download = "Fill Application Form";
+      downloadLink.click();
     }
 
 
@@ -98,14 +62,14 @@ export default function CoordinatorPreApprovalFormN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Download Pre-Approval Form </header>
                     <br></br>
-                    <img id="printImage" src={Image} onClick ={clickPrint} style={{cursor: 'pointer'}}></img>
+                    <img id="printImage" src={Image} onClick ={downloadPreApproval} style={{cursor: 'pointer'}}></img>
                     <br></br><br></br>
                    
                     <br></br><br></br><br></br>
-                    <Button onClick={uploadPreApprovalFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
                         Approve
                     </Button>
-                    <Button onClick={uploadPreApprovalFinal} style={{ margin:'1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                    <Button style={{ margin:'1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
                         Disapprove
                     </Button>
                 </div>
