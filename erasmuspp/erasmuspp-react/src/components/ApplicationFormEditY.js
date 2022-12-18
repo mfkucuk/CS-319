@@ -184,7 +184,7 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>1.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 1" onChange={(e) => setUni1(e.target.value)}>
+              <Form.Select aria-label="University Selection 1" onChange={(e) => {setUni1(e.target.value); console.log(e.target.value)}}>
                 <option>Select</option>
                 <option value="Aberystwyth University">Aberystwyth University</option>
                 <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>
@@ -809,7 +809,7 @@ export default function ApplicationFormEditY() {
                     label="Fall"
                     name="group1"
                     value = "Fall"
-                    onClick={(e)=>setSelectedSemester(e.target.value)}
+                    onClick={(e)=> {setSelectedSemester(e.target.value); console.log(e.target.value)}}
                     type='radio'
                     id={`inline-radio-1`}
                     className="ms-1"

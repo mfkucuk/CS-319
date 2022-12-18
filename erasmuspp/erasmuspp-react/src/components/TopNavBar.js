@@ -9,12 +9,15 @@ function TopNavBar() {
 
   let navigate = useNavigate();
   function handleClick() {
+    
     navigate("/main");
   }
 
   function clickLogOut() {
     let text = "Are you sure you want to log out?";
     if (window.confirm(text)) {
+      window.localStorage.setItem("USER_TOKEN","");
+      window.localStorage.setItem("LAST_APPLICATION","");
       navigate("/login");
     }
   }

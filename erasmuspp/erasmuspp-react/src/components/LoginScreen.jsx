@@ -30,9 +30,10 @@ export default function LoginScreen() {
           navigate("/main");
         }
         else {
+          alert("E-Mail/Password do not match")
           console.log(res.data.status);
         }
-      });
+      }).catch(err=> alert("Server Error! Try again later."));
   };
 
   function handleClickForgotPassword() {
