@@ -23,9 +23,11 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public int insertApplication(UUID id, Application application, String token) {
+        System.out.println(application.getChoice1());
+        System.out.println(application.getSemester());
         User user = userDataAccess.selectUserByToken(token).get();
-        final String sql = "INSERT INTO \"application\" (id, semester, stage, isequivalance, ispreapprovalapproved, universitychoices, userid)\nVALUES(?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), application.getEquivalanceApproved(), application.getPreApprovalApproved(), application.getChoices(), user.getId()});
+        final String sql = "INSERT INTO \"application\" (id, semester, stage, isequivalanceapproved, ispreapprovalapproved, userid, choice1, choice2, choice3, choice4, choice5)\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), application.getStage(), application.getEquivalanceApproved(), application.getPreApprovalApproved(), user.getId(), application.getChoice1(), application.getChoice2(), application.getChoice3(), application.getChoice4(), application.getChoice5()});
     }
 
     @Override
@@ -56,7 +58,11 @@ public class ApplicationDataAccess implements ApplicationDao
             int stage = resultSet.getInt("stage");
             boolean equivalance = resultSet.getBoolean("isequivalanceapproved");
             boolean preapproval = resultSet.getBoolean("ispreapprovalapproved");
-            String[] choices = (String[]) resultSet.getArray("universitychoices").getArray();
+            String choice1 = resultSet.getString("choice1");
+            String choice2 = resultSet.getString("choice2");
+            String choice3 = resultSet.getString("choice3");
+            String choice4 = resultSet.getString("choice4");
+            String choice5 = resultSet.getString("choice5");
             return new Application(
                 applicationId,
                 userId,
@@ -64,7 +70,11 @@ public class ApplicationDataAccess implements ApplicationDao
                 stage,
                 equivalance,
                 preapproval,
-                choices
+                choice1,
+                choice2,
+                choice3,
+                choice4,
+                choice5
             );
         });
 
