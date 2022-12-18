@@ -46,9 +46,9 @@ export default function AnnouncementsY() {
         <AnnouncementCardBreakY/>
         {announcements.map(announcement => (
           <Col md={{ span: 10, offset: 1 }}>
-            <Card style={{backgroundColor: "#F4EFF2"}}>
+            <Card style={{backgroundColor: "#F4EFF2", width: "65rem"}}>
               <Card.Body>
-                <Card.Title >{announcement.title}</Card.Title>
+                <Card.Title>{announcement.title}</Card.Title>
                 <Card.Text>
                   {announcement.body}
                 </Card.Text>

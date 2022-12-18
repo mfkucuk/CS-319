@@ -1,12 +1,93 @@
 import Form from 'react-bootstrap/Form';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function PostAnnouncementY() {
+
+  const [departmentNameInit, setDepartmentNameInit] = useState([]);
+  const [countryInit, setCountryInit] = useState([]);
+  const [erasmusSemesterInit, setErasmusSemesterInit] = useState([]);
+  const [universityInit, setUniversityInit] = useState([]);
+
+
+  const [announcementTitle, setAnnouncementTitle] = useState("");
+  const [announcementTitleInit, setAnnouncementTitleInit] = useState("");
+  const [announcementDescription, setAnnouncementDescription] = useState("");
+  const [announcementDescriptionInit, setAnnouncementDescriptionInit] = useState("");
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setDepartmentNameInit(res.data));
+  }, [departmentNameInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setCountryInit(res.data));
+  }, [countryInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setErasmusSemesterInit(res.data));
+  }, [erasmusSemesterInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setAnnouncementTitleInit(res.data[0].title));
+  }, [announcementTitleInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setAnnouncementDescriptionInit(res.data[1].title));
+  }, [announcementDescriptionInit])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setUniversityInit(res.data));
+  }, [universityInit])
+
+  const postAnnouncementTitle = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          title: announcementTitle
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Email updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
+  const postAnnouncementDescription = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          content: announcementDescription
+        })
+      .then((res) => {
+        if (res.data === true) {
+          alert("Email updated successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
+
 
   let navigate = useNavigate();
   function clickBack() {
@@ -37,11 +118,11 @@ export default function PostAnnouncementY() {
             <Form>
               <Form.Group className="mb-3" controlId="postAnnouncementTitle">
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type='text' placeholder="Announcement Title" />
+                <Form.Control type='text' placeholder={announcementTitleInit} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="postAnnouncementDescription">
                 <Form.Label>Announcement Description:</Form.Label>
-                <Form.Control as="textarea" rows={3} placeholder="Type announcement details here" />
+                <Form.Control as="textarea" rows={3} placeholder={announcementDescriptionInit} />
               </Form.Group>
             </Form>
           </div>
@@ -76,30 +157,38 @@ export default function PostAnnouncementY() {
             <br /><br />
             <Form.Select aria-label="Department Select">
               <option>Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {
+              departmentNameInit
+              .map((variant) => (
+              <option>{variant.title}</option>
+              ))}
             </Form.Select>
             <br />
             <Form.Select aria-label="Country Select">
               <option>Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {
+              countryInit
+              .map((variant) => (
+              <option>{variant.title}</option>
+              ))}
             </Form.Select>
             <br /><br />
             <Form.Select aria-label="Erasmus Semester Select">
               <option>Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {
+              erasmusSemesterInit
+              .map((variant) => (
+              <option>{variant.title}</option>
+              ))}
             </Form.Select>
             <br /><br />
-            <Form.Select aria-label="Erasmus Semester Select">
+            <Form.Select aria-label="University Select">
               <option>Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {
+              universityInit
+              .map((variant) => (
+              <option>{variant.title}</option>
+              ))}
             </Form.Select>
             <br /><br />
             <Form className="d-flex">
@@ -119,7 +208,7 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br /><br />
-            <Button style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
+            <Button onClick={postAnnouncementTitle} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
           </div>
         </div>
       </div>
