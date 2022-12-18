@@ -64,4 +64,16 @@ public class UserService {
     public int updateAboutMeByToken(String token, String aboutMe) {
         return userDao.updateAboutMeByToken(token, aboutMe);
     }
+
+    public int updatePersonalEmailByToken(String token, String personalEmail) {
+        return userDao.updatePersonalEmailByToken(token, personalEmail);
+    }
+
+    public int updateMobilePhoneByToken(String token, String mobilePhone) {
+        return userDao.updateMobilePhoneByToken(token, mobilePhone);
+    }
+
+    public int updateProfilePhotoByToken(String token, String profilePhoto) {
+        return userDao.updateProfilePhotoByToken(token, profilePhoto);
+    }
 }

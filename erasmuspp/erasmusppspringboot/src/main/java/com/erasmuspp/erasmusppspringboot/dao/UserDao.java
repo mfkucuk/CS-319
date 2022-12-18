@@ -33,4 +33,10 @@ public interface UserDao {
     int updatePasswordByToken(String token, String password);
 
     int updateAboutMeByToken(String token, String aboutMe);
+
+    int updatePersonalEmailByToken(String token, String personalEmail);
+
+    int updateMobilePhoneByToken(String token, String mobilePhone);
+
+    int updateProfilePhotoByToken(String token, String profilePhoto);
 }

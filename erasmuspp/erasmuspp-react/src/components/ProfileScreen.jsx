@@ -25,34 +25,15 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
-      .then((res) => {setUserFirstNameInit(res.data.firstName); setUserAboutMeInit(res.data.aboutMe);}
+      .then((res) => {setUserFirstNameInit(res.data.firstName); 
+                      setUserLastNameInit(res.data.lastName);
+                      setUserAboutMeInit(res.data.aboutMe);
+                      setUserEmailInit(res.data.email);
+                      setUserMobilePhoneNoInit(res.data.mobilePhone);
+                      setUserDoBInit(res.data.dob)}
             )
   }, [userFirstNameInit] [userAboutMeInit])
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
-  //     .then(res => setUserLastNameInit(res.data.lastName))
-  // }, [userLastNameInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserEmailInit(res.data[1].title));
-  }, [userEmailInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserMobilePhoneNoInit(res.data[2].title));
-  }, [userMobilePhoneNoInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setUserDoBInit(res.data[3].title));
-  }, [userDoBInit])
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/api/v1/announcement/")
-  //     .then(res => setUserAboutMeInit(res.data[0].content));
-  // }, [userAboutMeInit])
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/photos")
