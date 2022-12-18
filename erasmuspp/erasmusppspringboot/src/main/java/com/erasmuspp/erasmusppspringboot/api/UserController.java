@@ -72,4 +72,14 @@ public class UserController {
     public int updateAboutMeByToken(@PathVariable("token") String token, @Valid @RequestBody String newAboutMe) {
         return userService.updateAboutMeByToken(token, newAboutMe);
     }
+
+    @PutMapping(path = "changePersonalEmail/token={token}")
+    public int updatePersonalEmailByToken(@PathVariable("token") String token, @Valid @RequestBody String newPersonalEmail) {
+        return userService.updateAboutMeByToken(token, newPersonalEmail);
+    }
+
+    @PutMapping(path = "changeMobilePhone/token={token}")
+    public int updateMobilePhoneByToken(@PathVariable("token") String token, @Valid @RequestBody String newMobilePhone) {
+        return userService.updateAboutMeByToken(token, newMobilePhone);
+    }
 }
