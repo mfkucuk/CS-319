@@ -1,6 +1,5 @@
 import DefaultFooter from './DefaultFooter';
-import TopNavBar from './TopNavBar';
-import Button from 'react-bootstrap/esm/Button';import FormCheckLabel from 'react-bootstrap/esm/FormCheckLabel';
+import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPasswordN() {

@@ -25,9 +25,6 @@ export default function AnnouncementsModalPopUpY(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={handleClose}>
-            Additional button
-          </Button>
         </Modal.Footer>
       </Modal>
     </>

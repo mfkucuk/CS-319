@@ -1,8 +1,6 @@
-import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfoModalPopUpY from './SaveCandidateInfoModalPopUpY';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/esm/Button';

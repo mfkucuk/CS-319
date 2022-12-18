@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import UploadFileModalPopUpY from './UploadFileModalPopUp';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
