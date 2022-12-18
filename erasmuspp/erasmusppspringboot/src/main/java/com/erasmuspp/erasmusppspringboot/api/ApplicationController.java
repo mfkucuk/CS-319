@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.erasmuspp.erasmusppspringboot.model.Application;
@@ -38,7 +37,18 @@ public class ApplicationController
     public void addApplication(@PathVariable("token") String token, @Valid @RequestBody ApplicationPart part)
     {
         System.out.println("sa" + part.getChoice1());
-        Application application = new Application(UUID.fromString("9d77e231-7b7f-4f67-8da6-c696eb31f31e"), "", part.getSemester(), 0, false, false, part.getChoice1(), part.getChoice2(), part.getChoice3(), part.getChoice4(), part.getChoice5());
+        Application application = new Application(
+            UUID.fromString("9d77e231-7b7f-4f67-8da6-c696eb31f31e"), 
+            "", 
+            part.getSemester(), 
+            0, 
+            false, 
+            false, 
+            part.getChoice1(), 
+            part.getChoice2(), 
+            part.getChoice3(), 
+            part.getChoice4(), 
+            part.getChoice5());
         applicationService.addApplication(application, token);
     }
 
