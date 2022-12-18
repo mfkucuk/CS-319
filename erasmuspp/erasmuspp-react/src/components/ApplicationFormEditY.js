@@ -54,9 +54,12 @@ export default function ApplicationFormEditY() {
   function submitForm() {
 
     axios.post("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"), {
-    universityChoices: [
-      uni1, uni2, uni3, uni4, uni5
-    ],
+
+    choice1:  uni1,
+    choice2:  uni2,
+    choice3:  uni3,
+    choice4:  uni4,
+    choice5:  uni5,
     semester: selectedSemester
 
     })
