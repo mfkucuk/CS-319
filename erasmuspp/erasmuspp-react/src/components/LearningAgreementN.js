@@ -16,7 +16,15 @@ export default function LearningAgreementN() {
     }
 
     function clickPrint(){
-
+        fetch("ErasmusLearningAgreement.docx").then(response => {
+            response.blob().then(blob => {
+                const fileURL = window.URL.createObjectURL(blob);
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'Erasmus Learning Agreement.docx';
+                alink.click();
+            })
+        })
     }
 
     function clickUpload() {

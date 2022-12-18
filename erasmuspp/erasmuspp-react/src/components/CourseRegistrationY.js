@@ -36,12 +36,19 @@ export default function CourseRegistrationY() {
     navigate("/courseEquivalenceRequest");
   }
 
+  function clickBack() {
+    navigate("/myApplications");
+  }
+
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
       <div class="container-fluid" >
         <div class="row">
-          <div class="col-md-2">
+        <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+            <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
+              Go Back
+            </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <h3 className="pt-4" style={{ color: "#f4eff2" }}>
