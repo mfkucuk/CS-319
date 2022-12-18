@@ -8,7 +8,13 @@ import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 export default function AnnouncementsY() {
+
+  const [userName, setuserName] = useState("");
+  const [userRole, setuserRole] = useState("");
+
   const [announcements, setAnnouncements] = useState([]);
+  const [addAnnouncementHidden, setAddAnnouncementHidden] = useState(true);
+
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"))
@@ -21,6 +27,35 @@ export default function AnnouncementsY() {
 
   }, [])
 
+  useEffect(() => {
+    var userToken = 
+    console.log(userToken);
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+         .then(res => setuserName(res.data.name));
+  }, [userName]) 
+
+  useEffect(() => {
+    var userToken = 
+    console.log(userToken);
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+         .then((res) => {setuserRole(res.data.role); })
+  }, [userRole] ) 
+
+  useEffect(() => {
+    // 👇️ only runs once
+    console.log(userRole);
+    setButtons();
+  });
+
+  function setButtons(){
+    if(userRole == "ROLE_CANDIDATE"){
+    }
+
+    if(userRole == "ROLE_COORDINATOR"){
+      setAddAnnouncementHidden(false);
+    }
+
+  }
 
   let navigate = useNavigate();
   function handleClick() {
@@ -34,7 +69,7 @@ export default function AnnouncementsY() {
           <Card.Title>
             <div style={{ display: "flex" }}>
             <h1>Announcements</h1>
-            <Button onClick={handleClick} style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
+            <Button className='ms-5' hidden={addAnnouncementHidden} onClick={handleClick} style={{ marginLeft: "auto", backgroundColor: "#3C7479" }}>
               Add New Announcement+
             </Button>
             </div>
