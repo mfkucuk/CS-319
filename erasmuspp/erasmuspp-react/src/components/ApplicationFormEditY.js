@@ -805,7 +805,8 @@ export default function ApplicationFormEditY() {
                     inline
                     label="Fall"
                     name="group1"
-                    onClick={setSelectedSemester("Fall")}
+                    value = "Fall"
+                    onClick={(e)=>setSelectedSemester(e.target.value)}
                     type='radio'
                     id={`inline-radio-1`}
                     className="ms-1"
@@ -814,7 +815,8 @@ export default function ApplicationFormEditY() {
                     inline
                     label="Spring"
                     name="group1"
-                    onClick={setSelectedSemester("Spring")}
+                    value = "Spring"
+                    onClick={(e)=>setSelectedSemester(e.target.value)}
                     type='radio'
                     id={`inline-radio-2`}
                   />
@@ -824,12 +826,12 @@ export default function ApplicationFormEditY() {
           </div>
         </div>
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2"> 
             <br /><br /><br /><br /><br /><br /><br />
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br /><br />
-            <Button style={{ backgroundColor: "#3C7479" }} onClick = {submitForm}>Submit</Button>
+            <Button style={{ backgroundColor: "#3C7479" }} onClick={submitForm}>Submit</Button>
           </div>
         </div>
       </div>
