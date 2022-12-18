@@ -4,8 +4,7 @@ import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export default function CourseEquivalenceRequestY() {

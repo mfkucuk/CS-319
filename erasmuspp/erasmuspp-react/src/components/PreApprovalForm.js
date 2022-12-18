@@ -4,8 +4,9 @@ import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 import Image from "./lastPrint.png";
 import Form from 'react-bootstrap/Form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+
 export default function PreApprovalFormN() {
     const [preApprovalF, setpreApprovalF] = useState("");
     const [preApprovalFb64, setpreApprovalFb64] = useState("");

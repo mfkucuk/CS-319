@@ -1,5 +1,3 @@
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
