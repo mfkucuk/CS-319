@@ -1,6 +1,7 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
 import java.util.UUID;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class AnnouncementDataAccess implements AnnouncementDao
    {
         User posterUser = userDataAccess.selectUserByToken(token).orElse(null);
         String poster = posterUser.getFirstName() + " " + posterUser.getLastName();
-        final String sql = "INSERT INTO \"announcement\" (id, title, content, postDate, expireDate, filters, poster)\nVALUES(?, ?, ?, ?, ?, ?, ?);";
+        final String sql = "INSERT INTO \"announcement\"\nVALUES(?, ?, ?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, new Object[] {
             id, 
             announcement.getTitle(), 
@@ -84,9 +85,9 @@ public class AnnouncementDataAccess implements AnnouncementDao
             );
         });
 
-        filter(announcements, token);
+        List<Announcement> result = filter(announcements, token);
 
-        return announcements; 
+        return result; 
    }
 
     @Override
@@ -124,13 +125,16 @@ public class AnnouncementDataAccess implements AnnouncementDao
         return 0;
     }
 
-    private void filter(List<Announcement> announcements, String token) {
+    private List<Announcement> filter(List<Announcement> announcements, String token) {
         User user = userDataAccess.selectUserByToken(token).orElse(null);
+        List<Announcement> result = new ArrayList<Announcement>();
 
         // Filter by department
         for (Announcement announcement : announcements) {
-            if (!user.getDepartment().equals(announcement.getFilters()[0])) {
-                announcements.remove(announcement);
+            if (user.getDepartment().equals(announcement.getFilters()[0])) {
+                if (!result.contains(announcement)) {
+                    result.add(announcement);
+                }
             }
         }
 
@@ -157,10 +161,14 @@ public class AnnouncementDataAccess implements AnnouncementDao
 
         // Filter by bilkent ID
         for (Announcement announcement : announcements) {
-            if (!user.getBilkentId().equals(announcement.getFilters()[4])) {
-                announcements.remove(announcement);
+            if (user.getBilkentId().equals(announcement.getFilters()[4])) {
+                if (!result.contains(announcement)) {
+                    result.add(announcement);
+                }
             }
         }
+
+        return result;
     }
 
 }

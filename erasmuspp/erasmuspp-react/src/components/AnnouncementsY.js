@@ -11,7 +11,7 @@ export default function AnnouncementsY() {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/announcement/")
+    axios.get("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"))
       .then(res => {
         setAnnouncements(res.data);
       })
