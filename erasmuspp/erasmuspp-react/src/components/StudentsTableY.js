@@ -1,24 +1,32 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfo from './SaveCandidateInfoModalPopUpY';
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
 
 
-export default function PostAnnouncementY(){
-  
+export default function PostAnnouncementY() {
+
+  const [candidateList, setCandidateList] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setCandidateList(res.data));
+  }, [candidateList])
+
   let navigate = useNavigate();
 
   function clickBack() {
     navigate("/main");
   }
 
-  return(
-    <div style={{backgroundColor: "#C7D6D2"}}>
-      <TopNavBar/>
+  return (
+    <div style={{ backgroundColor: "#C7D6D2" }}>
+      <TopNavBar />
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
@@ -28,67 +36,67 @@ export default function PostAnnouncementY(){
           </div>
           <div class="col-md-8">
             <div class="row">
-              <div class="col-md-12 text-center" style={{backgroundColor: "#1F8F8E"}}>
-                <br/><br/>
+              <div class="col-md-12 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+                <br /><br />
                 <h3 style={{ color: '#f4eff2' }}>Registered Students:</h3>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-1" style={{backgroundColor: "#1F8F8E"}}>
+              <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
               </div>
               <div class="col-md-10">
-                <br/>
+                <br />
                 <Table responsive striped bordered hover variant="#b6f1cf">
                   <thead>
                     <tr>
                       <th>#</th>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <th key={index}>Table heading</th>
-                      ))}
+                      <td>First Name</td>
+                      <td>Last Name</td>
+                      <td>Bilkent ID</td>
+                      <td>Bilkent Department</td>
+                      <td>E-mail Address</td>
+                      <td>Nationality</td>
+                      <td>Cumulative GPA</td>
+                      <td>Personal E-mail</td>
+                      <td>Mobile Phone</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                      ))}
-                    </tr>
+                    {Array.from({ length: candidateList.length }).map((_, index) => (
+                      <>
+                        <tr>
+                          <td key={index + 1}>
+                            {index + 1}
+                          </td>
+                          <td>{candidateList[index].firstName}</td>
+                          <td>{candidateList[index].lastName}</td>
+                          <td>{candidateList[index].bilkentID}</td>
+                          <td>{candidateList[index].department}</td>
+                          <td>{candidateList[index].email}</td>
+                          <td>{candidateList[index].nationality}</td>
+                          <td>{candidateList[index].gpa}</td>
+                          <td>{candidateList[index].personalEmail}</td>
+                          <td>{candidateList[index].mobilePhone}</td>
+                        </tr>
+                      </>
+                    ))}
                   </tbody>
                 </Table>
               </div>
-              <div class="col-md-1 text-center" style={{backgroundColor: "#1F8F8E"}}>
+              <div class="col-md-1 text-center" style={{ backgroundColor: "#1F8F8E" }}>
               </div>
             </div>
-              <div class="row">
-                <div class="col-md-12 text-center" style={{backgroundColor: "#1F8F8E"}}>
-                  <br/><br/><br/><br/><br/><br/>
-                </div>
+            <div class="row">
+              <div class="col-md-12 text-center" style={{ backgroundColor: "#1F8F8E" }}>
+                <br /><br /><br /><br /><br /><br />
               </div>
             </div>
+          </div>
           <div class="col-md-2">
           </div>
         </div>
       </div>
-      <DefaultFooter/>
+      <DefaultFooter />
     </div>
   );
 }
