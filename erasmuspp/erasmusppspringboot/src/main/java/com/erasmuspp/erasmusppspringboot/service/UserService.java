@@ -29,6 +29,10 @@ public class UserService {
         return userDao.selectAllUsers();
     }
 
+    public List<User> getAllCandidates() {
+        return userDao.selectAllCandidates();
+    }
+
     public List<String> getAllDepartments() {
         return userDao.selectAllDepartments();
     }
