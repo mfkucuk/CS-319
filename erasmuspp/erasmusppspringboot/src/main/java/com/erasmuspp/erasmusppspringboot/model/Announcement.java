@@ -12,19 +12,23 @@ public class Announcement
     private final String content;
     private final String postDate;
     private final String expireDate;
+    private final String[] filters;
 
-    public Announcement(@JsonProperty("id") UUID id,
-                        @JsonProperty("title") String title,
-                        @JsonProperty("content") String content,
-                        @JsonProperty("postDate") String postDate,
-                        @JsonProperty("expireDate") String expireDate)
-                        {
-                            this.id = id;
-                            this.title = title;
-                            this.content = content;
-                            this.postDate = postDate;
-                            this.expireDate = expireDate;
-                        }
+    public Announcement(
+        @JsonProperty("id") UUID id,
+        @JsonProperty("title") String title,
+        @JsonProperty("content") String content,
+        @JsonProperty("postDate") String postDate,
+        @JsonProperty("expireDate") String expireDate,
+        @JsonProperty("filters") String[] filters
+        ) {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.postDate = postDate;
+            this.expireDate = expireDate;
+            this.filters = filters;
+        }
 
     public UUID getId()
     {
@@ -43,8 +47,13 @@ public class Announcement
     {
         return postDate;
     }
+
     public String getExpireDate()
     {
         return expireDate;
+    }
+
+    public String[] getFilters() {
+        return filters;
     }
 }
