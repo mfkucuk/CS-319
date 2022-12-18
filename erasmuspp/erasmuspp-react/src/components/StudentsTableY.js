@@ -1,7 +1,8 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
 import Table from 'react-bootstrap/Table';
@@ -9,7 +10,14 @@ import axios from 'axios';
 
 
 export default function PostAnnouncementY() {
-  
+
+  const [candidateList, setCandidateList] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setCandidateList(res.data));
+  }, [candidateList])
+
   let navigate = useNavigate();
 
   function clickBack() {
@@ -42,21 +50,33 @@ export default function PostAnnouncementY() {
                   <thead>
                     <tr>
                       <th>#</th>
-                      {Array.from({ length: 12 }).map((_, index) => (
-                        <th key={index}>Table heading</th>
-                      ))}
+                      <td>First Name</td>
+                      <td>Last Name</td>
+                      <td>Bilkent ID</td>
+                      <td>Bilkent Department</td>
+                      <td>E-mail Address</td>
+                      <td>Nationality</td>
+                      <td>Cumulative GPA</td>
+                      <td>Personal E-mail</td>
+                      <td>Mobile Phone</td>
                     </tr>
                   </thead>
                   <tbody>
-                    {Array.from({ length: 12 }).map((_, index) => (
+                    {Array.from({ length: candidateList.length }).map((_, index) => (
                       <>
                         <tr>
                           <td key={index + 1}>
                             {index + 1}
                           </td>
-                          {Array.from({ length: 12 }).map((_, index2) => (
-                            <td key={index2}>Table cell {index2}</td>
-                          ))}
+                          <td>{candidateList[index].firstName}</td>
+                          <td>{candidateList[index].lastName}</td>
+                          <td>{candidateList[index].bilkentID}</td>
+                          <td>{candidateList[index].department}</td>
+                          <td>{candidateList[index].email}</td>
+                          <td>{candidateList[index].nationality}</td>
+                          <td>{candidateList[index].gpa}</td>
+                          <td>{candidateList[index].personalEmail}</td>
+                          <td>{candidateList[index].mobilePhone}</td>
                         </tr>
                       </>
                     ))}
