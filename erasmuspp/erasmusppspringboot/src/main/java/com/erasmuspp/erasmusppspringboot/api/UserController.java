@@ -22,9 +22,9 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@Valid @RequestBody User user)
+    public int addUser(@Valid @RequestBody User user)
     {
-        userService.addUser(user);
+        return userService.addUser(user);
     }
 
     @GetMapping()
@@ -61,5 +61,15 @@ public class UserController {
     public int updateUserById(@PathVariable("id") UUID id, @Valid @RequestBody User user)
     {
         return userService.updateUserById(id, user);
+    }
+
+    @PutMapping(path = "changePassword/token={token}")
+    public int updatePasswordByToken(@PathVariable("token") String token, @Valid @RequestBody String newPassword) {
+        return userService.updatePasswordByToken(token, newPassword);
+    }
+
+    @PutMapping(path = "changeAboutMe/token={token}")
+    public int updateAboutMeByToken(@PathVariable("token") String token, @Valid @RequestBody String newAboutMe) {
+        return userService.updateAboutMeByToken(token, newAboutMe);
     }
 }

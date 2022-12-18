@@ -1,8 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,19 +20,8 @@ public class FileService {
         return fileDao.insertFile(file);
     }
 
-    public List<File> getAllFiles() {
-        return fileDao.selectAllFiles();
+    public List<File> getFilesByApplication(String application) {
+        return fileDao.selectFilesByApplication(application);
     }
 
-    public Optional<File> getFileById(UUID id) {
-        return fileDao.selectFileById(id);
-    }
-
-    public int deleteFileById(UUID id) {
-        return fileDao.deleteFileById(id);
-    }
-
-    public int updateFileById(UUID id, File file) {
-        return fileDao.updateFileById(id, file);
-    }
 }

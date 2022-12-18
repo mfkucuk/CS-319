@@ -52,4 +52,16 @@ public class UserService {
     {
         return userDao.updateUserById(id, user);
     }
+
+    public int updateTokenByEmail(String email, String token) {
+        return userDao.updateTokenByEmail(email, token);
+    }
+
+    public int updatePasswordByToken(String token, String password) {
+        return userDao.updatePasswordByToken(token, password);
+    }
+
+    public int updateAboutMeByToken(String token, String aboutMe) {
+        return userDao.updateAboutMeByToken(token, aboutMe);
+    }
 }

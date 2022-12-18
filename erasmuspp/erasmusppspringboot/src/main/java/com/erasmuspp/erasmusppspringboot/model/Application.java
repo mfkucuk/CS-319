@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Application
 {
     private final UUID id;
-    private File[] applicationFiles;
+    private String[] applicationFiles;
     private String semester;
     private int stage;
     private boolean isEquivalanceApproved;
@@ -15,7 +15,7 @@ public class Application
     private String[] universityChoices;
 
     public Application(@JsonProperty("id") UUID id,
-                       @JsonProperty("files") File[] applicationFiles,
+                       @JsonProperty("files") String[] applicationFiles,
                        @JsonProperty("semester") String semester,
                        @JsonProperty("stage") int stage,
                        @JsonProperty("equivalance") boolean isEquivalanceApproved,
@@ -33,10 +33,10 @@ public class Application
     }
 
 
-    public void setApplicationFiles(File[] applicationFiles)
+    public void setApplicationFiles(String[] applicationFiles)
     {
         this.applicationFiles = applicationFiles;
-        applicationFiles = new File[3]; 
+        applicationFiles = new String[5]; 
         universityChoices = new String[3];
     }
 
@@ -70,7 +70,7 @@ public class Application
         return id;
     }
 
-    public File[] getFiles()
+    public String[] getFiles()
     {
         return applicationFiles;
     }

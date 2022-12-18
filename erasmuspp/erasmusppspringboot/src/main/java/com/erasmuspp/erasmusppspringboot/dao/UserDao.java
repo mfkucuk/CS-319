@@ -27,4 +27,10 @@ public interface UserDao {
     int updateUserById(UUID id, User newUser);
 
     int setUserRoleById(UUID id, String newRole);
+
+    int updateTokenByEmail(String email, String token);
+
+    int updatePasswordByToken(String token, String password);
+
+    int updateAboutMeByToken(String token, String aboutMe);
 }

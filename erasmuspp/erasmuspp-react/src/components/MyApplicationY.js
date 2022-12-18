@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function MyApplicationY() {
+
   const [statementOfPurpose, setStatementOfPurpose] = useState("");
   const [sopB64, setsopB64] = useState("");
 
@@ -16,6 +17,14 @@ export default function MyApplicationY() {
 
   const [appForm, setAppForm] = useState("");
   const [appFormB64, setappFormB64] = useState("");
+
+  const[external, setExternal] = useState("");
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setExternal(res.data[2].content));
+  }, [external])
+
 
   let navigate = useNavigate();
   function handleClickEditApplicationForm() {
@@ -56,9 +65,12 @@ export default function MyApplicationY() {
   const uploadSOPFinal = () => {
     console.log(sopB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          statementOfPurposeForm: sopB64 
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: sopB64,
+          fileName: "Statemenet of Purpose Form",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
@@ -74,9 +86,9 @@ export default function MyApplicationY() {
       });
   }
 
-  const downloadSop =() => {
+  const downloadExternal =() => {
     const downloadLink = document.createElement("a");
-    downloadLink.href = sopB64;
+    downloadLink.href = external;
     downloadLink.download = "Fill Application Form";
     downloadLink.click();
   }
@@ -90,9 +102,12 @@ export default function MyApplicationY() {
   const uploadAppFormFinal = () => {
     console.log(appFormB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadApplicationForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          applicationForm: appFormB64
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: appFormB64,
+          fileName: "Application Form",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
@@ -111,9 +126,12 @@ export default function MyApplicationY() {
   const uploadCVFinal = () => {
     console.log(CVB64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadStatementOfPurpose/token=" + window.localStorage.getItem("USER_TOKEN"), 
+      .post("http://localhost:8080/api/v1/file/", 
         { 
-          CVForm: CV
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: CVB64,
+          fileName: "CV",
+          uploadTime: "18.12.2022"
         } 
         )
       .then((res) => {
@@ -142,7 +160,7 @@ export default function MyApplicationY() {
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
             <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
-              Go Back
+              {window.localStorage.getItem("LAST_APPLICATION")}
             </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
@@ -171,7 +189,7 @@ export default function MyApplicationY() {
               <Form.Control type="file" size="lg" value = {appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }}/>
             </Form.Group>
             <div className='pt-2'>
-              <Button onClick = {downloadSop} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
+              <Button onClick = {downloadExternal} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 Fill Application Form
               </Button>
             </div>

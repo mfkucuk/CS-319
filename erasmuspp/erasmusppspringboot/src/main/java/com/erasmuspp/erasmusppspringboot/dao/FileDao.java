@@ -1,7 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import com.erasmuspp.erasmusppspringboot.model.File;
@@ -14,11 +13,6 @@ public interface FileDao {
         return insertFile(id, file);
     }
 
-    List<File> selectAllFiles();
+    List<File> selectFilesByApplication(String application);
 
-    Optional<File> selectFileById(UUID id);
-
-    int deleteFileById(UUID id);
-
-    int updateFileById(UUID id, File newFile);
 }
