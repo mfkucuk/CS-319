@@ -222,17 +222,14 @@ public class UserDataAccess implements UserDao, UserDetailsService {
     }
 
     @Override
-    public int updateTokenByEmail(String email, String token) {
+    public int updateTokenByEmail(String email, String newToken) {
         final String sql = "UPDATE \"user\" SET \"token\" = ? WHERE \"email\" = ?";
-        return jdbcTemplate.update(sql, token, email);
+        return jdbcTemplate.update(sql, newToken, email);
     }
 
     @Override
-    public int updatePasswordByToken(String token, String password) {
+    public int updatePasswordByToken(String token, String newPassword) {
         final String sql = "UPDATE \"user\" SET \"password\" = ? WHERE \"token\" = ?";
-        return jdbcTemplate.update(sql, password, token);
+        return jdbcTemplate.update(sql, newPassword, token);
     }
-
-    
-    
 }
