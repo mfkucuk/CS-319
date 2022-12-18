@@ -8,16 +8,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.Application;
+import com.erasmuspp.erasmusppspringboot.model.User;
+
+import lombok.RequiredArgsConstructor;
+
 
 @Repository("application")
+@RequiredArgsConstructor
 public class ApplicationDataAccess implements ApplicationDao 
 {
     private final JdbcTemplate jdbcTemplate;
-
-    public ApplicationDataAccess(JdbcTemplate jdbcTemplate)
-    {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private UserDataAccess userDataAccess;
 
     @Override
     public int insertApplication(UUID id, Application application) {
@@ -38,6 +39,14 @@ public class ApplicationDataAccess implements ApplicationDao
     public int deleteApplicationById(UUID id) {
         final String sql = "DELETE FROM \"application\" WHERE id = ?";
         return jdbcTemplate.update(sql, id);
+    }
+
+    @Override
+    public List<Application> selectApplicationsByToken(String token)
+    {
+        User user = userDataAccess.selectUserByToken(token).get();
+        final String sql = "SELECT FROM \"application\" WHERE userid = " + user.getId();
+        return jdbcTemplate.queryForList(sql,Application.class);
     }
 
     @Override

@@ -3,16 +3,51 @@ import Button from 'react-bootstrap/esm/Button';
 import React, { useState } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfoModalPopUpY from './SaveCandidateInfoModalPopUpY';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function PostAnnouncementY() {
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userDoB, setUserDoB] = useState("");
+  const [userNationality, setUserNationality] = useState("");
+  const [userStudentIDNo, setUserIDNo] = useState("");
+  const [userDepartment, setUserDepartment] = useState("");
+  const [userBilkentEmail, setUserBilkentEmail] = useState("");
+  const [userCumGPA, setUserCumGPA] = useState("");
 
   let navigate = useNavigate();
 
   function clickBack() {
     navigate("/main");
   }
+
+  const saveCandidateInformation = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/candidateRegistration/token=" + window.localStorage.getItem("USER_TOKEN"),
+        {
+          firstName: userFirstName,
+          lastName: userLastName,
+          dob: userDoB,
+          nationality: userNationality,
+          bilkentID: userStudentIDNo,
+          department: userDepartment,
+          email: userBilkentEmail,
+          gpa: userCumGPA
+        })
+      .then((res) => {
+        if (res.data === true) {
+
+          alert("Candidate information saved successfully.");
+        }
+        else {
+          alert("Something went wrong.");
+        }
+      }).catch((error) => {
+        alert("Something went wrong.");
+      });
+  };
 
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
@@ -54,16 +89,16 @@ export default function PostAnnouncementY() {
               <div class="col-md-4 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br />
                 <Form.Group className="mb-3" controlId="registerCandidateFirstNameForm">
-                  <Form.Control type="text" placeholder="Yunus Eren" />
+                  <Form.Control onChange={(e) => setUserFirstName(e.target.value)} type="text" placeholder="Yunus Eren" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateLastNameForm">
-                  <Form.Control type="text" placeholder="Türkeri" />
+                  <Form.Control onChange={(e) => setUserLastName(e.target.value)} type="text" placeholder="Türkeri" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateDoBForm">
-                  <Form.Control type="text" placeholder="dd/mm/yyyy" />
+                  <Form.Control onChange={(e) => setUserDoB(e.target.value)} type="text" placeholder="dd/mm/yyyy" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateNationalityForm">
-                  <Form.Control type="text" placeholder="Turkey" />
+                  <Form.Control onChange={(e) => setUserNationality(e.target.value)} type="text" placeholder="Turkey" />
                 </Form.Group>
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
@@ -85,7 +120,7 @@ export default function PostAnnouncementY() {
                     <Form.Label>Student ID No.:</Form.Label>
                   </Form.Group>
                   <Form.Group className="mb-3 text-end" controlId="registerCandidateDepartment">
-                    <Form.Label>Department/Class:</Form.Label>
+                    <Form.Label>Department:</Form.Label>
                   </Form.Group>
                   <Form.Group className="mb-3 text-end" controlId="registerCandiateBilkentEmail">
                     <Form.Label>Bilkent E-mail:</Form.Label>
@@ -98,16 +133,16 @@ export default function PostAnnouncementY() {
               <div class="col-md-4 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br />
                 <Form.Group className="mb-3" controlId="registerCandidateStudentIDForm">
-                  <Form.Control type="text" placeholder="22001842" />
+                  <Form.Control onChange={(e) => setUserIDNo(e.target.value)} type="text" placeholder="22001842" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateDepartmentForm">
-                  <Form.Control type="text" placeholder="Computer Science" />
+                  <Form.Control onChange={(e) => setUserDepartment(e.target.value)} type="text" placeholder="Computer Science" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateBilkentEmailForm">
-                  <Form.Control type="text" placeholder="eren.turkeri@ug.bilkent.edu.tr" />
+                  <Form.Control onChange={(e) => setUserBilkentEmail(e.target.value)} type="text" placeholder="eren.turkeri@ug.bilkent.edu.tr" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateCumGPAForm">
-                  <Form.Control type="text" placeholder="3.21" />
+                  <Form.Control onChange={(e) => setUserCumGPA(e.target.value)} type="text" placeholder="3.21" />
                 </Form.Group>
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
@@ -116,7 +151,9 @@ export default function PostAnnouncementY() {
             <div class="row">
               <div class="col-md-12 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br /><br />
-                <SaveCandidateInfoModalPopUpY />
+                <Button onClick={saveCandidateInformation} style={{ backgroundColor: "#3C7479" }}>
+                  Save Candidate Info
+                </Button>
                 <br /><br /><br /><br />
               </div>
             </div>

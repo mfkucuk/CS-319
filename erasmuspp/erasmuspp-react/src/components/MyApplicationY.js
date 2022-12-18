@@ -8,8 +8,23 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function MyApplicationY() {
+
   const [statementOfPurpose, setStatementOfPurpose] = useState("");
   const [sopB64, setsopB64] = useState("");
+
+  const [CV, setCV] = useState("");
+  const [CVB64, setCVB64] = useState("");
+
+  const [appForm, setAppForm] = useState("");
+  const [appFormB64, setappFormB64] = useState("");
+
+  const[external, setExternal] = useState("");
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => setExternal(res.data[2].content));
+  }, [external])
+
 
   let navigate = useNavigate();
   function handleClickEditApplicationForm() {
@@ -31,10 +46,10 @@ export default function MyApplicationY() {
   const uploadStatemenetOfPurpose = async (e) => {
     const statementOfPurpose = e.target.files[0];
 
-    setsopB64(await sopToB64(statementOfPurpose));
+    setsopB64(await toB64(statementOfPurpose));
   };
 
-  const sopToB64 = (file) => {
+  const toB64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -44,25 +59,99 @@ export default function MyApplicationY() {
       fileReader.onerror = (error) => {
         reject(error);
       };
-
     })
-
   }
 
   const uploadSOPFinal = () => {
     console.log(sopB64);
-    const linkSource = sopB64
+    axios
+      .post("http://localhost:8080/api/v1/file/", 
+        { 
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: sopB64,
+          fileName: "Statemenet of Purpose Form",
+          uploadTime: "18.12.2022"
+        } 
+        )
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("Statement of Purpose Uploaded Successfully")
+        }
+        else {
+          alert("Statement of Purpose Failed to Upload")
+        }
+      }).catch((err)=> {
+
+        alert("Statement of Purpose Failed to Upload")
+      });
+  }
+
+  const downloadExternal =() => {
     const downloadLink = document.createElement("a");
-    downloadLink.href = linkSource;
-    downloadLink.download = "SA";
+    downloadLink.href = external;
+    downloadLink.download = "Fill Application Form";
     downloadLink.click();
   }
 
+  const uploadCV = async (e) => {
+    const CV = e.target.files[0];
+
+    setCVB64(await toB64(CV));
+  }
+
+  const uploadAppFormFinal = () => {
+    console.log(appFormB64);
+    axios
+      .post("http://localhost:8080/api/v1/file/", 
+        { 
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: appFormB64,
+          fileName: "Application Form",
+          uploadTime: "18.12.2022"
+        } 
+        )
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("Application Form Uploaded Successfully")
+        }
+        else {
+          alert("Application Form Failed to Upload")
+        }
+      }).catch((err)=> {
+
+        alert("Application Form Failed to Upload")
+      });
+  }
 
   const uploadCVFinal = () => {
-    console.log(sopB64);
+    console.log(CVB64);
+    axios
+      .post("http://localhost:8080/api/v1/file/", 
+        { 
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: CVB64,
+          fileName: "CV",
+          uploadTime: "18.12.2022"
+        } 
+        )
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("CV Uploaded Successfully")
+        }
+        else {
+          alert("CV Failed to Upload")
+        }
+      }).catch((err)=> {
 
+        alert("CV Failed to Upload")
+      });
   }
+
+  const uploadApplicationForm = async (e) => {
+    const appForm = e.target.files[0];
+
+    setappFormB64(await toB64(appForm));
+  };
 
   return(
     <div style={{backgroundColor: "#C7D6D2"}}>
@@ -71,7 +160,7 @@ export default function MyApplicationY() {
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
             <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
-              Go Back
+              GO BACK
             </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
@@ -92,15 +181,15 @@ export default function MyApplicationY() {
             <br />
             <Form.Group controlId="uploadCVForm" className="mb-3">
               <Form.Label style={{ color: '#f4eff2' }}>Upload CV</Form.Label>
-              <Form.Control type="file" size="lg" />
+              <Form.Control type="file" size="lg" value = {CV} onChange={(e) => { setCV(e.target.value); uploadCV(e); }}/>
             </Form.Group>
             <br />
             <Form.Group controlId="uploadApplicationForm" className="mb-3">
               <Form.Label style={{ color: '#f4eff2' }}>Upload Application Form</Form.Label>
-              <Form.Control type="file" size="lg" />
+              <Form.Control type="file" size="lg" value = {appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }}/>
             </Form.Group>
             <div className='pt-2'>
-              <Button onClick={handleClickEditApplicationForm} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
+              <Button onClick = {downloadExternal} style={{ backgroundColor: "#3C7479", width: "13rem" }}>
                 Fill Application Form
               </Button>
             </div>
@@ -119,13 +208,13 @@ export default function MyApplicationY() {
             </div>
             <br /><br /><br />
             <div className='pt-2'>
-              <Button style={{ backgroundColor: "#3C7479" }}>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadCVFinal}>
                 Upload
               </Button>
             </div>
             <br /><br /><br />
             <div className='pt-2'>
-              <Button style={{ backgroundColor: "#3C7479" }}>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick ={uploadAppFormFinal}>
                 Upload
               </Button>
             </div>

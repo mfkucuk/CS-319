@@ -13,10 +13,10 @@ public class File {
 
     private final String uploadTime;
 
-    private final UUID applicationId;
+    private final String applicationId;
 
     public File(@JsonProperty("id") UUID id,
-                @JsonProperty("application") UUID applicationId,
+                @JsonProperty("application") String applicationId,
                 @JsonProperty("content") String content,
                 @JsonProperty("fileName") String fileName,
                 @JsonProperty("uploadTime") String uploadTime) {
@@ -44,7 +44,7 @@ public class File {
         return uploadTime;
     }
 
-    public UUID getApplicationId()
+    public String getApplicationId()
     {
         return applicationId;
     }

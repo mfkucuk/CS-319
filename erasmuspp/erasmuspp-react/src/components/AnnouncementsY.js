@@ -11,7 +11,7 @@ export default function AnnouncementsY() {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/announcement/")
       .then(res => {
         setAnnouncements(res.data);
       })
@@ -46,14 +46,14 @@ export default function AnnouncementsY() {
         <AnnouncementCardBreakY/>
         {announcements.map(announcement => (
           <Col md={{ span: 10, offset: 1 }}>
-            <Card style={{backgroundColor: "#F4EFF2"}}>
+            <Card style={{backgroundColor: "#F4EFF2", width: "65rem"}}>
               <Card.Body>
-                <Card.Title >{announcement.title}</Card.Title>
+                <Card.Title>{announcement.title}</Card.Title>
                 <Card.Text>
-                  {announcement.body}
+                  {announcement.content}
                 </Card.Text>
               </Card.Body>
-              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.body} />
+              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.content} />
             </Card>
           </Col>
         ))}
