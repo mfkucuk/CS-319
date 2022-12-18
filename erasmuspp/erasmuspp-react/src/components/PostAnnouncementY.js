@@ -11,80 +11,61 @@ export default function PostAnnouncementY() {
 
   const [departmentNameInit, setDepartmentNameInit] = useState([]);
   const [countryInit, setCountryInit] = useState([]);
-  const [erasmusSemesterInit, setErasmusSemesterInit] = useState([]);
   const [universityInit, setUniversityInit] = useState([]);
+
+  const [departmentName, setDepartmentName] = useState("");
+  const [country, setCountry] = useState("");
+  const [erasmusSemester, setErasmusSemester] = useState("");
+  const [university, setUniversity] = useState("");
+  const [bilkentId, setBilkentId] = useState("");
+
+  const semesters = ['Fall', 'Spring'];
 
 
   const [announcementTitle, setAnnouncementTitle] = useState("");
-  const [announcementTitleInit, setAnnouncementTitleInit] = useState("");
   const [announcementDescription, setAnnouncementDescription] = useState("");
-  const [announcementDescriptionInit, setAnnouncementDescriptionInit] = useState("");
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user/department")
       .then(res => setDepartmentNameInit(res.data));
-  }, [departmentNameInit])
+  }, [])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user/country")
       .then(res => setCountryInit(res.data));
-  }, [countryInit])
+  }, [])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setErasmusSemesterInit(res.data));
-  }, [erasmusSemesterInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setAnnouncementTitleInit(res.data[0].title));
-  }, [announcementTitleInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setAnnouncementDescriptionInit(res.data[1].title));
-  }, [announcementDescriptionInit])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user/university")
       .then(res => setUniversityInit(res.data));
-  }, [universityInit])
+  }, [])
 
-  const postAnnouncementTitle = (e) => {
-    e.preventDefault();
+  const postAnnouncement = () => {
     axios
-      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
-          title: announcementTitle
-        })
+      .post("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"),
+      {
+        title: announcementTitle,
+        content: announcementDescription,
+        postDate: Date.now().toString(),
+        expireDate: "",
+        filters: [
+          departmentName,
+          country,
+          erasmusSemester,
+          university,
+          bilkentId
+        ],
+        poster: ""
+      })
       .then((res) => {
-        if (res.data === true) {
-          alert("Email updated successfully.");
+        if (res.data === 1) {
+          alert("Announcement posted successfully.");
         }
         else {
           alert("Something went wrong.");
         }
       }).catch((error) => {
-        alert("Something went wrong.");
-      });
-  };
-
-  const postAnnouncementDescription = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
-          content: announcementDescription
-        })
-      .then((res) => {
-        if (res.data === true) {
-          alert("Email updated successfully.");
-        }
-        else {
-          alert("Something went wrong.");
-        }
-      }).catch((error) => {
-        alert("Something went wrong.");
+        console.log(error);
       });
   };
 
@@ -118,11 +99,11 @@ export default function PostAnnouncementY() {
             <Form>
               <Form.Group className="mb-3" controlId="postAnnouncementTitle">
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type='text' placeholder={announcementTitleInit} onChange={(e) => setAnnouncementTitle(e.target.value)}/>
+                <Form.Control type='text' placeholder="Title" onChange={(e) => setAnnouncementTitle(e.target.value)}/>
               </Form.Group>
               <Form.Group className="mb-3" controlId="postAnnouncementDescription">
                 <Form.Label>Announcement Description:</Form.Label>
-                <Form.Control as="textarea" rows={3} placeholder={announcementDescriptionInit} onChange={(e) => setAnnouncementDescription(e.target.value)}/>
+                <Form.Control as="textarea" rows={3} placeholder="Content" onChange={(e) => setAnnouncementDescription(e.target.value)}/>
               </Form.Group>
             </Form>
           </div>
@@ -155,50 +136,49 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-2" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br />
-            <Form.Select aria-label="Department Select">
+            <Form.Select aria-label="Department Select" onChange={(e) => setDepartmentName(e.target.value)}>
               <option>Select</option>
               {
               departmentNameInit
               .map((variant) => (
-              <option>{variant.title}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br />
-            <Form.Select aria-label="Country Select">
+            <Form.Select aria-label="Country Select" onChange={(e) => setCountry(e.target.value)}>
               <option>Select</option>
               {
               countryInit
               .map((variant) => (
-              <option>{variant.title}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
-            <Form.Select aria-label="Erasmus Semester Select">
+            <Form.Select aria-label="Erasmus Semester Select" onChange={(e) => setErasmusSemester(e.target.value)}>
               <option>Select</option>
               {
-              erasmusSemesterInit
+              semesters
               .map((variant) => (
-              <option>{variant.title}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
-            <Form.Select aria-label="University Select">
+            <Form.Select aria-label="University Select" onChange={(e) => setUniversity(e.target.value)}>
               <option>Select</option>
               {
               universityInit
               .map((variant) => (
-              <option>{variant.title}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
             <Form className="d-flex">
-              <Form.Control
+              <Form.Control onChange={(e) => setBilkentId(e.target.value)}
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button style={{ backgroundColor: "#3C7479" }}>Search</Button>
             </Form>
           </div>
         </div>
@@ -208,7 +188,7 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br /><br />
-            <Button onClick={(e) => { postAnnouncementTitle(e); postAnnouncementDescription(e);}} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
+            <Button onClick={postAnnouncement} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
           </div>
         </div>
       </div>

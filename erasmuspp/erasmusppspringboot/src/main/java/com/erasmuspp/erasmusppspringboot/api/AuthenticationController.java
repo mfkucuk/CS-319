@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
     
-    //private final AuthenticationManager authenticationManager;
     private final UserDataAccess userDataAccess;
     private final JwtUtils jwtUtils;
 
@@ -28,9 +27,6 @@ public class AuthenticationController {
     public TokenStatus authenticate(
         @RequestBody AuthenticationRequest request
     ) {
-        // authenticationManager.authenticate(
-        //     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        // );
         final UserDetails user = userDataAccess.loadUserByUsername(request.getEmail());
         if (user != null) {
             System.out.println(user.getPassword());

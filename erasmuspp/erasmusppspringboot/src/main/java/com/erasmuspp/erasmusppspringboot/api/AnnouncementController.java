@@ -31,16 +31,16 @@ public class AnnouncementController
         this.announcementService = announcementService;
     }
 
-    @PostMapping
-    public void addAnnouncement(@Valid @RequestBody Announcement announcement)
+    @PostMapping(path = "token={token}")
+    public int addAnnouncement(@PathVariable("token") String token, @Valid @RequestBody Announcement announcement)
     {
-        announcementService.addAnnouncement(announcement);
+        return announcementService.addAnnouncement(announcement, token);
     }
 
-    @GetMapping
-    public List<Announcement> getAllAnnouncements()
+    @GetMapping(path = "token={token}")
+    public List<Announcement> getAllAnnouncements(@PathVariable("token") String token)
     {
-        return announcementService.getAllAnnouncements();
+        return announcementService.getFilteredAnnouncements(token);
     }
 
     @GetMapping(path = "{id}")

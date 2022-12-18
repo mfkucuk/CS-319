@@ -20,14 +20,18 @@ public class AnnouncementService
         this.announcementDao = announcementDao;
     }
 
-    public int addAnnouncement(Announcement announcement)
+    public int addAnnouncement(Announcement announcement, String token)
     {
-        return announcementDao.insertAnnouncement(announcement);
+        return announcementDao.insertAnnouncement(announcement, token);
     }
 
     public List<Announcement> getAllAnnouncements()
     {
         return announcementDao.selectAllAnnouncements();
+    }
+
+    public List<Announcement> getFilteredAnnouncements(String token) {
+        return announcementDao.selectFilteredAnnoucements(token);
     }
 
     public Optional<Announcement> getAnnouncementById(UUID id)

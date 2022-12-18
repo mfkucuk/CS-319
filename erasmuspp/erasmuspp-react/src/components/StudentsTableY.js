@@ -1,21 +1,18 @@
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import SaveCandidateInfo from './SaveCandidateInfoModalPopUpY';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-
 
 export default function PostAnnouncementY() {
 
   const [candidateList, setCandidateList] = useState([]);
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
+    axios.get("http://localhost:8080/api/v1/user")
       .then(res => setCandidateList(res.data));
   }, [candidateList])
 

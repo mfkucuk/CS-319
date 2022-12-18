@@ -264,4 +264,35 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "UPDATE \"user\" SET \"profilePhoto\" = ? WHERE \"token\" = ?";
         return jdbcTemplate.update(sql, newProfilePhoto, token);
     }
+
+    @Override
+    public List<String> selectAllDepartments() {
+        final String sql = "SELECT department FROM \"user\"";
+        List<String> departments = jdbcTemplate.query(sql, (resultSet, i) -> {
+            return resultSet.getString("department");
+        });
+        List<String> filteredList = new ArrayList<String>(departments);
+        return filteredList;
+    }
+
+    @Override
+    public List<String> selectAllUniversities() {
+        // final String sql = "SELECT  FROM \"user\"";
+        // List<String> departments = jdbcTemplate.query(sql, (resultSet, i) -> {
+        //     return resultSet.getString("department");
+        // });
+        // return departments;
+        return null;
+    }
+
+    @Override
+    public List<String> selectAllCountries() {
+        final String sql = "SELECT nationality FROM \"user\"";
+        List<String> nationalities = jdbcTemplate.query(sql, (resultSet, i) -> {
+            return resultSet.getString("nationality");
+        });
+
+        List<String> filteredList = new ArrayList<String>(nationalities);
+        return filteredList;
+    }
 }
