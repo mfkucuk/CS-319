@@ -31,4 +31,6 @@ public interface UserDao {
     int updateTokenByEmail(String email, String token);
 
     int updatePasswordByToken(String token, String password);
+
+    int updateAboutMeByToken(String token, String aboutMe);
 }

@@ -67,4 +67,9 @@ public class UserController {
     public int updatePasswordByToken(@PathVariable("token") String token, @Valid @RequestBody String newPassword) {
         return userService.updatePasswordByToken(token, newPassword);
     }
+
+    @PutMapping(path = "changeAboutMe/token={token}")
+    public int updateAboutMeByToken(@PathVariable("token") String token, @Valid @RequestBody String newAboutMe) {
+        return userService.updatePasswordByToken(token, newAboutMe);
+    }
 }

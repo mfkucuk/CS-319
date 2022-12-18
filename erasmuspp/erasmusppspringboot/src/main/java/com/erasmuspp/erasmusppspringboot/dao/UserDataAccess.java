@@ -232,4 +232,10 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         final String sql = "UPDATE \"user\" SET \"password\" = ? WHERE \"token\" = ?";
         return jdbcTemplate.update(sql, newPassword, token);
     }
+
+    @Override
+    public int updateAboutMeByToken(String token, String newAboutMe) {
+        final String sql = "UPDATE \"user\" SET \"aboutMe\" = ? WHERE \"token\" = ?";
+        return jdbcTemplate.update(sql, newAboutMe, token);
+    }
 }
