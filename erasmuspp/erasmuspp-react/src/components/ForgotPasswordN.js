@@ -12,7 +12,6 @@ export default function ForgotPasswordN() {
 
     return (
         <div class="container-fluid" >
-            <TopNavBar/>
             <div class="row" style={{ backgroundColor: '#1F8F8E', height: '100vh'}}>
                 <div class="col-md-2 justify-content-end" style={{display: 'flex'}}>
                     <Button style={{margin: '40px', height: '40px'}} onClick={clickBack}>

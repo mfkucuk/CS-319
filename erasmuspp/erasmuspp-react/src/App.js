@@ -19,6 +19,10 @@ import PreApprovalFormN from './components/PreApprovalForm';
 import ForgotPasswordN from './components/ForgotPasswordN';
 import CourseRegistrationY from './components/CourseRegistrationY';
 import CourseEquivalenceRequestY from './components/CourseEquivalenceRequestY';
+import CoordinatorViewApplicationN from './components/CoordinatorViewApplicationN';
+import CoordinatorViewCourseRegistrationN from './components/CoordinatorViewCourseRegistrationN';
+import CoordinatorLearningAgreementN from './components/CoordinatorLearningAgreementN';
+import CoordinatorPreApprovalFormN from './components/CoordinatorPreApprovalFormN';
 
 function App() {
   return (
@@ -44,6 +48,10 @@ function App() {
         <Route path ="/forgotPassword" element = {<ForgotPasswordN/>}> </Route>
         <Route path ="/courseRegistration" element = {<CourseRegistrationY/>}> </Route>
         <Route path ="/courseEquivalenceRequest" element = {<CourseEquivalenceRequestY/>}> </Route>
+        <Route path ="/coordinatorViewApplication" element = {<CoordinatorViewApplicationN/>}> </Route>CoordinatorViewCourseRegistrationN
+        <Route path ="/coordinatorViewCourseRegistration" element = {<CoordinatorViewCourseRegistrationN/>}> </Route>
+        <Route path ="/coordinatorLearningAgreement" element = {<CoordinatorLearningAgreementN/>}> </Route>
+        <Route path ="/coordinatorPreApprovalForm" element = {<CoordinatorPreApprovalFormN/>}> </Route>
       </Routes>  
     </>
   );

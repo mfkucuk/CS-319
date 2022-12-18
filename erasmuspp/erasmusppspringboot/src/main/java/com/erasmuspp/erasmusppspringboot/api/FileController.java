@@ -1,6 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.api;
 
-import java.util.UUID;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -24,9 +24,9 @@ public class FileController {
         fileService.addFile(file);
     }
 
-    @GetMapping(path = "{id}")
-    public File getFileById(@PathVariable("id") UUID id) {
-        return fileService.getFileById(id).orElse(null);
+    @GetMapping(path = "{application}")
+    public List<File> getFilesByApplication(@PathVariable("application") String application) {
+        return fileService.getFilesByApplication(application);
     }
 
 }

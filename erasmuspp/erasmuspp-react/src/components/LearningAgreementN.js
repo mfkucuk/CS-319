@@ -5,8 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import Image from "./lastPrint.png";
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function LearningAgreementN() {
+
+    const [learningAgreementF, setlearningAgreementF] = useState("");
+    const [learningAgreementFb64, setlearningAgreementFb64] = useState("");
+
 
     let checked = false;
     let submissionSuccess = false;
@@ -15,8 +20,57 @@ export default function LearningAgreementN() {
         navigate("/myApplication");
     }
 
-    function clickPrint(){
 
+    const uploadlearningAgreementF = async (e) => {
+        const learningAgreementF = e.target.files[0];
+    
+        setlearningAgreementFb64(await toB64(learningAgreementF));
+      };
+    
+      const toB64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        })
+      }
+    
+      const uploadLearningAgreementFinal = () => {
+        console.log(learningAgreementFb64);
+        axios
+          .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
+            { 
+              learningAgreement: learningAgreementFb64
+            } 
+            )
+          .then((res) => {
+            if (res.data.status === true) {
+              alert("Pre Approval Form Uploaded Successfully")
+            }
+            else {
+              alert("Pre Approval Form Failed to Upload")
+            }
+          }).catch((err)=> {
+    
+            alert("Pre Approval Form Failed to Upload")
+          });
+      }
+
+    function clickPrint(){
+        fetch("ErasmusLearningAgreement.docx").then(response => {
+            response.blob().then(blob => {
+                const fileURL = window.URL.createObjectURL(blob);
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'Erasmus Learning Agreement.docx';
+                alink.click();
+            })
+        })
     }
 
     function clickUpload() {
@@ -53,16 +107,14 @@ export default function LearningAgreementN() {
                     <br></br>
                     <div class="justify-content-center" style={{ display: 'flex' }}>
                         <Form.Group style={{ width: '270px', justifyContent: 'center'}}>
-                            <Form.Control type="file" size="lg" />
+                            <Form.Control type="file" value={learningAgreementF} onChange={(e) => { setlearningAgreementF(e.target.value); uploadlearningAgreementF(e); }} size="lg" />
                         </Form.Group>
                     </div>
                     <br></br>
-                    <Button onClick={clickUpload} style={{backgroundColor: '#3C7479'}}>
-                        Upload
-                    </Button>
-                    <br></br><br></br><br></br><br></br>
-                    <Button onClick={clickSubmit} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
-                        Submit
+                    
+                   <br></br><br></br><br></br>
+                    <Button onClick={uploadLearningAgreementFinal} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
+                        Submit and Upload
                     </Button>
                 </div>
 

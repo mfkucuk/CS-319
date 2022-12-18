@@ -6,21 +6,25 @@ import Image from "./lastPrint.png";
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-export default function PreApprovalFormN() {
-    const [preApprovalF, setpreApprovalF] = useState("");
-    const [preApprovalFb64, setpreApprovalFb64] = useState("");
-  
+
+export default function CoordinatorLearningAgreementN() {
+
+    const [learningAgreementF, setlearningAgreementF] = useState("");
+    const [learningAgreementFb64, setlearningAgreementFb64] = useState("");
+
+
     let checked = false;
     let submissionSuccess = false;
     let navigate = useNavigate();
     function clickBack() {
-        navigate("/myApplication");
+        navigate("/toDoList");
     }
 
-    const uploadpreApprovalF = async (e) => {
-        const preApprovalF = e.target.files[0];
+
+    const uploadlearningAgreementF = async (e) => {
+        const learningAgreementF = e.target.files[0];
     
-        setpreApprovalFb64(await toB64(preApprovalF));
+        setlearningAgreementFb64(await toB64(learningAgreementF));
       };
     
       const toB64 = (file) => {
@@ -36,12 +40,12 @@ export default function PreApprovalFormN() {
         })
       }
     
-      const uploadPreApprovalFinal = () => {
-        console.log(preApprovalFb64);
+      const uploadLearningAgreementFinal = () => {
+        console.log(learningAgreementFb64);
         axios
           .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
             { 
-              preApprovalForm: preApprovalFb64
+              learningAgreement: learningAgreementFb64
             } 
             )
           .then((res) => {
@@ -57,21 +61,21 @@ export default function PreApprovalFormN() {
           });
       }
 
-
-    const clickPrint = () =>{
-        fetch("PreApprovalForm.docx").then(response => {
+    function clickPrint(){
+        fetch("ErasmusLearningAgreement.docx").then(response => {
             response.blob().then(blob => {
                 const fileURL = window.URL.createObjectURL(blob);
                 let alink = document.createElement('a');
                 alink.href = fileURL;
-                alink.download = 'Pre Approval Form.docx';
+                alink.download = 'Erasmus Learning Agreement.docx';
                 alink.click();
             })
         })
-    
     }
 
-
+    function clickUpload() {
+        
+    }
 
     function clickSubmit() {
         if(submissionSuccess)
@@ -93,23 +97,19 @@ export default function PreApprovalFormN() {
 
                 <div class="col-md-8 text-center">
                     <br></br>
-                    <header style={{ fontSize: '50px', color: '#FBFCF8' }}>Pre-Approval Form </header>
+                    <header style={{ fontSize: '50px', color: '#FBFCF8' }}>Learning Agreement</header>
                     <br></br><br></br><br></br><br></br>
-                    <header style={{ fontSize: '18px', color: 'black' }}>Print Pre-Approval Form </header>
+                    <header style={{ fontSize: '18px', color: 'black' }}>Download Learning Agreement </header>
                     <br></br>
-                    <img id="printImage" src={Image} onClick ={clickPrint} style={{cursor: 'pointer'}}></img>
+                    <img id="printImage" src={Image} onClick={clickPrint} style={{cursor: 'pointer'}}></img>
                     <br></br><br></br>
-                    <header style={{ fontSize: '18px', color: 'black' }}>Upload Signed Pre-Approval Form </header>
-                    <br></br>
-                    <div class="justify-content-center" style={{ display: 'flex' }}>
-                        <Form.Group style={{ width: '270px', justifyContent: 'center'}}>
-                            <Form.Control type="file" value={preApprovalF} onChange={(e) => { setpreApprovalF(e.target.value); uploadpreApprovalF(e); }} size="lg" />
-                        </Form.Group>
-                    </div>
-                   
-                    <br></br><br></br><br></br>
-                    <Button onClick={uploadPreApprovalFinal} style={{ backgroundColor: "#3C7479", borderRadius: '20px', fontSize: '20px'}}>
-                        Upload and Submit
+                    
+                   <br></br><br></br><br></br>
+                    <Button onClick={uploadLearningAgreementFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                        Approve
+                    </Button>
+                    <Button onClick={uploadLearningAgreementFinal} style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
+                        Disapprove
                     </Button>
                 </div>
 
