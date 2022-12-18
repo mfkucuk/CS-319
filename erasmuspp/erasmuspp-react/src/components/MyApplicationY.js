@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function MyApplicationY() {
+
   const [statementOfPurpose, setStatementOfPurpose] = useState("");
   const [sopB64, setsopB64] = useState("");
 
@@ -153,7 +154,7 @@ export default function MyApplicationY() {
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
             <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
-              Go Back
+              {window.localStorage.getItem("LAST_APPLICATION")}
             </Button>
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>

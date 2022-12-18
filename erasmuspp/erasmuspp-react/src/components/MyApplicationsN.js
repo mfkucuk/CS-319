@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TopNavBar from './TopNavBar';
 import DefaultFooter from './DefaultFooter';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 export default function MyApplicationsN() {
@@ -27,7 +27,8 @@ export default function MyApplicationsN() {
 
 
     let navigate = useNavigate();
-    function handleClickMyApplication() {
+    const handleClickMyApplication = (id) => {
+        window.localStorage.setItem("LAST_APPLICATION", id);
         navigate("/myApplication");
     }
 
@@ -90,7 +91,7 @@ export default function MyApplicationsN() {
                                         alignContent: 'center',
                                         justifyContent: 'center',
                                     }}>
-                                        <Button onClick={handleClickMyApplication} style={{
+                                        <Button onClick={() =>handleClickMyApplication(attributes.id)} style={{
                                             textAlign: 'center',
                                         }}>
                                             Go to Application
