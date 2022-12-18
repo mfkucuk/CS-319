@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DefaultFooter from './DefaultFooter';
 import LargeBreak from './LargeBreak';
 import { useNavigate } from "react-router-dom";

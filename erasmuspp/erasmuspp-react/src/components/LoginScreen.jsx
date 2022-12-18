@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import DefaultFooter from './DefaultFooter';
 
