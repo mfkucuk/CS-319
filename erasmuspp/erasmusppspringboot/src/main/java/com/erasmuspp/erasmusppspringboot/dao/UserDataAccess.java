@@ -271,7 +271,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         List<String> departments = jdbcTemplate.query(sql, (resultSet, i) -> {
             return resultSet.getString("department");
         });
-        return departments;
+        List<String> filteredList = new ArrayList<String>(departments);
+        return filteredList;
     }
 
     @Override
@@ -290,6 +291,8 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         List<String> nationalities = jdbcTemplate.query(sql, (resultSet, i) -> {
             return resultSet.getString("nationality");
         });
-        return nationalities;
+
+        List<String> filteredList = new ArrayList<String>(nationalities);
+        return filteredList;
     }
 }

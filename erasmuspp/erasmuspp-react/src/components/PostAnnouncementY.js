@@ -11,9 +11,7 @@ export default function PostAnnouncementY() {
 
   const [departmentNameInit, setDepartmentNameInit] = useState([]);
   const [countryInit, setCountryInit] = useState([]);
-  const [erasmusSemesterInit, setErasmusSemesterInit] = useState([]);
   const [universityInit, setUniversityInit] = useState([]);
-  const [bilkentIdInit, setBilkentIdInit] = useState([]);
 
   const [departmentName, setDepartmentName] = useState("");
   const [country, setCountry] = useState("");
@@ -30,26 +28,25 @@ export default function PostAnnouncementY() {
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/department")
       .then(res => setDepartmentNameInit(res.data));
-  }, [departmentNameInit])
+  }, [])
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/country")
       .then(res => setCountryInit(res.data));
-  }, [countryInit])
+  }, [])
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/v1/user/university")
       .then(res => setUniversityInit(res.data));
-  }, [universityInit])
+  }, [])
 
-  const postAnnouncement = (e) => {
-    e.preventDefault();
+  const postAnnouncement = () => {
     axios
-      .post("http://localhost:8080/api/v1/user/announcement/token=" + window.localStorage.getItem("USER_TOKEN"),
+      .post("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"),
       {
         title: announcementTitle,
         content: announcementDescription,
-        postDate: (Date.now() + ""),
+        postDate: Date(),
         expireDate: "",
         filters: [
           departmentName,
@@ -57,7 +54,8 @@ export default function PostAnnouncementY() {
           erasmusSemester,
           university,
           bilkentId
-        ]
+        ],
+        poster: ""
       })
       .then((res) => {
         if (res.data === 1) {
@@ -67,7 +65,7 @@ export default function PostAnnouncementY() {
           alert("Something went wrong.");
         }
       }).catch((error) => {
-        alert("Something went wrong.");
+        console.log(error);
       });
   };
 
@@ -138,44 +136,44 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-2" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br />
-            <Form.Select aria-label="Department Select" onChange={(e) => setDepartmentName(e)}>
+            <Form.Select aria-label="Department Select" onChange={(e) => setDepartmentName(e.target.value)}>
               <option>Select</option>
               {
               departmentNameInit
               .map((variant) => (
-              <option>{variant}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br />
-            <Form.Select aria-label="Country Select" onChange={(e) => setCountry(e)}>
+            <Form.Select aria-label="Country Select" onChange={(e) => setCountry(e.target.value)}>
               <option>Select</option>
               {
               countryInit
               .map((variant) => (
-              <option>{variant}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
-            <Form.Select aria-label="Erasmus Semester Select" onChange={(e) => setErasmusSemester(e)}>
+            <Form.Select aria-label="Erasmus Semester Select" onChange={(e) => setErasmusSemester(e.target.value)}>
               <option>Select</option>
               {
               semesters
               .map((variant) => (
-              <option>{variant}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
-            <Form.Select aria-label="University Select" onChange={(e) => setUniversity(e)}>
+            <Form.Select aria-label="University Select" onChange={(e) => setUniversity(e.target.value)}>
               <option>Select</option>
               {
               universityInit
               .map((variant) => (
-              <option>{variant}</option>
+              <option value={variant}>{variant}</option>
               ))}
             </Form.Select>
             <br /><br />
             <Form className="d-flex">
-              <Form.Control onChange={(e) => setBilkentId(e)}
+              <Form.Control onChange={(e) => setBilkentId(e.target.value)}
                 type="search"
                 placeholder="Search"
                 className="me-2"
@@ -190,7 +188,7 @@ export default function PostAnnouncementY() {
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <br /><br /><br />
-            <Button onClick={(e) => { postAnnouncement(e)}} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
+            <Button onClick={postAnnouncement} style={{ backgroundColor: "#3C7479" }}>Post Announcement</Button>
           </div>
         </div>
       </div>
