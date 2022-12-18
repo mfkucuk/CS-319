@@ -12,7 +12,13 @@ import {useEffect, useState} from 'react';
 export default function LeftSideBarAndAnnouncements(){
 
   const [userName, setuserName] = useState("");
+  const [userRole, setuserRole] = useState("");
 
+  const [myAppsHidden, setMyAppsHidden] = useState(false);
+  const [toDoListHidden, setToDoListHidden] = useState(false);
+  const [registerCandidateHidden, setRegisterCandidateHidden] = useState(false);
+  const [studentsListHidden, setStudentsListHidden] = useState(false);
+  const [addAnnouncement, setAddAnnouncement] = useState(false);
   
   
   useEffect(() => {
@@ -21,6 +27,29 @@ export default function LeftSideBarAndAnnouncements(){
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then(res => setuserName(res.data.name));
   }, [userName]) 
+
+  useEffect(() => {
+    var userToken = 
+    console.log(userToken);
+    axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
+         .then((res) => {setuserRole(res.data.role); })
+  }, [userRole] ) 
+
+  useEffect(() => {
+    // 👇️ only runs once
+    console.log(userRole);
+    setButtons();
+  }, []);
+
+  let coordinatorOutput;
+
+  function setButtons(){
+    if(userRole == "ROLE_CANDIDATE"){
+      setToDoListHidden(true);
+      setRegisterCandidateHidden(true);
+      setStudentsListHidden(true);
+    }
+  }
 
   let navigate = useNavigate();
   function handleClick() {
@@ -66,22 +95,22 @@ export default function LeftSideBarAndAnnouncements(){
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button hidden={myAppsHidden} onClick={handleClickMyApplications} style={{backgroundColor: "#3C7479"}} size="lg">
                 My Applications
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickToDo} style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button hidden={toDoListHidden} onClick={handleClickToDo} style={{backgroundColor: "#3C7479"}} size="lg">
                 To Do List
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button  hidden={registerCandidateHidden} onClick={handleClickCandidateRegistration} style={{backgroundColor: "#3C7479"}} size="lg">
                 Register Candidate
               </Button>
               <br/>
               <br/>
-              <Button onClick={handleClickStudentsTable} style={{backgroundColor: "#3C7479"}} size="lg">
+              <Button hidden={studentsListHidden} onClick={handleClickStudentsTable} style={{backgroundColor: "#3C7479"}} size="lg">
                 Students List
               </Button>
               <LargeBreak></LargeBreak>
