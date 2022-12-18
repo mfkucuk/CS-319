@@ -7,15 +7,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Application
 {
     private final UUID id;
-    private String[] applicationFiles;
     private String semester;
+    private String userId;
     private int stage;
     private boolean isEquivalanceApproved;
     private boolean isPreApprovalApproved;
     private String[] universityChoices;
 
     public Application(@JsonProperty("id") UUID id,
-                       @JsonProperty("files") String[] applicationFiles,
+                        @JsonProperty("userId") String userId,
                        @JsonProperty("semester") String semester,
                        @JsonProperty("stage") int stage,
                        @JsonProperty("equivalance") boolean isEquivalanceApproved,
@@ -24,7 +24,7 @@ public class Application
                        
     {
         this.id = id;
-        this.applicationFiles = applicationFiles;
+        this.userId = userId;
         this.semester = semester;
         this.stage = stage;
         this.isEquivalanceApproved = isEquivalanceApproved;
@@ -32,13 +32,6 @@ public class Application
         this.universityChoices = universityChocies;
     }
 
-
-    public void setApplicationFiles(String[] applicationFiles)
-    {
-        this.applicationFiles = applicationFiles;
-        applicationFiles = new String[5]; 
-        universityChoices = new String[3];
-    }
 
     public void setSemester(String semester)
     {
@@ -48,6 +41,11 @@ public class Application
     public void setStage(int stage)
     {
         this.stage = stage;
+    }
+
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
     }
 
     public void setEquivalanceApproved(boolean bool)
@@ -70,14 +68,14 @@ public class Application
         return id;
     }
 
-    public String[] getFiles()
-    {
-        return applicationFiles;
-    }
-
     public String getSemester()
     {
         return semester;
+    }
+
+    public String getUserId()
+    {
+        return userId;
     }
 
     public int getStage()
@@ -99,5 +97,4 @@ public class Application
     {
         return universityChoices;
     }
-
 }
