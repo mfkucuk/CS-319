@@ -28,21 +28,18 @@ export default function AnnouncementsY() {
 
   useEffect(() => {
     var userToken = 
-    console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then(res => setuserName(res.data.name));
   }, [userName]) 
 
   useEffect(() => {
     var userToken = 
-    console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then((res) => {setuserRole(res.data.role); })
   }, [userRole] ) 
 
   useEffect(() => {
     // 👇️ only runs once
-    console.log(userRole);
     setButtons();
   });
 
