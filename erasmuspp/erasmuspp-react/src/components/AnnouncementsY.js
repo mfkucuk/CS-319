@@ -92,7 +92,6 @@ export default function AnnouncementsY() {
                   {announcement.content}
                 </Card.Text>
               </Card.Body>
-              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.content} />
             </Card>
           </Col>
         ))}
