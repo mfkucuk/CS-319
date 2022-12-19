@@ -30,7 +30,7 @@ code {
 }
 #scrollable {
   position: absolute;
-  height: 122%;
+  height: 110%;
   /* width: 100%; */
   overflow-y: auto;
   overflow-x: hidden;
