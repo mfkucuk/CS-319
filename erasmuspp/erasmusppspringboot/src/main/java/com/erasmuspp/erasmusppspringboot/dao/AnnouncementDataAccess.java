@@ -134,15 +134,15 @@ public class AnnouncementDataAccess implements AnnouncementDao
 
         // Filter by department
         for (Announcement announcement : announcements) {
-            if (!user.getDepartment().equals(announcement.getFilters()[0])) {
+            if (!user.getDepartment().equals(announcement.getFilters()[0]) && !announcement.getFilters()[0].equals("")) {
                 result.remove(announcement);
             }
         }
 
         // Filter by country
         // for (Announcement announcement : announcements) {
-        //     if (!user.getCountry().equals(announcement.getFilters()[1])) {
-        //         announcements.remove(announcement);
+        //     if (!user.getNationality().equals(announcement.getFilters()[1])) {
+        //         result.remove(announcement);
         //     }
         // }
 
@@ -162,7 +162,7 @@ public class AnnouncementDataAccess implements AnnouncementDao
 
         // Filter by bilkent ID
         for (Announcement announcement : announcements) {
-            if (!user.getBilkentId().equals(announcement.getFilters()[4])) {
+            if (!user.getBilkentId().equals(announcement.getFilters()[4]) && !announcement.getFilters()[4].equals("")) {
                 result.remove(announcement);
             }
         }

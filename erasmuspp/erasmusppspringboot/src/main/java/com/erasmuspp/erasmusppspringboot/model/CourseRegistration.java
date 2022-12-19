@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CourseRegistration {
 
     private final String id;
-    private final long applicationId;
+    private final String applicationId;
     private final String[] bilkentCourse;
     private final String[] preApprovedCourse;
 
     public CourseRegistration(
         @JsonProperty("id") String id,
-        @JsonProperty("applicationId") long applicationId,
+        @JsonProperty("applicationId") String applicationId,
         @JsonProperty("bilkentCourse") String[] bilkentCourse,
         @JsonProperty("preApprovedCourse") String[] preApprovedCourse
     ) {
@@ -25,7 +25,7 @@ public class CourseRegistration {
         return id;
     }
 
-    public long getApplicationId() {
+    public String getApplicationId() {
         return applicationId;
     }
 

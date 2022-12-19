@@ -16,11 +16,11 @@ public class CourseRegistrationService {
         this.courseRegistrationDao = courseRegistrationDao;
     }
 
-    public int addCourseRegistration(CourseRegistration courseRegistration) {
-        return courseRegistrationDao.insertCourseRegistration(courseRegistration);
+    public int addCourseRegistration(CourseRegistration courseRegistration, String applicationId) {
+        return courseRegistrationDao.insertCourseRegistration(courseRegistration, applicationId);
     }
 
-    public Optional<CourseRegistration> getCourseRegistrationByApplicationId(long applicationId) {
+    public Optional<CourseRegistration> getCourseRegistrationByApplicationId(String applicationId) {
         return courseRegistrationDao.selectCourseRegistrationByApplicationId(applicationId);
     }
 }
