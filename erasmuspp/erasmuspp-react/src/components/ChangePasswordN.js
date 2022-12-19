@@ -69,15 +69,15 @@ export default function ForgotPasswordN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Enter Old Password: </header>
                     <br></br>
-                    <input onChange={(e) => setuserOldPasswordInput(e.target.value)}></input>
+                    <input type="password" onChange={(e) => setuserOldPasswordInput(e.target.value)}></input>
                     <br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Enter New Password: </header>
                     <br></br>
-                    <input onChange={(e) => setuserNewPassword(e.target.value)}></input>
+                    <input type="password" onChange={(e) => setuserNewPassword(e.target.value)}></input>
                     <br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Confirm New Password: </header>
                     <br></br>
-                    <input onChange={(e) => setuserNewPasswordConfirm(e.target.value)}></input>
+                    <input type="password" onChange={(e) => setuserNewPasswordConfirm(e.target.value)}></input>
                     <br></br><br></br><br></br><br></br>
                     <Button onClick={changePassword} style={{ backgroundColor: "#3C7479" }}>
                         Change Password

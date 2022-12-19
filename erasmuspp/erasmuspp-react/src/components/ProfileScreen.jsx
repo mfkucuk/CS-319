@@ -165,7 +165,9 @@ export default function ProfileScreen() {
               <br />
               <br />
               <view>
-                <img style={{ width: "10rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrcInit} />
+                <img style={{ width: "10rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrcInit} onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src =Image;}}/>
               </view>
               <br /><br />
               <div className="row">
