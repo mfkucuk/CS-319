@@ -67,7 +67,37 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public Optional<Application> selectApplicationById(UUID id) {
-        return Optional.empty();
+        final String sql = "SELECT * FROM \"application\" WHERE \"id\" = ?";
+        Application application = jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            UUID applicationId = UUID.fromString(resultSet.getString("id"));
+            String userId = resultSet.getString("userid");
+            String semester = resultSet.getString("semester");
+            int stage = resultSet.getInt("stage");
+            boolean equivalance = resultSet.getBoolean("isequivalanceapproved");
+            boolean preapproval = resultSet.getBoolean("ispreapprovalapproved");
+            String choice1 = resultSet.getString("choice1");
+            String choice2 = resultSet.getString("choice2");
+            String choice3 = resultSet.getString("choice3");
+            String choice4 = resultSet.getString("choice4");
+            String choice5 = resultSet.getString("choice5");
+            String status = resultSet.getString("status");
+            return new Application(
+                applicationId,
+                userId,
+                semester,
+                stage,
+                equivalance,
+                preapproval,
+                choice1,
+                choice2,
+                choice3,
+                choice4,
+                choice5,
+                status
+            );
+        }, new Object[] {id});
+
+        return Optional.ofNullable(application);
     }
 
     @Override
