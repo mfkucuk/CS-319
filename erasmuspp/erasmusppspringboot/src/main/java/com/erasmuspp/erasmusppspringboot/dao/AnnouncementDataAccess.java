@@ -140,11 +140,11 @@ public class AnnouncementDataAccess implements AnnouncementDao
         }
 
         // Filter by country
-        // for (Announcement announcement : announcements) {
-        //     if (!user.getNationality().equals(announcement.getFilters()[1])) {
-        //         result.remove(announcement);
-        //     }
-        // }
+        for (Announcement announcement : announcements) {
+            if (!user.getNationality().equals(announcement.getFilters()[1])) {
+                result.remove(announcement);
+            }
+        }
 
         // Filter by semester
         // for (Announcement announcement : announcements) {
