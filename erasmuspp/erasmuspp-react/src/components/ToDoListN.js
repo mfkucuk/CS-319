@@ -10,22 +10,87 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {useState, useEffect} from 'react';
 
 export default function ToDoListN() {
 
     let navigate = useNavigate();
+
+    const [applications, setApplications] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"))
+          .then(res => {
+            setApplications(res.data);
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+    
+      }, [])
     
     function applyFilters() {
         //TODO
+    }
+
+    function approve(applicationId, stage) {
+        stage++;
+        axios.put("http://localhost:8080/api/v1/announcement/token=" + {applicationId}, {stage})
+          .then(res => {
+            if(res === 1)
+            {
+                alert("Application approved!")
+            }
+            else{
+                alert("Application approve failed!")
+            }          })
+          .catch(err=>{
+            console.log(err)
+          })
+    }
+
+    function disapprove(applicationId) {
+        axios.put("http://localhost:8080/api/v1/announcement/token=" + {applicationId})
+          .then(res => {
+            if(res === 1)
+            {
+                alert("Application disapproved!")
+            }
+            else{
+                alert("Application disapprove failed!")
+            }          })
+          .catch(err=>{
+            console.log(err)
+          })
+    }
+
+    function view(stage, applicationId) {
+        window.localStorage.setItem("LAST_APPLICATION", applicationId)
+        if(stage === 1){
+            navigate("/coordinatorViewCourseRegistration")
+        }
+        else if(stage === 2){
+            navigate("/courseRegistration")
+        }
+        else if(stage === 3){
+            navigate("/coordinatorPreApprovalForm")
+        }
+        else if(stage === 4){
+            navigate("/coordinatorLearningAgreement")
+        }
+        else{
+            alert("Application is successful. No further action is needed.")
+        }
     }
 
     function clickBack() {
         navigate("/main");
     }
 
-    function clickView() {
-        navigate("/coordinatorViewApplication")
-    }
+    // function clickView() {
+    //     navigate("/coordinatorViewApplication")
+    // }
     return (
         <div>
             <TopNavBar />
@@ -41,37 +106,32 @@ export default function ToDoListN() {
                     <div class="col-md-3" style={{ padding: '40px' }}>
                         <header class="col text-center" style={{ color: 'white', padding: '40px', fontSize: '30px' }}><b>Filtered Applications</b></header>
                         <Form id="scrollable" style={{ height: '70vh', background: '#3C8480', padding: '50px' }}>
-                            {[
-                                'Primary',
-                                'Secondary',
-                                'Success',
-                                'Danger',
-                                'Warning',
-                                'Info',
-                                'Light',
-                                'Dark',
-                            ].map((variant) => (
+                            {applications.map((variant) => (
                                 <Card
-                                    key={variant}
                                     text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
                                     style={{ width: '26rem', background: "#EB9181", margin: '10px' }}
                                 >
-                                    <Card.Header>Header</Card.Header>
+                                    <Card.Header>Application for {variant.choice1}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>{variant} Card Title </Card.Title>
+                                        <Card.Title>Semester: {variant.semester} </Card.Title>
                                         <Card.Text>
-                                            Some quick example text to build on the card title and make up the
-                                            bulk of the card's content.
+                                            Current Stage: {variant.stage ? 'Yes' : 'No'}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Pre-Approval Status: {variant.ispreapprovalapproved ? 'Yes' : 'No'}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Equivalence: {variant.isequivalanceapproved ? 'Yes' : 'No'}
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{ alignContent: 'center', justifyContent: 'center', }}>
-                                        <Button onClick={clickView} style={{ textAlign: 'left', margin: '5px' }}>
+                                        <Button onClick={() => view(variant.stage, variant.id)} style={{ textAlign: 'left', margin: '5px' }}>
                                             View
                                         </Button>
-                                        <Button style={{ textAlign: 'right', margin: '5px' }}>
+                                        <Button onClick={ () => approve(variant.id, variant.stage)} style={{ textAlign: 'right', margin: '5px' }}>
                                             Approve
                                         </Button>
-                                        <Button style={{ textAlign: 'right', margin: '5px' }}>
+                                        <Button onClick={ () => disapprove(variant.id) } style={{ textAlign: 'right', margin: '5px' }}>
                                             Disapprove
                                         </Button>
                                     </Card.Footer>
