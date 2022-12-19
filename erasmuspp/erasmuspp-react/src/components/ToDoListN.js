@@ -9,9 +9,23 @@ import DropdownContext from "react-bootstrap/esm/DropdownContext";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function ToDoListN() {
+
+    const [myApplications, setmyAnnouncements] = useState([]);
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/application")
+            .then(res => {
+                setmyAnnouncements(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }, [])
 
     let navigate = useNavigate();
     
@@ -41,27 +55,17 @@ export default function ToDoListN() {
                     <div class="col-md-3" style={{ padding: '40px' }}>
                         <header class="col text-center" style={{ color: 'white', padding: '40px', fontSize: '30px' }}><b>Filtered Applications</b></header>
                         <Form id="scrollable" style={{ height: '70vh', background: '#3C8480', padding: '50px' }}>
-                            {[
-                                'Primary',
-                                'Secondary',
-                                'Success',
-                                'Danger',
-                                'Warning',
-                                'Info',
-                                'Light',
-                                'Dark',
-                            ].map((variant) => (
+                            {myApplications.map((variant) => (
                                 <Card
                                     key={variant}
                                     text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
                                     style={{ width: '26rem', background: "#EB9181", margin: '10px' }}
                                 >
-                                    <Card.Header>Header</Card.Header>
+                                    <Card.Header>{variant.id}</Card.Header>
                                     <Card.Body>
                                         <Card.Title>{variant} Card Title </Card.Title>
                                         <Card.Text>
-                                            Some quick example text to build on the card title and make up the
-                                            bulk of the card's content.
+                                            {variant.id}
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{ alignContent: 'center', justifyContent: 'center', }}>
