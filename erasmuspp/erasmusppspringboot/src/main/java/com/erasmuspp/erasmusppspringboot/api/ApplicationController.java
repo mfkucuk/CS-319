@@ -39,10 +39,10 @@ public class ApplicationController
         return applicationService.addApplication(application, token);
     }
 
-    @GetMapping
-    public List<Application> getAllApplication()
+    @GetMapping(path = "token={token}")
+    public List<Application> getAllApplication(@PathVariable("token") String token)
     {
-        return applicationService.getAllApplications();
+        return applicationService.getAllApplications(token);
     }
 
     @GetMapping(path="token={token}")

@@ -30,8 +30,37 @@ public class ApplicationDataAccess implements ApplicationDao
     }
 
     @Override
-    public List<Application> selectAllApplications() {
-        return null;
+    public List<Application> selectAllApplications(String token) {
+        final String sql = "SELECT * FROM \"application\"";
+        List<Application> applications = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID applicationId = UUID.fromString(resultSet.getString("id"));
+            String userId = resultSet.getString("userid");
+            String semester = resultSet.getString("semester");
+            int stage = resultSet.getInt("stage");
+            boolean equivalance = resultSet.getBoolean("isequivalanceapproved");
+            boolean preapproval = resultSet.getBoolean("ispreapprovalapproved");
+            String choice1 = resultSet.getString("choice1");
+            String choice2 = resultSet.getString("choice2");
+            String choice3 = resultSet.getString("choice3");
+            String choice4 = resultSet.getString("choice4");
+            String choice5 = resultSet.getString("choice5");
+            return new Application(
+                applicationId,
+                userId,
+                semester,
+                stage,
+                equivalance,
+                preapproval,
+                choice1,
+                choice2,
+                choice3,
+                choice4,
+                choice5
+            );
+        });
+
+        List<Application> result = filterByDepartment(applications, token);
+        return result;
     }
 
     @Override
@@ -95,6 +124,20 @@ public class ApplicationDataAccess implements ApplicationDao
     }
 
     
+    private List<Application> filterByDepartment(List<Application> applications, String token) {
+        List<Application> result = new ArrayList<>();
 
+        User coordinator = userDataAccess.selectUserByToken(token).orElse(null);
+
+        for (Application application : applications) {
+            User ownerOfApplication = userDataAccess.selectUserById(UUID.fromString(application.getUserId())).orElse(null);
+
+            if (coordinator.getDepartment().equals(ownerOfApplication.getDepartment())) {
+                result.add(application);
+            }
+        }
+
+        return result;
+    }
 
 }

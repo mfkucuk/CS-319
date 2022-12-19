@@ -33,9 +33,9 @@ public class ApplicationService
         return applicationDao.selectApplicationsByToken(token);
     }
 
-    public List<Application> getAllApplications()
+    public List<Application> getAllApplications(String token)
     {
-        return applicationDao.selectAllApplications();
+        return applicationDao.selectAllApplications(token);
     }
 
     public Optional<Application> getApplicationById(UUID id)

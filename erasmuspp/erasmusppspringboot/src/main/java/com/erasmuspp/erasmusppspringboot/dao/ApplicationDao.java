@@ -19,7 +19,7 @@ public interface ApplicationDao
 
     List<Application> selectApplicationsByToken(String token);
 
-    List<Application> selectAllApplications();
+    List<Application> selectAllApplications(String token);
 
     Optional<Application> selectApplicationById(UUID id);
 
