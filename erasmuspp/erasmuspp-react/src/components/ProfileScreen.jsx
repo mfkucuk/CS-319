@@ -37,7 +37,9 @@ export default function ProfileScreen() {
         setUserEmailInit(res.data.personalEmail);
         setUserMobilePhoneNoInit(res.data.mobilePhone);
         setUserDoBInit(res.data.dob);
-        setUserImageSrcInit(res.data.profilePhoto);
+        if (res.data.profilePhoto !== "") { 
+          setUserImageSrcInit(res.data.profilePhoto);
+        }
       }
       )
   }, [userFirstNameInit][userAboutMeInit])
