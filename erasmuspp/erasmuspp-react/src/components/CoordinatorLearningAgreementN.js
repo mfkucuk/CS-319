@@ -28,9 +28,6 @@ export default function CoordinatorLearningAgreementN() {
     }
 
 
-
-
-
     return (
         <div class="container-fluid">
             <TopNavBar />

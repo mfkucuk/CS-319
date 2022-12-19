@@ -128,9 +128,6 @@ export default function ApplicationFormEditY() {
               <Form.Group className="ps-5 mb-2" controlId="applicationFormEditMobilePhoneNo">
                 <Form.Label>Mobile Phone No.:</Form.Label>
               </Form.Group>
-              <Form.Group className="ps-5 mb-2" controlId="applicationFormEditLocalPhoneNo">
-                <Form.Label>Local Phone No.:</Form.Label>
-              </Form.Group>
               <Form.Group className="ps-5 mb-2" controlId="applicationFormEditPostalAddress">
                 <Form.Label>Postal Address:</Form.Label>
               </Form.Group>
@@ -165,16 +162,13 @@ export default function ApplicationFormEditY() {
               <Form.Group className="pt-1 mb-1" controlId="applicationFormEditUnivEmailForm">
                 <Form.Label>{userEmailInit}</Form.Label>
               </Form.Group>
-              <Form.Group className="me-5 mb-1" controlId="applicationformEditPersonalEmailForm">
+              <Form.Group className="me-5 mb-2" controlId="applicationformEditPersonalEmailForm">
                 <Form.Control placeholder={userEmailInit} />
               </Form.Group>
-              <Form.Group className="me-5 mb-1" controlId="applicationFormEditMobilePhoneNoForm">
+              <Form.Group className="me-5 mb-3" controlId="applicationFormEditMobilePhoneNoForm">
                 <Form.Control placeholder={userMobilePhoneNoInit} />
               </Form.Group>
-              <Form.Group className="me-5 mb-1" controlId="applicationFormEditLocalPhoneNoForm">
-                <Form.Control placeholder={userMobilePhoneNoInit} />
-              </Form.Group>
-              <Form.Group className="me-5 mb-3" controlId="applicationFormEditPostalAddressForm">
+              <Form.Group className="me-5 mb-2" controlId="applicationFormEditPostalAddressForm">
                 <Form.Control as="textarea" rows={4} placeholder="Postal Address" />
               </Form.Group>
             </Form>

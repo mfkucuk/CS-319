@@ -11,7 +11,6 @@ export default function LoginScreen() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  
   let navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
@@ -31,7 +30,6 @@ export default function LoginScreen() {
         }
         else {
           alert("E-Mail/Password do not match")
-          console.log(res.data.status);
         }
       }).catch(err=> alert("Server Error! Try again later."));
   };
