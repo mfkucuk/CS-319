@@ -91,12 +91,16 @@ export default function CourseRegistrationY() {
     navigate("/myApplications");
   }
 
+  function handleCLickRoadmap() {
+    navigate("/roadmap");
+  }
+
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
       <TopNavBar />
       <div class="container-fluid" >
         <div class="row">
-        <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
+          <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
             <Button style={{ margin: '40px', height: '40px' }} onClick={clickBack}>
               Go Back
             </Button>
@@ -171,8 +175,12 @@ export default function CourseRegistrationY() {
           <div class="col-md-2 text-center">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-            <Button onClick={(e) => { postBilkentCourses(e); postPreApprovedCourses(e);}} style={{ backgroundColor: "#3C7479" }}>
+            <Button onClick={(e) => { postBilkentCourses(e); postPreApprovedCourses(e); }} style={{ backgroundColor: "#3C7479" }}>
               Submit
+            </Button>
+            <br /><br /><br /><br /><br />
+            <Button onClick={handleCLickRoadmap} style={{ backgroundColor: "#3C7479" }}>
+              Go to Roadmap
             </Button>
             <LargeBreak></LargeBreak>
           </div>
