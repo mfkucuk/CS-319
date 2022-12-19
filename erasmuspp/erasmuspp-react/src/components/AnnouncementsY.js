@@ -83,7 +83,7 @@ export default function AnnouncementsY() {
           <Col md={{ span: 10, offset: 1 }}>
             <Card style={{backgroundColor: "#F4EFF2", width: "65rem"}}>
               <Card.Body>
-                <Card.Title>{announcement.title}</Card.Title>
+                <Card.Title>{announcement.postDate} | {announcement.poster} : {announcement.title}</Card.Title>
                 <Card.Text>
                   {announcement.content}
                 </Card.Text>

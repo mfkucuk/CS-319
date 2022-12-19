@@ -41,12 +41,14 @@ export default function PostAnnouncementY() {
   }, [])
 
   const postAnnouncement = () => {
+    let d = (new Date()).getDate() + "/" + (new Date()).getMonth() + "/" + (new Date()).getFullYear() + " "
+        + (new Date()).getHours() + ":" + (new Date()).getMinutes();
     axios
       .post("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"),
       {
         title: announcementTitle,
         content: announcementDescription,
-        postDate: Date(),
+        postDate: d,
         expireDate: "",
         filters: [
           departmentName,

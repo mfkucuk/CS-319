@@ -180,8 +180,8 @@ public class ApplicationDataAccess implements ApplicationDao
         final String sql = "UPDATE \"application\"\nSET \"stage\" = ?, \"status\" = ?, \"isequivalanceapproved\" = ?, \"ispreapprovalapproved\" = ?\nWHERE \"id\" = ?";
         Application app = selectApplicationById(applicationId).orElse(null);
 
-        Boolean isEquivalence = false;
-        Boolean isPreApproval = false;
+        Boolean isEquivalence = app.getEquivalanceApproved();
+        Boolean isPreApproval = app.getPreApprovalApproved();
 
         if (app.getStage() == 2) {
             isEquivalence = true;
