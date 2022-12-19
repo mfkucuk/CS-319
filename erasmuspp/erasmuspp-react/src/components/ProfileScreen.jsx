@@ -34,7 +34,7 @@ export default function ProfileScreen() {
         setUserFirstNameInit(res.data.firstName);
         setUserLastNameInit(res.data.lastName);
         setUserAboutMeInit(res.data.aboutMe);
-        setUserEmailInit(res.data.email);
+        setUserEmailInit(res.data.personalEmail);
         setUserMobilePhoneNoInit(res.data.mobilePhone);
         setUserDoBInit(res.data.dob);
         setUserImageSrcInit(res.data.profilePhoto);
@@ -65,12 +65,12 @@ export default function ProfileScreen() {
 
   const putUserEmail = () => {
     axios
-      .put("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
-          personalEmail: userEmail
-        })
+      .put("http://localhost:8080/api/v1/user/changePersonalEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+        
+          userEmail
+        )
       .then((res) => {
-        if (res.data === true) {
+        if (res.data === 1) {
           alert("Email updated successfully.");
         }
         else {
@@ -83,12 +83,12 @@ export default function ProfileScreen() {
 
   const putUserMobilePhoneNo = () => {
     axios
-      .put("http://localhost:8080/api/v1/user/changeMobilePhoneNo/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
-          mobilePhone: userMobilePhoneNo
-        })
+      .put("http://localhost:8080/api/v1/user/changeMobilePhone/token=" + window.localStorage.getItem("USER_TOKEN"),
+        
+          userMobilePhoneNo
+        )
       .then((res) => {
-        if (res.data === true) {
+        if (res.data === 1) {
           alert("Mobile phone number updated successfully.");
         }
         else {
