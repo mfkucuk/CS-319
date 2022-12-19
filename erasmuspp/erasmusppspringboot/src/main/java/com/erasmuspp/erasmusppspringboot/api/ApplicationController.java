@@ -70,8 +70,8 @@ public class ApplicationController
     }
 
     @PutMapping(path = "/approve/applicationId={id}")
-    public int incrementStage(@PathVariable("id") UUID id, @Valid @RequestBody int newStage) {
-        return applicationService.incrementStage(id, newStage);
+    public int incrementStage(@PathVariable("id") UUID id) {
+        return applicationService.incrementStage(id);
     }
 
     @PutMapping(path = "/disapprove/applicationId={id}")

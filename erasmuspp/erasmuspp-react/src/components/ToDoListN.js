@@ -34,26 +34,23 @@ export default function ToDoListN() {
         //TODO
     }
 
-    function approve(applicationId, stage) {
-        stage++;
-        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId, stage)
+    function approve(applicationId) {
+        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId, temp)
           .then(res => {
-            if(res === 1)
+            if(res.data === 1)
             {
                 alert("Application approved!")
             }
             else{
                 alert("Application approve failed!")
-            }          })
-          .catch(err=>{
-            console.log(err)
-          })
+            }          
+            })
     }
 
     function disapprove(applicationId) {
         axios.put("http://localhost:8080/api/v1/application/disapprove/applicationId=" + applicationId)
           .then(res => {
-            if(res === 1)
+            if(res.data === 1)
             {
                 alert("Application disapproved!")
             }
@@ -127,7 +124,7 @@ export default function ToDoListN() {
                                         <Button onClick={() => view(variant.stage, variant.id)} style={{ textAlign: 'left', margin: '5px' }}>
                                             View
                                         </Button>
-                                        <Button onClick={ () => approve(variant.id, variant.stage)} style={{ textAlign: 'right', margin: '5px' }}>
+                                        <Button onClick={ () => approve(variant.id)} style={{ textAlign: 'right', margin: '5px' }}>
                                             Approve
                                         </Button>
                                         <Button onClick={ () => disapprove(variant.id) } style={{ textAlign: 'right', margin: '5px' }}>

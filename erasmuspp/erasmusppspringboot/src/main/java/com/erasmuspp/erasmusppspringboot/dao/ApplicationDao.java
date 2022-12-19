@@ -27,7 +27,7 @@ public interface ApplicationDao
 
     int updateApplicationById(UUID id, Application application);
 
-    int incrementStage(UUID applicationId, int stage);
+    int incrementStage(UUID applicationId);
 
     int disapprove(UUID applicationId);
 }

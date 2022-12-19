@@ -145,9 +145,10 @@ public class ApplicationDataAccess implements ApplicationDao
     }
 
     @Override
-    public int incrementStage(UUID applicationId, int stage) {
+    public int incrementStage(UUID applicationId) {
         final String sql = "UPDATE \"application\" SET \"stage\" = ?, \"status\" = ? WHERE \"id\" = ?";
-        return jdbcTemplate.update(sql, stage, "Approved", applicationId);
+        Application app = selectApplicationById(applicationId).orElse(null);
+        return jdbcTemplate.update(sql, app.getStage() + 1, "Approved", applicationId);
     }
 
     @Override
