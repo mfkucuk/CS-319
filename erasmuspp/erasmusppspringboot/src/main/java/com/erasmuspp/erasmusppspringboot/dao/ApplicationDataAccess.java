@@ -154,7 +154,8 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public int updateApplicationStatus(UUID id) {
-        return 0;
+        final String sql = "UPDATE \"application\" SET \"status\" = ? WHERE \"id\" = ?";
+        return jdbcTemplate.update(sql, "Pending", id);
     }
 
     
@@ -176,7 +177,7 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public int incrementStage(UUID applicationId) {
-        final String sql = "UPDATE \"application\" SET \"stage\" = ?, \"status\" = ?, SET \"isequivalanceapproved\" = ?, SET \"ispreapprovalapproved\" = ?  WHERE \"id\" = ?";
+        final String sql = "UPDATE \"application\" SET \"stage\" = ?, SET \"status\" = ?, SET \"isequivalanceapproved\" = ?, SET \"ispreapprovalapproved\" = ?  WHERE \"id\" = ?";
         Application app = selectApplicationById(applicationId).orElse(null);
 
         Boolean isEquivalence = false;
