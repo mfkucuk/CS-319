@@ -46,9 +46,13 @@ export default function LearningAgreementN() {
   const uploadLearningAgreementFinal = () => {
     console.log(learningAgreementFb64);
     axios
-      .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"),
+      .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"),
         {
-          learningAgreement: learningAgreementFb64
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: learningAgreementFb64,
+          fileName: "Learning Agreement",
+          fileType: "Learning Agreement",
+          uploadTime: Date()
         }
       )
       .then((res) => {

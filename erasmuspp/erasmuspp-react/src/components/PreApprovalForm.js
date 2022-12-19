@@ -43,9 +43,13 @@ export default function PreApprovalFormN() {
 
   const uploadPreApprovalFinal = () => {
     axios
-      .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"),
+      .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"),
         {
-          preApprovalForm: preApprovalFb64
+          applicationId: window.localStorage.getItem("LAST_APPLICATION"),
+          content: preApprovalFb64,
+          fileName: "Pre Approval Form",
+          fileType: "Pre Approval Form",
+          uploadTime: Date()
         }
       )
       .then((res) => {

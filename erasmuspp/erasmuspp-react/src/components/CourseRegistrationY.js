@@ -17,6 +17,8 @@ export default function CourseRegistrationY() {
     axios
       .post("http://localhost:8080/api/v1/courseRegistration/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"),
         {
+          id: "",
+          applicationId: "",
           bilkentCourse: bilkentCourses,
           preApprovedCourse: preApprovedCourses
         })
@@ -34,13 +36,13 @@ export default function CourseRegistrationY() {
 
   const handleBilkentChange = (index, event) => {
     let data = [...bilkentCourses];
-    data[index][event.target.courseIndex] = event.target.value;
+    data[index] = event;
     setBilkentCourses(data);
   }
 
   const handleApprovedChange = (index, event) => {
     let data = [...preApprovedCourses];
-    data[index][event.target.courseIndex] = event.target.value;
+    data[index] = event;
     setPreApprovedCourses(data)
   }
 
@@ -111,7 +113,7 @@ export default function CourseRegistrationY() {
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
-                      onChange={event => handleBilkentChange(index, event)} />
+                      onChange={event => handleBilkentChange(index, event.target.value)} />
                   </div>
                 )
               })}
@@ -140,7 +142,7 @@ export default function CourseRegistrationY() {
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
                       placeholder={input.courseIndex}
-                      onChange={event => handleApprovedChange(index, event)} />
+                      onChange={event => handleApprovedChange(index, event.target.value)} />
 
                   </div>
                 )

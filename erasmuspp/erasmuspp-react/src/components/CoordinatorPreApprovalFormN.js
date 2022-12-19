@@ -9,16 +9,21 @@ import axios from 'axios';
 export default function CoordinatorPreApprovalFormN() {
   
     const [preApprovalFb64, setpreApprovalFb64] = useState("");
+
     useEffect(() => {
-      axios.get("http://localhost:8080/api/v1/announcement/")
-        .then(res => {
-          setpreApprovalFb64(res.data);
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-  
-    }, [preApprovalFb64])
+        axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
+          .then(res => {
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i]?.fileType === "Statement of Purpose"){
+                    setpreApprovalFb64(res.data[i].content);
+                }
+            }
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+    
+      }, [preApprovalFb64])
   
     let checked = false;
     let submissionSuccess = false;
