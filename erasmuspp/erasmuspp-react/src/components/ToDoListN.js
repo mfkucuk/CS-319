@@ -68,10 +68,10 @@ export default function ToDoListN() {
     function view(stage, applicationId) {
         window.localStorage.setItem("LAST_APPLICATION", applicationId)
         if(stage === 1){
-            navigate("/coordinatorViewCourseRegistration")
+            navigate("/coordinatorViewApplication")
         }
         else if(stage === 2){
-            navigate("/courseRegistration")
+            navigate("/coordinatorCourseRegistration")
         }
         else if(stage === 3){
             navigate("/coordinatorPreApprovalForm")
@@ -108,14 +108,13 @@ export default function ToDoListN() {
                         <Form id="scrollable" style={{ height: '70vh', background: '#3C8480', padding: '50px' }}>
                             {applications.map((variant) => (
                                 <Card
-                                    text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
                                     style={{ width: '26rem', background: "#EB9181", margin: '10px' }}
                                 >
                                     <Card.Header>Application for {variant.choice1}</Card.Header>
                                     <Card.Body>
                                         <Card.Title>Semester: {variant.semester} </Card.Title>
                                         <Card.Text>
-                                            Current Stage: {variant.stage ? 'Yes' : 'No'}
+                                            Current Stage: {variant.stage}
                                         </Card.Text>
                                         <Card.Text>
                                             Pre-Approval Status: {variant.ispreapprovalapproved ? 'Yes' : 'No'}

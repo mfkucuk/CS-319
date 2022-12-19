@@ -29,7 +29,6 @@ public class AuthenticationController {
     ) {
         final UserDetails user = userDataAccess.loadUserByUsername(request.getEmail());
         if (user != null) {
-            System.out.println(user.getPassword());
             if (user.getPassword().equals(request.getPassword())) {
                 String token = jwtUtils.generateToken(user);
                 userDataAccess.updateTokenByEmail(request.getEmail(), token);

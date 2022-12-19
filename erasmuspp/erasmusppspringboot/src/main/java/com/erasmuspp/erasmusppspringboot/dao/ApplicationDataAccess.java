@@ -60,6 +60,9 @@ public class ApplicationDataAccess implements ApplicationDao
         });
 
         List<Application> result = filterByDepartment(applications, token);
+        for (Application app : result) {
+            System.out.println(app.getChoice1());
+        }
         return result;
     }
 
@@ -130,7 +133,9 @@ public class ApplicationDataAccess implements ApplicationDao
         User coordinator = userDataAccess.selectUserByToken(token).orElse(null);
 
         for (Application application : applications) {
+            System.out.println(application.getUserId());
             User ownerOfApplication = userDataAccess.selectUserById(UUID.fromString(application.getUserId())).orElse(null);
+            System.out.println(ownerOfApplication.getFirstName());
 
             if (coordinator.getDepartment().equals(ownerOfApplication.getDepartment())) {
                 result.add(application);
