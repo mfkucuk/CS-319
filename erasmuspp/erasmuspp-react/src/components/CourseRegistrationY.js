@@ -13,35 +13,16 @@ export default function CourseRegistrationY() {
   const [preApprovedCourses, setPreApprovedCourses] = useState([])
 
 
-  const postBilkentCourses = (e) => {
-    e.preventDefault();
+  const postBilkentCourses = () => {
     axios
-      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
+      .post("http://localhost:8080/api/v1/courseRegistration/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"),
         {
-          bilkentCourse: bilkentCourses
-        })
-      .then((res) => {
-        if (res.data === true) {
-          alert("Email updated successfully.");
-        }
-        else {
-          alert("Something went wrong.");
-        }
-      }).catch((error) => {
-        alert("Something went wrong.");
-      });
-  };
-
-  const postPreApprovedCourses = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/v1/user/changeEmail/token=" + window.localStorage.getItem("USER_TOKEN"),
-        {
+          bilkentCourse: bilkentCourses,
           preApprovedCourse: preApprovedCourses
         })
       .then((res) => {
-        if (res.data === true) {
-          alert("Email updated successfully.");
+        if (res.data === 1) {
+          alert("Course registration is successful.");
         }
         else {
           alert("Something went wrong.");
@@ -175,7 +156,7 @@ export default function CourseRegistrationY() {
           <div class="col-md-2 text-center">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-            <Button onClick={(e) => { postBilkentCourses(e); postPreApprovedCourses(e); }} style={{ backgroundColor: "#3C7479" }}>
+            <Button onClick={postBilkentCourses} style={{ backgroundColor: "#3C7479" }}>
               Submit
             </Button>
             <br /><br /><br /><br /><br />
