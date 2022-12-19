@@ -38,7 +38,6 @@ export default function PreApprovalFormN() {
       }
     
       const uploadPreApprovalFinal = () => {
-        console.log(preApprovalFb64);
         axios
           .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
             { 
@@ -58,7 +57,6 @@ export default function PreApprovalFormN() {
           });
       }
 
-
     const clickPrint = () =>{
         fetch("PreApprovalForm.docx").then(response => {
             response.blob().then(blob => {
@@ -71,8 +69,6 @@ export default function PreApprovalFormN() {
         })
     
     }
-
-
 
     function clickSubmit() {
         if(submissionSuccess)

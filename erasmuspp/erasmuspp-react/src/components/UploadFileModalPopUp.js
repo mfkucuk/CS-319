@@ -11,7 +11,6 @@ export default function UploadFileModalPopUpY(props) {
 
 
   const submitFile = () => {
-    console.log(sopB64x);
   } 
   
   return (

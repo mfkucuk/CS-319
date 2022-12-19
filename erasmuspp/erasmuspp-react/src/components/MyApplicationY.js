@@ -62,7 +62,6 @@ export default function MyApplicationY() {
   }
 
   const uploadSOPFinal = () => {
-    console.log(sopB64);
     axios
       .post("http://localhost:8080/api/v1/file/", 
         { 
@@ -99,7 +98,6 @@ export default function MyApplicationY() {
   }
 
   const uploadAppFormFinal = () => {
-    console.log(appFormB64);
     axios
       .post("http://localhost:8080/api/v1/file/", 
         { 
@@ -123,7 +121,6 @@ export default function MyApplicationY() {
   }
 
   const uploadCVFinal = () => {
-    console.log(CVB64);
     axios
       .post("http://localhost:8080/api/v1/file/", 
         { 

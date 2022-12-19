@@ -36,7 +36,6 @@ export default function CoordinatorPreApprovalFormN() {
     }
 
 
-
     function clickSubmit() {
         if(submissionSuccess)
             alert("Learning Agreement Submitted Succesfully!");

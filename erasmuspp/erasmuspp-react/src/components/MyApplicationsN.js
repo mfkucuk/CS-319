@@ -12,16 +12,16 @@ export default function MyApplicationsN() {
 
     const [myApplications, setmyAnnouncements] = useState([]);
     let preapproval, equivalance;
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"))
-      .then(res => {
-        setmyAnnouncements(res.data);
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"))
+            .then(res => {
+                setmyAnnouncements(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
-  }, [])
+    }, [])
 
 
     let navigate = useNavigate();
@@ -38,11 +38,11 @@ export default function MyApplicationsN() {
 
 
     }
-    function newApplication(){
+    function newApplication() {
         navigate("/editApplicationForm");
     }
 
-    function clickBack(){
+    function clickBack() {
         navigate("/main");
     }
     return (
@@ -85,7 +85,7 @@ export default function MyApplicationsN() {
                         }}>
                             {myApplications.map((attributes) => (
                                 <Card
-                                    key= {attributes.id}
+                                    key={attributes.id}
                                     text={attributes.body}
                                     style={{ width: '18rem', background: "#EB9181", margin: 'auto', alignItems: 'center' }}
                                     className="mb-2"
@@ -94,19 +94,20 @@ export default function MyApplicationsN() {
                                     <Card.Body>
                                         <Card.Text>Semester: {attributes.semester}</Card.Text>
                                         <Card.Text>
-                                            Stage: {attributes.stage} 
-                                        </Card.Text> 
-                                        <Card.Text> 
+                                            Stage: {attributes.stage}
+                                        </Card.Text>
+                                        <Card.Text>
                                             Preapproval Approved: {attributes.ispreapprovalapproved ? 'Yes' : 'No'}
                                         </Card.Text>
                                         <Card.Text>
-                                            Equivalance Approved: {attributes.isequivalanceapproved ? 'Yes' : 'No'} 
+                                            Equivalance Approved: {attributes.isequivalanceapproved ? 'Yes' : 'No'}
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer style={{
                                         alignContent: 'center',
                                         justifyContent: 'center',
                                     }}>
+
                                         <Button onClick={() =>handleClickMyApplication(attributes.id, attributes.stage)} style={{
                                             textAlign: 'center',
                                         }}>
@@ -120,10 +121,10 @@ export default function MyApplicationsN() {
                         </Form>
                         <br></br>
                         <div class="col text-center">
-                                <Button onClick= {newApplication}>
-                                    New Application
-                                </Button>
-                            </div>
+                            <Button onClick={newApplication}>
+                                New Application
+                            </Button>
+                        </div>
                     </div>
                     <div class="col-md-2">
 
