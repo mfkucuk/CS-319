@@ -22,22 +22,38 @@ export default function PostAnnouncementY() {
     navigate("/main");
   }
 
-  const saveCandidateInformation = (e) => {
-    e.preventDefault();
+  function generatePassword() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+  }
+
+  const saveCandidateInformation = () => {
     axios
-      .post("http://localhost:8080/api/v1/candidateRegistration/token=" + window.localStorage.getItem("USER_TOKEN"),
+      .post("http://localhost:8080/api/v1/user",
         {
           firstName: userFirstName,
           lastName: userLastName,
           dob: userDoB,
           nationality: userNationality,
+          email: userBilkentEmail,
           bilkentId: userStudentIDNo,
           department: userDepartment,
-          email: userBilkentEmail,
-          gpa: userCumGPA
+          gpa: userCumGPA,
+          personalEmail: "",
+          mobilePhone: "",
+          aboutMe: "",
+          password: generatePassword(),
+          role: "ROLE_CANDIDATE",
+          token: "",
+          profilePhoto: ""
         })
       .then((res) => {
-        if (res.data === true) {
+        if (res.data === 1) {
 
           alert("Candidate information saved successfully.");
         }

@@ -19,14 +19,14 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @PostMapping
-    public void addFile(@Valid @RequestBody File file) {
-        fileService.addFile(file);
+    @PostMapping(path = "applicationId={applicationId}")
+    public int addFile(@PathVariable("applicationId") String applicationId, @Valid @RequestBody File file) {
+        return fileService.addFile(applicationId, file);
     }
 
-    @GetMapping(path = "{application}")
-    public List<File> getFilesByApplication(@PathVariable("application") String application) {
-        return fileService.getFilesByApplication(application);
+    @GetMapping(path = "applicationId={applicationId}")
+    public List<File> getFilesByApplicationId(@PathVariable("application") String application) {
+        return fileService.getFilesByApplicationId(application);
     }
 
 }

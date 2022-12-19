@@ -18,27 +18,30 @@ public class FileDataAccess implements FileDao {
     }
 
     @Override
-    public int insertFile(UUID id, File file) {
+    public int insertFile(UUID id, String applicationId, File file) {
         final String sql = "INSERT INTO \"file\"\nVALUES(?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, file.getApplicationId(), file.getContent(), file.getFileName(), file.getUploadTime() });
+        return jdbcTemplate.update(sql, new Object[] { id, applicationId, file.getContent(), file.getFileName(), file.getUploadTime() });
     }
 
     @Override
-    public List<File> selectFilesByApplication(String application) {
-        final String sql = "SELECT * FROM \"file\" WHERE application = ?";
+    public List<File> selectFilesByApplicationId(String applicationId) {
+        final String sql = "SELECT * FROM \"file\" WHERE applicationId = ?";
         List<File> files = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID fileId = UUID.fromString(resultSet.getString("id"));
             String content = resultSet.getString("content");
-            String fileName = resultSet.getString("fileName");
-            String uploadTime = resultSet.getString("uploadTime");
+            String applicationid = resultSet.getString("applicationId");
+            String fileName = resultSet.getString("filename");
+            String uploadTime = resultSet.getString("uploadtime");
+            String fileType = resultSet.getString("filetype");
             return new File(
                 fileId,
-                application,
+                applicationid,
                 content,
                 fileName,
+                fileType,
                 uploadTime
             );
-        });
+        }, applicationId);
         return files;
     }
 

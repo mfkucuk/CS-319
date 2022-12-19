@@ -6,13 +6,13 @@ import java.util.UUID;
 import com.erasmuspp.erasmusppspringboot.model.File;
 
 public interface FileDao {
-    int insertFile(UUID id, File file);
+    int insertFile(UUID id, String applicationId, File file);
 
-    default int insertFile(File file) {
+    default int insertFile(String applicationId, File file) {
         UUID id = UUID.randomUUID();
-        return insertFile(id, file);
+        return insertFile(id, applicationId, file);
     }
 
-    List<File> selectFilesByApplication(String application);
+    List<File> selectFilesByApplicationId(String applicationId);
 
 }

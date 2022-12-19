@@ -16,12 +16,12 @@ public class FileService {
         this.fileDao = fileDao;
     }
 
-    public int addFile(File file) {
-        return fileDao.insertFile(file);
+    public int addFile(String applicationId, File file) {
+        return fileDao.insertFile(applicationId, file);
     }
 
-    public List<File> getFilesByApplication(String application) {
-        return fileDao.selectFilesByApplication(application);
+    public List<File> getFilesByApplicationId(String application) {
+        return fileDao.selectFilesByApplicationId(application);
     }
 
 }

@@ -2,6 +2,8 @@ package com.erasmuspp.erasmusppspringboot.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Application
 {
@@ -17,7 +19,18 @@ public class Application
     private String choice4;
     private String choice5;
 
-    public Application(UUID id, String userId, String semester, int stage, boolean isEquivalanceApproved, boolean isPreApprovalApproved, String choice1, String choice2, String choice3, String choice4, String choice5)
+    public Application(
+        @JsonProperty("id") UUID id, 
+        @JsonProperty("userId") String userId, 
+        @JsonProperty("semester") String semester, 
+        @JsonProperty("stage") int stage, 
+        @JsonProperty("isEquivalanceApproved") boolean isEquivalanceApproved, 
+        @JsonProperty("isPreApprovalApproved") boolean isPreApprovalApproved, 
+        @JsonProperty("choice1") String choice1, 
+        @JsonProperty("choice2") String choice2, 
+        @JsonProperty("choice3") String choice3, 
+        @JsonProperty("choice4") String choice4, 
+        @JsonProperty("choice5") String choice5)
     {
         this.id = id;
         this.userId = userId;

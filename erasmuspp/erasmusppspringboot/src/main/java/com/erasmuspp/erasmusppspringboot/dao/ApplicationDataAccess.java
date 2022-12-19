@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.erasmuspp.erasmusppspringboot.dto.ApplicationRequest;
 import com.erasmuspp.erasmusppspringboot.model.Application;
 import com.erasmuspp.erasmusppspringboot.model.User;
 
@@ -22,12 +23,10 @@ public class ApplicationDataAccess implements ApplicationDao
     private final UserDataAccess userDataAccess;
 
     @Override
-    public int insertApplication(UUID id, Application application, String token) {
-        System.out.println(application.getChoice1());
-        System.out.println(application.getSemester());
-        User user = userDataAccess.selectUserByToken(token).get();
-        final String sql = "INSERT INTO \"application\" (id, semester, stage, isequivalanceapproved, ispreapprovalapproved, userid, choice1, choice2, choice3, choice4, choice5)\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), application.getStage(), application.getEquivalanceApproved(), application.getPreApprovalApproved(), user.getId(), application.getChoice1(), application.getChoice2(), application.getChoice3(), application.getChoice4(), application.getChoice5()});
+    public int insertApplication(UUID id, ApplicationRequest application, String token) {
+        User user = userDataAccess.selectUserByToken(token).orElse(null);
+        final String sql = "INSERT INTO \"application\"\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), 1, false, false, user.getId().toString(), application.getChoice1(), application.getChoice2(), application.getChoice3(), application.getChoice4(), application.getChoice5()});
     }
 
     @Override

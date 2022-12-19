@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.erasmuspp.erasmusppspringboot.dao.ApplicationDao;
+import com.erasmuspp.erasmusppspringboot.dto.ApplicationRequest;
 import com.erasmuspp.erasmusppspringboot.model.Application;
 
 
@@ -22,7 +23,7 @@ public class ApplicationService
         this.applicationDao = applicationDao;
     }
 
-    public int addApplication(Application application, String token)
+    public int addApplication(ApplicationRequest application, String token)
     {
         return applicationDao.insertApplication(application, token);
     }

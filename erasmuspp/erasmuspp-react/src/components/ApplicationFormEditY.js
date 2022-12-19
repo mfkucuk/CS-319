@@ -36,6 +36,7 @@ export default function ApplicationFormEditY() {
         setUserFirstNameInit(res.data.firstName);
         setUserLastNameInit(res.data.lastName);
         setUserEmailInit(res.data.email);
+        setUserEmail(res.data.personalEmail);
         setUserNationality(res.data.nationality);
         setUserId(res.data.bilkentId);
         setUserDepartment(res.data.department);
@@ -54,16 +55,20 @@ export default function ApplicationFormEditY() {
   function submitForm() {
 
     axios.post("http://localhost:8080/api/v1/application/token=" + window.localStorage.getItem("USER_TOKEN"), {
-
-    choice1:  uni1,
-    choice2:  uni2,
-    choice3:  uni3,
-    choice4:  uni4,
-    choice5:  uni5,
-    semester: selectedSemester
-
-    })
-      .then((res) => { })
+      semester: selectedSemester,
+      choice1:  uni1,
+      choice2:  uni2,
+      choice3:  uni3,
+      choice4:  uni4,
+      choice5:  uni5
+    }).then((res) => {
+        if (res.data === 1) {
+          alert("Application successfull");
+        }
+        else {
+          alert("Something went wrong");
+        }
+     })
   }
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
@@ -166,7 +171,7 @@ export default function ApplicationFormEditY() {
                 <Form.Label>{userEmailInit}</Form.Label>
               </Form.Group>
               <Form.Group className="me-5 mb-1" controlId="applicationformEditPersonalEmailForm">
-                <Form.Control placeholder={userEmailInit} />
+                <Form.Control placeholder={userEmail} />
               </Form.Group>
               <Form.Group className="me-5 mb-1" controlId="applicationFormEditMobilePhoneNoForm">
                 <Form.Control placeholder={userMobilePhoneNoInit} />
@@ -187,7 +192,7 @@ export default function ApplicationFormEditY() {
               <Form.Group controlId="applicationFormEditFirstNameForm">
                 <Form.Label>1.</Form.Label>
               </Form.Group>
-              <Form.Select aria-label="University Selection 1" onChange={(e) => {setUni1(e.target.value); console.log(e.target.value)}}>
+              <Form.Select aria-label="University Selection 1" onChange={(e) => {setUni1(e.target.value);}}>
                 <option>Select</option>
                 <option value="Aberystwyth University">Aberystwyth University</option>
                 <option value="Adam Mickiewicz Universitesi">Adam Mickiewicz Universitesi</option>

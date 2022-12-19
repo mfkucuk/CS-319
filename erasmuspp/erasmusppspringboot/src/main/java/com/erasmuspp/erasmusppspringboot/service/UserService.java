@@ -1,5 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.service;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public int addUser(User user)
+    public int addUser(User user) throws FileNotFoundException
     {
         return userDao.insertUser(user);
     }

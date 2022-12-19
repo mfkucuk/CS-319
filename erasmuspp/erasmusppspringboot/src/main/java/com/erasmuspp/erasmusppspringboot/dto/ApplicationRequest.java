@@ -1,18 +1,23 @@
-package com.erasmuspp.erasmusppspringboot.model;
+package com.erasmuspp.erasmusppspringboot.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ApplicationPart 
+public class ApplicationRequest 
 {
-    private String semester;
-    private String choice1;
-    private String choice2;
-    private String choice3;
-    private String choice4;
-    private String choice5;
+    private final String semester;
+    private final String choice1;
+    private final String choice2;
+    private final String choice3;
+    private final String choice4;
+    private final String choice5;
     
-    public ApplicationPart(@JsonProperty String semester, @JsonProperty String choice1, @JsonProperty String choice2, @JsonProperty String choice3,
-                            @JsonProperty String choice4, @JsonProperty String choice5)
+    public ApplicationRequest(
+        @JsonProperty("semester") String semester,
+        @JsonProperty("choice1") String choice1,
+        @JsonProperty("choice2") String choice2,
+        @JsonProperty("choice3") String choice3,
+        @JsonProperty("choice4") String choice4, 
+        @JsonProperty("choice5") String choice5)
     {
         this.semester = semester;
         this.choice1 = choice1;

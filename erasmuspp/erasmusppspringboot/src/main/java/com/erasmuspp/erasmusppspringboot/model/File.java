@@ -11,6 +11,8 @@ public class File {
 
     private final String fileName;
 
+    private final String fileType;
+
     private final String uploadTime;
 
     private final String applicationId;
@@ -19,12 +21,14 @@ public class File {
                 @JsonProperty("application") String applicationId,
                 @JsonProperty("content") String content,
                 @JsonProperty("fileName") String fileName,
+                @JsonProperty("fileType") String fileType,
                 @JsonProperty("uploadTime") String uploadTime) {
 
         this.applicationId = applicationId;
         this.id = id;    
         this.content = content;
         this.fileName = fileName;
+        this.fileType = fileType;
         this.uploadTime = uploadTime;        
     }
 
@@ -38,6 +42,10 @@ public class File {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
     }
 
     public String getUploadTime() {

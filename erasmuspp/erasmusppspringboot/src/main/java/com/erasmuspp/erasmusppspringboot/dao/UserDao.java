@@ -1,5 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,9 +8,9 @@ import java.util.UUID;
 import com.erasmuspp.erasmusppspringboot.model.User;
 
 public interface UserDao {
-    int insertUser(UUID id, User user);
+    int insertUser(UUID id, User user) throws FileNotFoundException;
 
-    default int insertUser(User user) {
+    default int insertUser(User user) throws FileNotFoundException {
         UUID id = UUID.randomUUID();
         return insertUser(id, user);
     }
