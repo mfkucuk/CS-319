@@ -25,7 +25,7 @@ public class FileDataAccess implements FileDao {
 
     @Override
     public List<File> selectFilesByApplicationId(String applicationId) {
-        final String sql = "SELECT * FROM \"file\" WHERE id = ?";
+        final String sql = "SELECT * FROM \"file\" WHERE \"applicationId\" = ?";
         List<File> files = jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID fileId = UUID.fromString(resultSet.getString("id"));
             String content = resultSet.getString("content");
