@@ -1,23 +1,27 @@
 package com.erasmuspp.erasmusppspringboot.dao;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.erasmuspp.erasmusppspringboot.model.CourseRegistration;
 
+import lombok.RequiredArgsConstructor;
+
 @Repository("courseRegistration")
+@RequiredArgsConstructor
 public class CourseRegistrationDataAccess implements CourseRegistrationDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public CourseRegistrationDataAccess(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    } 
-
     @Override
     public int insertCourseRegistration(String id, CourseRegistration courseRegistration, String applicationId) {
+
+        String updateStatus = "UPDATE \"application\" SET \"status\" = ? WHERE = ?";
+        jdbcTemplate.update(updateStatus, "Pending", UUID.fromString(applicationId));
+
         final String sql = "INSERT INTO \"courseRegistration\"\nVALUES (?, ?, ?, ?);";
         return jdbcTemplate.update(sql, id, applicationId, courseRegistration.getBilkentCourse(), courseRegistration.getPreApprovedCourse());
     }

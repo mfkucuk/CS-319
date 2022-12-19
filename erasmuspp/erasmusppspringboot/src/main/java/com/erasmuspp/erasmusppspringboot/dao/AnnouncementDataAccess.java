@@ -141,7 +141,7 @@ public class AnnouncementDataAccess implements AnnouncementDao
 
         // Filter by country
         for (Announcement announcement : announcements) {
-            if (!user.getNationality().equals(announcement.getFilters()[1])) {
+            if (!user.getNationality().equals(announcement.getFilters()[1]) && !announcement.getFilters()[1].equals("")) {
                 result.remove(announcement);
             }
         }
