@@ -136,7 +136,7 @@ public class ApplicationDataAccess implements ApplicationDao
         for (Application application : applications) {
             User ownerOfApplication = userDataAccess.selectUserById(UUID.fromString(application.getUserId())).orElse(null);
 
-            if (coordinator.getDepartment().equals(ownerOfApplication.getDepartment())) {
+            if (coordinator.getDepartment().equals(ownerOfApplication.getDepartment()) && application.getStatus().equals("Pending")) {
                 result.add(application);
             }
         }
