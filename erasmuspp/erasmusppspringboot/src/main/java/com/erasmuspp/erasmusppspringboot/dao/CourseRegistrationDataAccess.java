@@ -19,7 +19,7 @@ public class CourseRegistrationDataAccess implements CourseRegistrationDao {
     @Override
     public int insertCourseRegistration(String id, CourseRegistration courseRegistration, String applicationId) {
 
-        String updateStatus = "UPDATE \"application\" SET \"status\" = ? WHERE = ?";
+        String updateStatus = "UPDATE \"application\" SET \"status\" = ? WHERE \"id\" = ?";
         jdbcTemplate.update(updateStatus, "Pending", UUID.fromString(applicationId));
 
         final String sql = "INSERT INTO \"courseRegistration\"\nVALUES (?, ?, ?, ?);";
