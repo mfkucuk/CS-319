@@ -18,6 +18,7 @@ public class Application
     private String choice3;
     private String choice4;
     private String choice5;
+    private String status;     
 
     public Application(
         @JsonProperty("id") UUID id, 
@@ -30,7 +31,8 @@ public class Application
         @JsonProperty("choice2") String choice2, 
         @JsonProperty("choice3") String choice3, 
         @JsonProperty("choice4") String choice4, 
-        @JsonProperty("choice5") String choice5)
+        @JsonProperty("choice5") String choice5,
+        @JsonProperty("stauts") String status)
     {
         this.id = id;
         this.userId = userId;
@@ -43,6 +45,7 @@ public class Application
         this.choice3 = choice3;
         this.choice4 = choice4;
         this.choice5 = choice5;
+        this.status = status;
     }
 
 
@@ -123,4 +126,7 @@ public class Application
         return isPreApprovalApproved;
     }
 
+    public String getStatus() {
+        return status;
+    }
 }
