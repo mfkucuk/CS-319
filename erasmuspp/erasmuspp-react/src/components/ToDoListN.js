@@ -36,7 +36,7 @@ export default function ToDoListN() {
 
     function approve(applicationId, stage) {
         stage++;
-        axios.put("http://localhost:8080/api/v1/announcement/token=" + applicationId, stage)
+        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId, stage)
           .then(res => {
             if(res === 1)
             {
@@ -51,7 +51,7 @@ export default function ToDoListN() {
     }
 
     function disapprove(applicationId) {
-        axios.put("http://localhost:8080/api/v1/announcement/token=" + applicationId)
+        axios.put("http://localhost:8080/api/v1/application/disapprove/applicationId=" + applicationId)
           .then(res => {
             if(res === 1)
             {
