@@ -153,7 +153,7 @@ public class ApplicationDataAccess implements ApplicationDao
     }
 
     @Override
-    public int updateApplicationById(UUID id, Application application) {
+    public int updateApplicationStatus(UUID id) {
         return 0;
     }
 
@@ -176,7 +176,7 @@ public class ApplicationDataAccess implements ApplicationDao
 
     @Override
     public int incrementStage(UUID applicationId) {
-        final String sql = "UPDATE \"application\" SET \"stage\" = ?, \"status\" = ? SET \"isequivalanceapproved\" = ? SET \"ispreapprovalapproved\" = ?  WHERE \"id\" = ?";
+        final String sql = "UPDATE \"application\" SET \"stage\" = ?, \"status\" = ?, SET \"isequivalanceapproved\" = ?, SET \"ispreapprovalapproved\" = ?  WHERE \"id\" = ?";
         Application app = selectApplicationById(applicationId).orElse(null);
 
         Boolean isEquivalence = false;

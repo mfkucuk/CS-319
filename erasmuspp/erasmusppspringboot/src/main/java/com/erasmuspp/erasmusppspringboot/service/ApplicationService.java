@@ -48,9 +48,9 @@ public class ApplicationService
         return applicationDao.deleteApplicationById(id);
     }
 
-    public int updateApplicationById(UUID id, Application application)
+    public int updateApplicationStatus(UUID id)
     {
-        return applicationDao.updateApplicationById(id, application);
+        return applicationDao.updateApplicationStatus(id);
     }
 
     public int incrementStage(UUID applicationId) {

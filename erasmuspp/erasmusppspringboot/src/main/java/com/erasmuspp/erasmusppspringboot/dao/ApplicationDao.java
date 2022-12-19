@@ -25,7 +25,7 @@ public interface ApplicationDao
 
     int deleteApplicationById(UUID id);
 
-    int updateApplicationById(UUID id, Application application);
+    int updateApplicationStatus(UUID id);
 
     int incrementStage(UUID applicationId);
 
