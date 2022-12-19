@@ -25,12 +25,20 @@ export default function MyApplicationsN() {
 
 
     let navigate = useNavigate();
-    const handleClickMyApplication = (id) => {
+    function handleClickMyApplication(id, stage) {
         window.localStorage.setItem("LAST_APPLICATION", id);
-        navigate("/myApplication");
+        if (stage === 1)
+            navigate("/myApplication");
+        if(stage === 2)
+            navigate("/courseRegistration");
+        if(stage === 3)
+            navigate("/preApprovalForm");
+        if(stage===4)
+            navigate("/learningAgreement")
+
+
     }
     function newApplication() {
-
         navigate("/editApplicationForm");
     }
 
@@ -99,7 +107,8 @@ export default function MyApplicationsN() {
                                         alignContent: 'center',
                                         justifyContent: 'center',
                                     }}>
-                                        <Button onClick={() => handleClickMyApplication(attributes.id)} style={{
+
+                                        <Button onClick={() =>handleClickMyApplication(attributes.id, attributes.stage)} style={{
                                             textAlign: 'center',
                                         }}>
                                             Go to Application
