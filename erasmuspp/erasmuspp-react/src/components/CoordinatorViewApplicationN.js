@@ -19,7 +19,7 @@ export default function CoordinatorViewApplicationN() {
         axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
             for(let i = 0; i < res.data.length; i++){
-                if(res.data[i].fileType === "Statement of Purpose"){
+                if(res.data[i]?.fileType === "Statement of Purpose"){
                     setsopB64(res.data[i].content);
                 }
             }
@@ -34,8 +34,8 @@ export default function CoordinatorViewApplicationN() {
         axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
             for(let i = 0; i < res.data.length; i++){
-                if(res.data[i].fileType === "CV"){
-                    setCVB64(res.data[i]);
+                if(res.data[i]?.fileType === "CV"){
+                    setCVB64(res.data[i].content);
                 }
             }
           })
@@ -49,8 +49,8 @@ export default function CoordinatorViewApplicationN() {
         axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
             for(let i = 0; i < res.data.length; i++){
-                if(res.data[i].fileType === "Application"){
-                    setappFormB64(res.data[i]);
+                if(res.data[i]?.fileType === "Application"){
+                    setappFormB64(res.data[i].content);
                 }
             }
           })
