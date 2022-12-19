@@ -13,7 +13,7 @@ import com.erasmuspp.erasmusppspringboot.model.CourseRegistration;
 import com.erasmuspp.erasmusppspringboot.service.CourseRegistrationService;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@RequestMapping(value = "api/v1/courseRegistratiob")
+@RequestMapping(value = "api/v1/courseRegistration")
 @CrossOrigin(origins = "*")
 @RestController
 public class CourseRegistrationController {
