@@ -25,8 +25,8 @@ public class ApplicationDataAccess implements ApplicationDao
     @Override
     public int insertApplication(UUID id, ApplicationRequest application, String token) {
         User user = userDataAccess.selectUserByToken(token).orElse(null);
-        final String sql = "INSERT INTO \"application\"\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), 1, false, false, user.getId().toString(), application.getChoice1(), application.getChoice2(), application.getChoice3(), application.getChoice4(), application.getChoice5()});
+        final String sql = "INSERT INTO \"application\"\nVALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, application.getSemester(), 1, false, false, user.getId().toString(), application.getChoice1(), application.getChoice2(), application.getChoice3(), application.getChoice4(), application.getChoice5(), "Pending"});
     }
 
     @Override
@@ -44,6 +44,7 @@ public class ApplicationDataAccess implements ApplicationDao
             String choice3 = resultSet.getString("choice3");
             String choice4 = resultSet.getString("choice4");
             String choice5 = resultSet.getString("choice5");
+            String status = resultSet.getString("status");
             return new Application(
                 applicationId,
                 userId,
@@ -55,14 +56,12 @@ public class ApplicationDataAccess implements ApplicationDao
                 choice2,
                 choice3,
                 choice4,
-                choice5
+                choice5,
+                status
             );
         });
 
         List<Application> result = filterByDepartment(applications, token);
-        for (Application app : result) {
-            System.out.println(app.getChoice1());
-        }
         return result;
     }
 
@@ -94,6 +93,7 @@ public class ApplicationDataAccess implements ApplicationDao
             String choice3 = resultSet.getString("choice3");
             String choice4 = resultSet.getString("choice4");
             String choice5 = resultSet.getString("choice5");
+            String status = resultSet.getString("status");
             return new Application(
                 applicationId,
                 userId,
@@ -105,7 +105,8 @@ public class ApplicationDataAccess implements ApplicationDao
                 choice2,
                 choice3,
                 choice4,
-                choice5
+                choice5,
+                status
             );
         });
 
@@ -133,9 +134,7 @@ public class ApplicationDataAccess implements ApplicationDao
         User coordinator = userDataAccess.selectUserByToken(token).orElse(null);
 
         for (Application application : applications) {
-            System.out.println(application.getUserId());
             User ownerOfApplication = userDataAccess.selectUserById(UUID.fromString(application.getUserId())).orElse(null);
-            System.out.println(ownerOfApplication.getFirstName());
 
             if (coordinator.getDepartment().equals(ownerOfApplication.getDepartment())) {
                 result.add(application);
@@ -143,6 +142,18 @@ public class ApplicationDataAccess implements ApplicationDao
         }
 
         return result;
+    }
+
+    @Override
+    public int incrementStage(UUID applicationId, int stage) {
+        final String sql = "UPDATE \"application\" SET \"stage\" = ?, \"status\" = ? WHERE \"id\" = ?";
+        return jdbcTemplate.update(sql, stage, "Approved", applicationId);
+    }
+
+    @Override
+    public int disapprove(UUID applicationId) {
+        final String sql = "UPDATE \"application\" SET \"status\" = ? WHERE \"id\" = ?";
+        return jdbcTemplate.update(sql, "Disapproved", applicationId);
     }
 
 }

@@ -52,4 +52,12 @@ public class ApplicationService
     {
         return applicationDao.updateApplicationById(id, application);
     }
+
+    public int incrementStage(UUID applicationId, int stage) {
+        return applicationDao.incrementStage(applicationId, stage);
+    }
+
+    public int disapprove(UUID applicationId) {
+        return applicationDao.disapprove(applicationId);
+    }
 }

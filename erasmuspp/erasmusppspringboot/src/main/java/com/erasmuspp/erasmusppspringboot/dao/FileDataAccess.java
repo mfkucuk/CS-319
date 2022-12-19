@@ -19,8 +19,8 @@ public class FileDataAccess implements FileDao {
 
     @Override
     public int insertFile(UUID id, String applicationId, File file) {
-        final String sql = "INSERT INTO \"file\"\nVALUES(?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, new Object[] { id, applicationId, file.getContent(), file.getFileName(), file.getUploadTime() });
+        final String sql = "INSERT INTO \"file\"\nVALUES(?, ?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, new Object[] { id, applicationId, file.getContent(), file.getFileName(), file.getUploadTime(), file.getFileType()});
     }
 
     @Override

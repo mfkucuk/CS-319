@@ -68,5 +68,15 @@ public class ApplicationController
     {
         return applicationService.updateApplicationById(id, application);
     }
+
+    @PutMapping(path = "/approve/applicationId={id}")
+    public int incrementStage(@PathVariable("id") UUID id, @Valid @RequestBody int newStage) {
+        return applicationService.incrementStage(id, newStage);
+    }
+
+    @PutMapping(path = "/disapprove/applicationId={id}")
+    public int disapprove(@PathVariable("id") UUID id) {
+        return applicationService.disapprove(id);
+    }
 }
     
