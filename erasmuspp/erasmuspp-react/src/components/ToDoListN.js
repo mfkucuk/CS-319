@@ -35,7 +35,7 @@ export default function ToDoListN() {
     }
 
     function approve(applicationId) {
-        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId, temp)
+        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId)
           .then(res => {
             if(res.data === 1)
             {
