@@ -17,7 +17,7 @@ export default function MyApplicationY() {
   const [appForm, setAppForm] = useState("");
   const [appFormB64, setappFormB64] = useState("");
 
-  const[external, setExternal] = useState("");
+  const [external, setExternal] = useState("");
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts")
@@ -62,7 +62,6 @@ export default function MyApplicationY() {
   }
 
   const uploadSOPFinal = () => {
-    console.log(sopB64);
     axios
       .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
         { 
@@ -80,13 +79,13 @@ export default function MyApplicationY() {
         else {
           alert("Statement of Purpose Failed to Upload")
         }
-      }).catch((err)=> {
+      }).catch((err) => {
 
         alert("Statement of Purpose Failed to Upload")
       });
   }
 
-  const downloadExternal =() => {
+  const downloadExternal = () => {
     const downloadLink = document.createElement("a");
     downloadLink.href = external;
     downloadLink.download = "Fill Application Form";
@@ -100,7 +99,6 @@ export default function MyApplicationY() {
   }
 
   const uploadAppFormFinal = () => {
-    console.log(appFormB64);
     axios
       .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
         { 
@@ -118,14 +116,13 @@ export default function MyApplicationY() {
         else {
           alert("Application Form Failed to Upload")
         }
-      }).catch((err)=> {
+      }).catch((err) => {
 
         alert("Application Form Failed to Upload")
       });
   }
 
   const uploadCVFinal = () => {
-    console.log(CVB64);
     axios
       .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
         { 
@@ -143,7 +140,7 @@ export default function MyApplicationY() {
         else {
           alert("CV Failed to Upload")
         }
-      }).catch((err)=> {
+      }).catch((err) => {
 
         alert("CV Failed to Upload")
       });
@@ -155,9 +152,9 @@ export default function MyApplicationY() {
     setappFormB64(await toB64(appForm));
   };
 
-  return(
-    <div style={{backgroundColor: "#C7D6D2"}}>
-      <TopNavBar/>
+  return (
+    <div style={{ backgroundColor: "#C7D6D2" }}>
+      <TopNavBar />
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2 justify-content-end" style={{ display: 'flex' }}>
@@ -183,14 +180,14 @@ export default function MyApplicationY() {
             <br />
             <Form.Group controlId="uploadCVForm" className="mb-3">
               <Form.Label style={{ color: '#f4eff2' }}>Upload CV</Form.Label>
-              <Form.Control type="file" size="lg" value = {CV} onChange={(e) => { setCV(e.target.value); uploadCV(e); }}/>
+              <Form.Control type="file" size="lg" value={CV} onChange={(e) => { setCV(e.target.value); uploadCV(e); }} />
             </Form.Group>
             <br />
             <Form.Group controlId="uploadApplicationForm" className="mb-3">
               <Form.Label style={{ color: '#f4eff2' }}>Upload Application Form</Form.Label>
-              <Form.Control type="file" size="lg" value = {appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }}/>
+              <Form.Control type="file" size="lg" value={appForm} onChange={(e) => { setAppForm(e.target.value); uploadApplicationForm(e); }} />
             </Form.Group>
-        
+
           </div>
           <div class="col-md-1" style={{ backgroundColor: "#1F8F8E" }}>
             <br />
@@ -207,7 +204,7 @@ export default function MyApplicationY() {
             </div>
             <br /><br /><br />
             <div className='pt-2'>
-              <Button style={{ backgroundColor: "#3C7479" }} onClick ={uploadAppFormFinal}>
+              <Button style={{ backgroundColor: "#3C7479" }} onClick={uploadAppFormFinal}>
                 Upload
               </Button>
             </div>

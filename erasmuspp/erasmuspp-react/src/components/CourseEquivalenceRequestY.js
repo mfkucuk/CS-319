@@ -33,7 +33,6 @@ export default function CourseEquivalenceRequestY() {
   }
 
   const submitRequest = () => {
-    console.log(courseSyllabusb64);
     axios
       .post("http://localhost:8080/api/v1/application/uploadPreApprovalForm/token=" + window.localStorage.getItem("USER_TOKEN"), 
         { 

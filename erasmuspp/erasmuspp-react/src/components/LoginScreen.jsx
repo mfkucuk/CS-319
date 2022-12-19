@@ -11,7 +11,6 @@ export default function LoginScreen() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  
   let navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
@@ -31,7 +30,6 @@ export default function LoginScreen() {
         }
         else {
           alert("E-Mail/Password do not match")
-          console.log(res.data.status);
         }
       }).catch(err=> alert("Server Error! Try again later."));
   };
@@ -74,7 +72,7 @@ export default function LoginScreen() {
                         Login via your instutition e-mail
                       </Form.Text>
                     </Form.Group>
-
+                      
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginPassword">
                       <Form.Label>Password</Form.Label>
                       <Form.Control type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} placeholder="Password" />
