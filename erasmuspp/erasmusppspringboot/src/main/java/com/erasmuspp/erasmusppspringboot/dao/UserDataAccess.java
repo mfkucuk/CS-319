@@ -271,7 +271,15 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         List<String> departments = jdbcTemplate.query(sql, (resultSet, i) -> {
             return resultSet.getString("department");
         });
-        List<String> filteredList = new ArrayList<String>(departments);
+
+        List<String> filteredList = new ArrayList<String>();
+        
+        for (String department : departments) {
+            if (!filteredList.contains(department)) {
+                filteredList.add(department);
+            }
+        }
+
         return filteredList;
     }
 
@@ -292,7 +300,14 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             return resultSet.getString("nationality");
         });
 
-        List<String> filteredList = new ArrayList<String>(nationalities);
+        List<String> filteredList = new ArrayList<String>();
+        
+        for (String nationality : nationalities) {
+            if (!filteredList.contains(nationality)) {
+                filteredList.add(nationality);
+            }
+        }
+
         return filteredList;
     }
 
@@ -336,5 +351,5 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             );
         }, new Object[] { "ROLE_CANDIDATE" });
         return users;
-    }
+    } 
 }

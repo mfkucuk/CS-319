@@ -6,6 +6,7 @@ import TopNavBar from './TopNavBar';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import Image from "./defaultpp.png";
 
 export default function LeftSideBarAndAnnouncements(){
 
@@ -18,7 +19,7 @@ export default function LeftSideBarAndAnnouncements(){
   const [registerCandidateHidden, setRegisterCandidateHidden] = useState(true);
   const [studentsListHidden, setStudentsListHidden] = useState(true);
   
-  const[pp, setPP] = useState("");
+  const[pp, setPP] = useState(Image);
   useEffect(() => {
     var userToken = 
     console.log(userToken);
