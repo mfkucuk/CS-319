@@ -73,7 +73,7 @@ export default function MyApplicationY() {
         } 
         )
       .then((res) => {
-        if (res.data.status === true) {
+        if (res.data === 1) {
           alert("Statement of Purpose Uploaded Successfully")
         }
         else {
@@ -110,7 +110,7 @@ export default function MyApplicationY() {
         } 
         )
       .then((res) => {
-        if (res.data.status === true) {
+        if (res.data === 1) {
           alert("Application Form Uploaded Successfully")
         }
         else {
@@ -134,7 +134,7 @@ export default function MyApplicationY() {
         } 
         )
       .then((res) => {
-        if (res.data.status === true) {
+        if (res.data === 1) {
           alert("CV Uploaded Successfully")
         }
         else {

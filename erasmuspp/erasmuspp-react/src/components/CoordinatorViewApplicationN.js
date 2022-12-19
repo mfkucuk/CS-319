@@ -16,9 +16,13 @@ export default function CoordinatorViewApplicationN() {
     const [appFormB64, setappFormB64] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/application/")
+        axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
-            setsopB64(res.data);
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i].fileType === "Statement of Purpose"){
+                    setsopB64(res.data[i].content);
+                }
+            }
           })
           .catch(err=>{
             console.log(err)
@@ -27,9 +31,13 @@ export default function CoordinatorViewApplicationN() {
       }, [sopB64])
 
       useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/announcement/")
+        axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
-            setCVB64(res.data);
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i].fileType === "CV"){
+                    setCVB64(res.data[i]);
+                }
+            }
           })
           .catch(err=>{
             console.log(err)
@@ -38,9 +46,13 @@ export default function CoordinatorViewApplicationN() {
       }, [CVB64])
 
       useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/announcement/")
+        axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
-            setappFormB64(res.data);
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i].fileType === "Application"){
+                    setappFormB64(res.data[i]);
+                }
+            }
           })
           .catch(err=>{
             console.log(err)
@@ -101,7 +113,7 @@ export default function CoordinatorViewApplicationN() {
                     </div>
                     <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                         <br /><br />
-                        <h3 style={{ color: '#f4eff2' }}>My Application</h3>
+                        <h3 style={{ color: '#f4eff2' }}>View Application</h3>
                     </div>
                 </div>
                 <div class="row">
