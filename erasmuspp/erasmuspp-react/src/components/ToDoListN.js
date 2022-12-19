@@ -20,7 +20,7 @@ export default function ToDoListN() {
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/announcement/token=" + window.localStorage.getItem("USER_TOKEN"))
+        axios.get("http://localhost:8080/api/v1/application/todo/token=" + window.localStorage.getItem("USER_TOKEN"))
           .then(res => {
             setApplications(res.data);
           })
@@ -36,7 +36,7 @@ export default function ToDoListN() {
 
     function approve(applicationId, stage) {
         stage++;
-        axios.put("http://localhost:8080/api/v1/announcement/token=" + {applicationId}, {stage})
+        axios.put("http://localhost:8080/api/v1/announcement/token=" + applicationId, stage)
           .then(res => {
             if(res === 1)
             {
@@ -51,7 +51,7 @@ export default function ToDoListN() {
     }
 
     function disapprove(applicationId) {
-        axios.put("http://localhost:8080/api/v1/announcement/token=" + {applicationId})
+        axios.put("http://localhost:8080/api/v1/announcement/token=" + applicationId)
           .then(res => {
             if(res === 1)
             {
