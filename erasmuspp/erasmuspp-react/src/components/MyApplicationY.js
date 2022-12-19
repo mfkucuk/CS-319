@@ -63,14 +63,15 @@ export default function MyApplicationY() {
 
   const uploadSOPFinal = () => {
     axios
-      .post("http://localhost:8080/api/v1/file/",
-        {
+      .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
+        { 
           applicationId: window.localStorage.getItem("LAST_APPLICATION"),
           content: sopB64,
-          fileName: "Statemenet of Purpose Form",
-          uploadTime: "18.12.2022"
-        }
-      )
+          fileName: "Statement of Purpose Form",
+          fileType: "Statement of Purpose",
+          uploadTime: Date()
+        } 
+        )
       .then((res) => {
         if (res.data.status === true) {
           alert("Statement of Purpose Uploaded Successfully")
@@ -99,14 +100,15 @@ export default function MyApplicationY() {
 
   const uploadAppFormFinal = () => {
     axios
-      .post("http://localhost:8080/api/v1/file/",
-        {
+      .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
+        { 
           applicationId: window.localStorage.getItem("LAST_APPLICATION"),
           content: appFormB64,
           fileName: "Application Form",
-          uploadTime: "18.12.2022"
-        }
-      )
+          fileType: "Application",
+          uploadTime: Date()
+        } 
+        )
       .then((res) => {
         if (res.data.status === true) {
           alert("Application Form Uploaded Successfully")
@@ -122,14 +124,15 @@ export default function MyApplicationY() {
 
   const uploadCVFinal = () => {
     axios
-      .post("http://localhost:8080/api/v1/file/",
-        {
+      .post("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"), 
+        { 
           applicationId: window.localStorage.getItem("LAST_APPLICATION"),
           content: CVB64,
           fileName: "CV",
-          uploadTime: "18.12.2022"
-        }
-      )
+          fileType: "CV",
+          uploadTime: Date()
+        } 
+        )
       .then((res) => {
         if (res.data.status === true) {
           alert("CV Uploaded Successfully")

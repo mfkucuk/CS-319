@@ -1,5 +1,6 @@
 package com.erasmuspp.erasmusppspringboot.api;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping
-    public int addUser(@Valid @RequestBody User user)
+    public int addUser(@Valid @RequestBody User user) throws FileNotFoundException
     {
         return userService.addUser(user);
     }
