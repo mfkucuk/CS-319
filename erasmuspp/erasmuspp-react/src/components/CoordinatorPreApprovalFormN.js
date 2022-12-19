@@ -14,7 +14,7 @@ export default function CoordinatorPreApprovalFormN() {
         axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
           .then(res => {
             for(let i = 0; i < res.data.length; i++){
-                if(res.data[i]?.fileType === "Statement of Purpose"){
+                if(res.data[i]?.fileType === "Pre Approval Form"){
                     setpreApprovalFb64(res.data[i].content);
                 }
             }
@@ -32,11 +32,24 @@ export default function CoordinatorPreApprovalFormN() {
         navigate("/toDoList");
     }
 
+    function approve(applicationId) {
+        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId)
+          .then(res => {
+            if(res.data === 1)
+            {
+                alert("Application approved!")
+            }
+            else{
+                alert("Application approve failed!")
+            }          
+            })
+    }
+
 
     const downloadPreApproval = () => {
       const downloadLink = document.createElement("a");
       downloadLink.href = preApprovalFb64;
-      downloadLink.download = "Fill Application Form";
+      downloadLink.download = "Pre Approval Form";
       downloadLink.click();
     }
 
@@ -69,12 +82,6 @@ export default function CoordinatorPreApprovalFormN() {
                     <br></br><br></br>
                    
                     <br></br><br></br><br></br>
-                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
-                        Approve
-                    </Button>
-                    <Button style={{ margin:'1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
-                        Disapprove
-                    </Button>
                 </div>
 
                 <div class="col-md-2">

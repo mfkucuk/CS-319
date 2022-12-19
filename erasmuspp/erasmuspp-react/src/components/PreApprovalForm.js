@@ -53,7 +53,7 @@ export default function PreApprovalFormN() {
         }
       )
       .then((res) => {
-        if (res.data.status === true) {
+        if (res.data === 1) {
           alert("Pre Approval Form Uploaded Successfully")
         }
         else {
@@ -63,6 +63,13 @@ export default function PreApprovalFormN() {
 
         alert("Pre Approval Form Failed to Upload")
       });
+    
+    axios
+    .put("http://localhost:8080/api/v1/application/pending/applicationId=" + window.localStorage.getItem("LAST_APPLICATION")
+    )
+    .then((res) => {
+      
+    });
   }
 
   const clickPrint = () => {

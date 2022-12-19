@@ -60,6 +60,19 @@ export default function CoordinatorViewApplicationN() {
     
       }, [appFormB64])
 
+      function approve(applicationId) {
+        axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId)
+          .then(res => {
+            if(res.data === 1)
+            {
+                alert("Application approved!")
+            }
+            else{
+                alert("Application approve failed!")
+            }          
+            })
+    }
+
 
     let navigate = useNavigate();
     function handleClickEditApplicationForm() {
@@ -179,12 +192,6 @@ export default function CoordinatorViewApplicationN() {
                     </div>
                     <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                         <LargeBreak></LargeBreak>
-                        <Button onClick={(e) => { }} style={{ margin: '2rem', backgroundColor: "#3C7479" }}>
-                            Approve
-                        </Button>
-                        <Button onClick={(e) => { }} style={{ margin: '2rem', backgroundColor: "#3C7479" }}>
-                            Disapprove
-                        </Button>
                     </div>
                 </div>
             </div>

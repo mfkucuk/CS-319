@@ -13,20 +13,33 @@ export default function CoordinatorViewCourseRegistrationN() {
   const [preApprovedCourses, setPreApprovedCourses] = useState([])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setBilkentCourses(res.data));
-  }, [bilkentCourses])
+    axios.get("http://localhost:8080/api/v1/courseRegistration/application=" + window.localStorage.getItem("LAST_APPLICATION"))
+      .then((res) => {setBilkentCourses(res.data.bilkentCourse); });
+    }, [])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => setPreApprovedCourses(res.data));
-  }, [preApprovedCourses])
+    axios.get("http://localhost:8080/api/v1/courseRegistration/application=" + window.localStorage.getItem("LAST_APPLICATION"))
+      .then((res) => {setPreApprovedCourses(res.data.preApprovedCourse); });
+  }, [])
 
   let navigate = useNavigate();
 
   function clickBack() {
     navigate("/toDoList");
   }
+
+  function approve(applicationId) {
+    axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId)
+      .then(res => {
+        if(res.data === 1)
+        {
+            alert("Application approved!")
+        }
+        else{
+            alert("Application approve failed!")
+        }          
+        })
+}
 
   return (
     <div style={{ backgroundColor: "#C7D6D2" }}>
@@ -41,7 +54,7 @@ export default function CoordinatorViewCourseRegistrationN() {
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
             <h3 className="pt-4" style={{ color: "#f4eff2" }}>
               <br />
-              Course Registration
+              Registered Course
             </h3>
           </div>
         </div>
@@ -62,7 +75,7 @@ export default function CoordinatorViewCourseRegistrationN() {
                       style={{ width: "14rem", height: "2rem" }}
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
-                      value={index.title} />
+                      value={index} />
                   </div>
                 )
               })}
@@ -83,7 +96,7 @@ export default function CoordinatorViewCourseRegistrationN() {
                       style={{ width: "14rem", height: "2rem" }}
                       id="profileScreenEmail"
                       aria-describedby="emailHelp"
-                      value={index.title} />
+                      value={index} />
 
                   </div>
                 )
@@ -96,12 +109,6 @@ export default function CoordinatorViewCourseRegistrationN() {
           <div class="col-md-2 text-center">
           </div>
           <div class="col-md-8 text-center" style={{ backgroundColor: "#1F8F8E" }}>
-          <Button onClick={(e) => { }} style={{  margin: '2rem',  backgroundColor: "#3C7479" }}>
-              Approve
-            </Button>
-            <Button onClick={(e) => { }} style={{ margin: '2rem' , backgroundColor: "#3C7479" }}>
-              Disapprove
-            </Button>
             <LargeBreak></LargeBreak>
           </div>
         </div>

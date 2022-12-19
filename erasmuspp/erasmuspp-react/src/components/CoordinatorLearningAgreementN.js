@@ -13,9 +13,13 @@ export default function CoordinatorLearningAgreementN() {
 
 
     useEffect(() => {
-      axios.get("http://localhost:8080/api/v1/announcement/")
+      axios.get("http://localhost:8080/api/v1/file/applicationId=" + window.localStorage.getItem("LAST_APPLICATION"))
         .then(res => {
-          setlearningAgreementFb64(res.data);
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i]?.fileType === "Learning Agreement"){
+                    setlearningAgreementFb64(res.data[i].content);
+                }
+            }
         })
         .catch(err=>{
           console.log(err)
@@ -27,6 +31,25 @@ export default function CoordinatorLearningAgreementN() {
         navigate("/toDoList");
     }
 
+    const downloadPreApproval = () => {
+        const downloadLink = document.createElement("a");
+        downloadLink.href = learningAgreementFb64;
+        downloadLink.download = "Learning Agreement Form";
+        downloadLink.click();
+      }
+
+    function approve(applicationId) {
+    axios.put("http://localhost:8080/api/v1/application/approve/applicationId=" + applicationId)
+        .then(res => {
+        if(res.data === 1)
+        {
+            alert("Application approved!")
+        }
+        else{
+            alert("Application approve failed!")
+        }          
+        })
+    }
 
     return (
         <div class="container-fluid">
@@ -45,16 +68,10 @@ export default function CoordinatorLearningAgreementN() {
                     <br></br><br></br><br></br><br></br>
                     <header style={{ fontSize: '18px', color: 'black' }}>Download Learning Agreement </header>
                     <br></br>
-                    <img id="printImage" src={Image} style={{cursor: 'pointer'}}></img>
+                    <img id="printImage" src={Image} style={{cursor: 'pointer'}} onClick={downloadPreApproval}></img>
                     <br></br><br></br>
                     
                    <br></br><br></br><br></br>
-                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
-                        Approve
-                    </Button>
-                    <Button  style={{ margin: '1rem', backgroundColor: "#3C7479", borderRadius: '20px'}}>
-                        Disapprove
-                    </Button>
                 </div>
 
                 <div class="col-md-2">

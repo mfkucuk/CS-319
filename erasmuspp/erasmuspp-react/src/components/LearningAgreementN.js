@@ -56,16 +56,23 @@ export default function LearningAgreementN() {
         }
       )
       .then((res) => {
-        if (res.data.status === true) {
-          alert("Pre Approval Form Uploaded Successfully")
+        if (res.data === 1) {
+          alert("Learning Agreement Uploaded Successfully")
         }
         else {
-          alert("Pre Approval Form Failed to Upload")
+          alert("Learning Agreement Failed to Upload")
         }
       }).catch((err) => {
 
-        alert("Pre Approval Form Failed to Upload")
+        alert("Learning Agreement Failed to Upload")
       });
+
+      axios
+    .put("http://localhost:8080/api/v1/application/pending/applicationId=" + window.localStorage.getItem("LAST_APPLICATION")
+    )
+    .then((res) => {
+      
+    });
   }
 
   function clickPrint() {

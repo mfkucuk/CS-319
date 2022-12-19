@@ -68,7 +68,7 @@ export default function ToDoListN() {
             navigate("/coordinatorViewApplication")
         }
         else if(stage === 2){
-            navigate("/coordinatorCourseRegistration")
+            navigate("/coordinatorViewCourseRegistration")
         }
         else if(stage === 3){
             navigate("/coordinatorPreApprovalForm")

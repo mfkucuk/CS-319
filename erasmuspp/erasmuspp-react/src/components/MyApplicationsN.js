@@ -35,6 +35,8 @@ export default function MyApplicationsN() {
             navigate("/preApprovalForm");
         if(stage===4)
             navigate("/learningAgreement")
+        if(stage === 5)
+            alert("Your application process is complete. You no longer have to follow any procedure.")
 
 
     }
