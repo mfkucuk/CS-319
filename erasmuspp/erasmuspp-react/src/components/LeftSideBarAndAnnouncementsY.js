@@ -22,7 +22,6 @@ export default function LeftSideBarAndAnnouncements(){
   const[pp, setPP] = useState(Image);
   useEffect(() => {
     var userToken = 
-    console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then((res) => {
           setuserFirstName(res.data.firstName);
@@ -33,14 +32,12 @@ export default function LeftSideBarAndAnnouncements(){
 
   useEffect(() => {
     var userToken = 
-    console.log(userToken);
     axios.get("http://localhost:8080/api/v1/user/token=" + window.localStorage.getItem("USER_TOKEN"))
          .then((res) => {setuserRole(res.data.role); })
   }, [userRole] ) 
 
   useEffect(() => {
     // 👇️ only runs once
-    console.log(userRole);
     setButtons();
   });
 
