@@ -63,7 +63,7 @@ public class ApplicationController
         return applicationService.deleteApplicationById(id);
     }
 
-    @PutMapping(path = "pending")
+    @PutMapping(path = "pending/applicationId={id}")
     public int updateApplicationStatus(@PathVariable("id") UUID id)
     {
         return applicationService.updateApplicationStatus(id);
