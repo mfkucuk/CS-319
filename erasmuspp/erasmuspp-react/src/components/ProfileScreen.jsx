@@ -6,6 +6,7 @@ import LargeBreak from './LargeBreak';
 import TopNavBar from './TopNavBar';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
+import Image from "./defaultpp.png";
 
 export default function ProfileScreen() {
   const [userFirstNameInit, setUserFirstNameInit] = useState("");
@@ -22,7 +23,7 @@ export default function ProfileScreen() {
   const [userAboutMe, setUserAboutMe] = useState("");
   const [userAboutMeInit, setUserAboutMeInit] = useState("");
 
-  const [userImageSrcInit, setUserImageSrcInit] = useState("");
+  const [userImageSrcInit, setUserImageSrcInit] = useState(Image);
 
   const[userPP, setuserPP] = useState("");
   const[userPPB64, setuserPPB64] = useState("");
@@ -162,7 +163,7 @@ export default function ProfileScreen() {
               <br />
               <br />
               <view>
-                <img style={{ width: "12rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrcInit} />
+                <img style={{ width: "10rem", height: "12rem" }} alt="Bootstrap Image Preview" src={userImageSrcInit} />
               </view>
               <br /><br />
               <div className="row">
