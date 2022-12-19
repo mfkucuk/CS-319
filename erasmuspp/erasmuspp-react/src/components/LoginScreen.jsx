@@ -72,7 +72,7 @@ export default function LoginScreen() {
                         Login via your instutition e-mail
                       </Form.Text>
                     </Form.Group>
-
+                      
                     <Form.Group className="ms-3 me-3 mb-3" controlId="loginPassword">
                       <Form.Label>Password</Form.Label>
                       <Form.Control type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} placeholder="Password" />
