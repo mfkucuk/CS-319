@@ -31,7 +31,7 @@ export default function PostAnnouncementY() {
           lastName: userLastName,
           dob: userDoB,
           nationality: userNationality,
-          bilkentID: userStudentIDNo,
+          bilkentId: userStudentIDNo,
           department: userDepartment,
           email: userBilkentEmail,
           gpa: userCumGPA

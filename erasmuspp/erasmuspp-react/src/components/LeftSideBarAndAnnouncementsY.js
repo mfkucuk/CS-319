@@ -92,7 +92,7 @@ export default function LeftSideBarAndAnnouncements(){
             <br/>
             <br/>
             <view style={{padding: 40, alignSelf: 'flex-start'}}>
-              <img style={{ width: "10rem", height: "10rem" }} alt="Bootstrap Image Preview" src={pp}/>
+              <img style={{ width: "10rem", height: "12rem" }} alt="Bootstrap Image Preview" src={pp}/>
             </view>
             <p style={{textAlign: "center"}}>
               {userFirstName} {userSecondName}

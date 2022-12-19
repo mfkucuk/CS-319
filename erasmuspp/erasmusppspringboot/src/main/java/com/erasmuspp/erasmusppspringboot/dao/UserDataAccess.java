@@ -271,7 +271,15 @@ public class UserDataAccess implements UserDao, UserDetailsService {
         List<String> departments = jdbcTemplate.query(sql, (resultSet, i) -> {
             return resultSet.getString("department");
         });
-        List<String> filteredList = new ArrayList<String>(departments);
+
+        List<String> filteredList = new ArrayList<String>();
+        
+        for (String department : departments) {
+            if (!filteredList.contains(department)) {
+                filteredList.add(department);
+            }
+        }
+
         return filteredList;
     }
 
@@ -292,7 +300,56 @@ public class UserDataAccess implements UserDao, UserDetailsService {
             return resultSet.getString("nationality");
         });
 
-        List<String> filteredList = new ArrayList<String>(nationalities);
+        List<String> filteredList = new ArrayList<String>();
+        
+        for (String nationality : nationalities) {
+            if (!filteredList.contains(nationality)) {
+                filteredList.add(nationality);
+            }
+        }
+
         return filteredList;
     }
+
+    @Override
+    public List<User> selectAllCandidates() {
+        final String sql = "SELECT * FROM \"user\" WHERE role = ?";
+        List<User> users = jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID userId = UUID.fromString(resultSet.getString("id"));
+            String firstName = resultSet.getString("firstName");
+            String lastName = resultSet.getString("lastName");
+            String dob = resultSet.getString("dob");
+            String nationality = resultSet.getString("nationality"); 
+            String email = resultSet.getString("email");
+            String bilkentID = resultSet.getString("bilkentId");
+            String department = resultSet.getString("department");
+            String gpa = resultSet.getString("gpa");
+            String personalEmail = resultSet.getString("personalEmail");
+            String mobilePhone = resultSet.getString("mobilePhone");
+            String aboutMe = resultSet.getString("aboutMe");
+            String password = resultSet.getString("password");
+            String role = resultSet.getString("role");
+            String token = resultSet.getString("token");
+            String profilePhoto = resultSet.getString("profilePhoto");
+            return new User(
+                userId,
+                firstName,
+                lastName,
+                dob,
+                nationality,
+                email,
+                bilkentID,
+                department,
+                gpa,
+                personalEmail,
+                mobilePhone,
+                aboutMe,
+                password,
+                role,
+                token,
+                profilePhoto
+            );
+        }, new Object[] { "ROLE_CANDIDATE" });
+        return users;
+    } 
 }

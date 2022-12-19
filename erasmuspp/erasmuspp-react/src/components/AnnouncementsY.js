@@ -2,9 +2,8 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AnnouncementCardBreakY from './AnnouncementCardBreakY';
-import AnnouncementsModalPopUpY from './AnnouncementsModalPopUpY';
 import Button from 'react-bootstrap/Button';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 export default function AnnouncementsY() {
@@ -55,6 +54,10 @@ export default function AnnouncementsY() {
       setAddAnnouncementHidden(false);
     }
 
+    if(userRole == "ROLE_ADMIN"){
+      setAddAnnouncementHidden(false);
+    }
+
   }
 
   let navigate = useNavigate();
@@ -88,7 +91,6 @@ export default function AnnouncementsY() {
                   {announcement.content}
                 </Card.Text>
               </Card.Body>
-              <AnnouncementsModalPopUpY title = {announcement.title} body = {announcement.content} />
             </Card>
           </Col>
         ))}

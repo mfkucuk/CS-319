@@ -22,6 +22,8 @@ public interface UserDao {
 
     List<String> selectAllCountries();
 
+    List<User> selectAllCandidates();
+
     Optional<User> selectUserById(UUID id);
 
     Optional<User> selectUserByEmail(String email);

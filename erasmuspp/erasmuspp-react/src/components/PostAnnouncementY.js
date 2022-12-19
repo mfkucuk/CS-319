@@ -46,7 +46,7 @@ export default function PostAnnouncementY() {
       {
         title: announcementTitle,
         content: announcementDescription,
-        postDate: Date.now().toString(),
+        postDate: Date(),
         expireDate: "",
         filters: [
           departmentName,
@@ -130,7 +130,7 @@ export default function PostAnnouncementY() {
               </Form.Group>
               <br />
               <Form.Group className="mb-3" controlId="postAnnouncementNameID" style={{ textAlign: 'left' }}>
-                <Form.Label>Query by Name/ID:</Form.Label>
+                <Form.Label>Query by ID:</Form.Label>
               </Form.Group>
             </Form>
           </div>
