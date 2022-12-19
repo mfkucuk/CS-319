@@ -25,7 +25,7 @@ public class FileController {
     }
 
     @GetMapping(path = "applicationId={applicationId}")
-    public List<File> getFilesByApplicationId(@PathVariable("application") String application) {
+    public List<File> getFilesByApplicationId(@PathVariable("applicationId") String application) {
         return fileService.getFilesByApplicationId(application);
     }
 
