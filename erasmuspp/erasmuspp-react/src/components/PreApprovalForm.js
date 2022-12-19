@@ -117,15 +117,15 @@ export default function PreApprovalFormN() {
         </div>
       </div>
       <div class="row">
-        <div class="col-md-5" style={{ backgroundColor: '#1F8F8E'}}>
+        <div class="col-md-5" style={{ backgroundColor: '#1F8F8E' }}>
         </div>
-        <div class="col-md-2 text-center" style={{ backgroundColor: '#1F8F8E'}}>
+        <div class="col-md-2 text-center" style={{ backgroundColor: '#1F8F8E' }}>
           <Button onClick={handleCLickRoadmap} style={{ backgroundColor: "#3C7479" }}>
             Go to Roadmap
           </Button>
           <br /><br /><br />
         </div>
-        <div class="col-md-5" style={{ backgroundColor: '#1F8F8E'}}>
+        <div class="col-md-5" style={{ backgroundColor: '#1F8F8E' }}>
         </div>
       </div>
 
