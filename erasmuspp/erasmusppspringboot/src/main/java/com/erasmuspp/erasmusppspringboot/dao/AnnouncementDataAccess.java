@@ -128,13 +128,14 @@ public class AnnouncementDataAccess implements AnnouncementDao
     private List<Announcement> filter(List<Announcement> announcements, String token) {
         User user = userDataAccess.selectUserByToken(token).orElse(null);
         List<Announcement> result = new ArrayList<Announcement>();
+        for (Announcement announcement : announcements) {
+            result.add(announcement);
+        }
 
         // Filter by department
         for (Announcement announcement : announcements) {
-            if (user.getDepartment().equals(announcement.getFilters()[0])) {
-                if (!result.contains(announcement)) {
-                    result.add(announcement);
-                }
+            if (!user.getDepartment().equals(announcement.getFilters()[0])) {
+                result.remove(announcement);
             }
         }
 
@@ -161,10 +162,8 @@ public class AnnouncementDataAccess implements AnnouncementDao
 
         // Filter by bilkent ID
         for (Announcement announcement : announcements) {
-            if (user.getBilkentId().equals(announcement.getFilters()[4])) {
-                if (!result.contains(announcement)) {
-                    result.add(announcement);
-                }
+            if (!user.getBilkentId().equals(announcement.getFilters()[4])) {
+                result.remove(announcement);
             }
         }
 

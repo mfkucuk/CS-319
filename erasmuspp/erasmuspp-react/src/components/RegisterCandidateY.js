@@ -29,10 +29,13 @@ export default function PostAnnouncementY() {
     for (var i = 0, n = charset.length; i < length; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));
     }
+
+    console.log(retVal);
     return retVal;
   }
 
   const saveCandidateInformation = () => {
+    var userPassword = generatePassword();
     axios
       .post("http://localhost:8080/api/v1/user",
         {
@@ -47,7 +50,7 @@ export default function PostAnnouncementY() {
           personalEmail: "",
           mobilePhone: "",
           aboutMe: "",
-          password: generatePassword(),
+          password: userPassword,
           role: "ROLE_CANDIDATE",
           token: "",
           profilePhoto: ""
@@ -55,7 +58,7 @@ export default function PostAnnouncementY() {
       .then((res) => {
         if (res.data === 1) {
 
-          alert("Candidate information saved successfully.");
+          alert("Candidate information saved successfully.\nPassword is " + userPassword);
         }
         else {
           alert("Something went wrong.");
