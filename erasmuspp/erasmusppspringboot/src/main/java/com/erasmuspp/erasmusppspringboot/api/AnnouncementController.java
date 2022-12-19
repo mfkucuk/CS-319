@@ -3,20 +3,24 @@ package com.erasmuspp.erasmusppspringboot.api;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.erasmuspp.erasmusppspringboot.model.Announcement;
 import com.erasmuspp.erasmusppspringboot.service.AnnouncementService;
 
-import jakarta.annotation.Nonnull;
-import jakarta.validation.Valid;
 
+@RequestMapping("/api/v1/announcement")
+@CrossOrigin(origins = "*")
 @RestController
 public class AnnouncementController
 {
@@ -27,16 +31,16 @@ public class AnnouncementController
         this.announcementService = announcementService;
     }
 
-    @PostMapping
-    public void addAnnounement(@Nonnull @Valid @RequestBody Announcement announcement)
+    @PostMapping(path = "token={token}")
+    public int addAnnouncement(@PathVariable("token") String token, @Valid @RequestBody Announcement announcement)
     {
-        announcementService.addAnnouncement(announcement);
+        return announcementService.addAnnouncement(announcement, token);
     }
 
-    @GetMapping
-    public List<Announcement> getAllAnnouncements()
+    @GetMapping(path = "token={token}")
+    public List<Announcement> getAllAnnouncements(@PathVariable("token") String token)
     {
-        return announcementService.getAllAnnouncements();
+        return announcementService.getFilteredAnnouncements(token);
     }
 
     @GetMapping(path = "{id}")
@@ -46,13 +50,13 @@ public class AnnouncementController
     } 
 
     @DeleteMapping(path = "{id}")
-    public int deletePersonById(@PathVariable("id") UUID id)
+    public int deleteAnnouncementById(@PathVariable("id") UUID id)
     {
         return announcementService.deleteAnnouncementById(id);
     }
 
     @PutMapping(path = "{id}")
-    public int updateAnnouncementById(@PathVariable("id") UUID id, @Valid @Nonnull @RequestBody Announcement announcement)
+    public int updateAnnouncementById(@PathVariable("id") UUID id, @Valid @RequestBody Announcement announcement)
     {
         return announcementService.updateAnnouncementById(id, announcement);
     }

@@ -8,15 +8,17 @@ import com.erasmuspp.erasmusppspringboot.model.Announcement;
 
 public interface AnnouncementDao 
 {
-    int insertAnnouncement(UUID id, Announcement announcement);
+    int insertAnnouncement(UUID id, Announcement announcement, String token);
     
-    default int insertAnnouncement(Announcement announcement)
+    default int insertAnnouncement(Announcement announcement, String token)
     {
         UUID id = UUID.randomUUID();
-        return insertAnnouncement(id, announcement);
+        return insertAnnouncement(id, announcement, token);
     }
 
     List<Announcement> selectAllAnnouncements();
+
+    List<Announcement> selectFilteredAnnoucements(String token);
 
     Optional<Announcement> selectAnnouncementById(UUID id);
 
