@@ -108,17 +108,19 @@ export default function PostAnnouncementY() {
               <div class="col-md-4 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br />
                 <Form.Group className="mb-3" controlId="registerCandidateFirstNameForm">
-                  <Form.Control onChange={(e) => setUserFirstName(e.target.value)} type="text" placeholder="Yunus Eren" />
+                  <Form.Control onChange={(e) => setUserFirstName(e.target.value)} type="text" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateLastNameForm">
-                  <Form.Control onChange={(e) => setUserLastName(e.target.value)} type="text" placeholder="Türkeri" />
+                  <Form.Control onChange={(e) => setUserLastName(e.target.value)} type="text" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateDoBForm">
                   <Form.Control onChange={(e) => setUserDoB(e.target.value)} type="text" placeholder="dd/mm/yyyy" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateNationalityForm">
-                  <Form.Control onChange={(e) => setUserNationality(e.target.value)} type="text" placeholder="Turkey" />
+                  <Form.Control onChange={(e) => setUserNationality(e.target.value)} type="text"/>
                 </Form.Group>
+
+                <p style={{color: "#f4eff2"}}>{userPassword}</p>
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
               </div>
@@ -155,13 +157,13 @@ export default function PostAnnouncementY() {
                   <Form.Control onChange={(e) => setUserIDNo(e.target.value)} type="text" placeholder="22001842" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateDepartmentForm">
-                  <Form.Control onChange={(e) => setUserDepartment(e.target.value)} type="text" placeholder="Computer Science" />
+                  <Form.Control onChange={(e) => setUserDepartment(e.target.value)} type="text"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateBilkentEmailForm">
-                  <Form.Control onChange={(e) => setUserBilkentEmail(e.target.value)} type="text" placeholder="eren.turkeri@ug.bilkent.edu.tr" />
+                  <Form.Control onChange={(e) => setUserBilkentEmail(e.target.value)} type="text"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateCumGPAForm">
-                  <Form.Control onChange={(e) => setUserCumGPA(e.target.value)} type="text" placeholder="3.21" />
+                  <Form.Control onChange={(e) => setUserCumGPA(e.target.value)} type="text"/>
                 </Form.Group>
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
