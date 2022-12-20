@@ -31,7 +31,7 @@ export default function LoginScreen() {
         else {
           alert("E-Mail/Password do not match")
         }
-      }).catch(err=> alert("Server Error! Try again later."));
+      }).catch(err=> alert("There is no such user!"));
   };
 
   function handleClickForgotPassword() {

@@ -36,7 +36,8 @@ export default function PostAnnouncementY() {
   }
 
   const saveCandidateInformation = () => {
-    setUserPassword(generatePassword());
+    let tempPassword = generatePassword()
+    setUserPassword(tempPassword);
     axios
       .post("http://localhost:8080/api/v1/user",
         {
@@ -51,7 +52,7 @@ export default function PostAnnouncementY() {
           personalEmail: "",
           mobilePhone: "",
           aboutMe: "",
-          password: userPassword,
+          password: tempPassword,
           role: "ROLE_CANDIDATE",
           token: "",
           profilePhoto: ""
@@ -59,7 +60,7 @@ export default function PostAnnouncementY() {
       .then((res) => {
         if (res.data === 1) {
 
-          alert("Candidate information saved successfully.\nPassword is " + userPassword);
+          alert("Candidate information saved successfully.");
         }
         else {
           alert("Something went wrong.");
@@ -121,7 +122,7 @@ export default function PostAnnouncementY() {
                   <Form.Control onChange={(e) => setUserNationality(e.target.value)} type="text"/>
                 </Form.Group>
 
-                <p style={{color: "#f4eff2"}}>Candidate's password will be: {userPassword}</p>
+                
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
               </div>
@@ -155,7 +156,7 @@ export default function PostAnnouncementY() {
               <div class="col-md-4 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br />
                 <Form.Group className="mb-3" controlId="registerCandidateStudentIDForm">
-                  <Form.Control onChange={(e) => setUserIDNo(e.target.value)} type="text" placeholder="22001842" />
+                  <Form.Control onChange={(e) => setUserIDNo(e.target.value)} type="text" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="registerCandidateDepartmentForm">
                   <Form.Control onChange={(e) => setUserDepartment(e.target.value)} type="text"/>
@@ -173,6 +174,7 @@ export default function PostAnnouncementY() {
             <div class="row">
               <div class="col-md-12 text-center" style={{ backgroundColor: "#1F8F8E" }}>
                 <br /><br />
+                <p style={{color: "#f4eff2"}}>Candidate's password will be: {userPassword}</p>
                 <Button onClick={saveCandidateInformation} style={{ backgroundColor: "#3C7479" }}>
                   Save Candidate Info
                 </Button>
