@@ -15,6 +15,7 @@ export default function PostAnnouncementY() {
   const [userDepartment, setUserDepartment] = useState("");
   const [userBilkentEmail, setUserBilkentEmail] = useState("");
   const [userCumGPA, setUserCumGPA] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
   let navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export default function PostAnnouncementY() {
   }
 
   const saveCandidateInformation = () => {
-    var userPassword = generatePassword();
+    setUserPassword(generatePassword());
     axios
       .post("http://localhost:8080/api/v1/user",
         {
@@ -120,7 +121,7 @@ export default function PostAnnouncementY() {
                   <Form.Control onChange={(e) => setUserNationality(e.target.value)} type="text"/>
                 </Form.Group>
 
-                <p style={{color: "#f4eff2"}}>{userPassword}</p>
+                <p style={{color: "#f4eff2"}}>Candidate's password will be: {userPassword}</p>
               </div>
               <div class="col-md-3 text-center" style={{ backgroundColor: "#1F8F8E" }}>
               </div>
